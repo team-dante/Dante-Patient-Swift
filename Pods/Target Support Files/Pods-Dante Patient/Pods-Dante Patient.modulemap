@@ -1,0 +1,6 @@
+framework module Pods_Dante_Patient {
+  umbrella header "Pods-Dante Patient-umbrella.h"
+
+  export *
+  module * { export * }
+}
