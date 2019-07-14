@@ -3,13 +3,28 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		9A22BE7BAF0963CD4574D842 /* Pods_Dante_Patient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */; };
+		DB4A0ED722D5BA5900F6EC57 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED222D5BA5900F6EC57 /* Poppins-Italic.ttf */; };
+		DB4A0ED822D5BA5900F6EC57 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED322D5BA5900F6EC57 /* Poppins-SemiBold.ttf */; };
+		DB4A0ED922D5BA5900F6EC57 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED422D5BA5900F6EC57 /* Poppins-Regular.ttf */; };
+		DB4A0EDA22D5BA5900F6EC57 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED522D5BA5900F6EC57 /* Poppins-Light.ttf */; };
+		DB4A0EDB22D5BA5900F6EC57 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED622D5BA5900F6EC57 /* Poppins-Bold.ttf */; };
+		DB4A0EE022D5BA9A00F6EC57 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDC22D5BA9A00F6EC57 /* Rubik-Bold.ttf */; };
+		DB4A0EE122D5BA9A00F6EC57 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDD22D5BA9A00F6EC57 /* Rubik-Medium.ttf */; };
+		DB4A0EE222D5BA9A00F6EC57 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */; };
+		DB4A0EE322D5BA9A00F6EC57 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */; };
+		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
+		DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */; };
+		DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */; };
+		DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */; };
+		DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA917C522D939560088A520 /* PinRefViewController.swift */; };
+		DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */; };
 		DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC64722CB292500B00A68 /* AppDelegate.swift */; };
-		DBCCC64A22CB292500B00A68 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC64922CB292500B00A68 /* ViewController.swift */; };
+		DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC64922CB292500B00A68 /* OncMapViewController.swift */; };
 		DBCCC64D22CB292500B00A68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC64B22CB292500B00A68 /* Main.storyboard */; };
 		DBCCC64F22CB292900B00A68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC64E22CB292900B00A68 /* Assets.xcassets */; };
 		DBCCC65222CB292900B00A68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC65022CB292900B00A68 /* LaunchScreen.storyboard */; };
@@ -20,9 +35,24 @@
 /* Begin PBXFileReference section */
 		73DAB50266CD4D0CEF54150A /* Pods-Dante Patient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.release.xcconfig"; sourceTree = "<group>"; };
 		9E5D9A74D41EC12E8A1CF669 /* Pods-Dante Patient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.debug.xcconfig"; sourceTree = "<group>"; };
+		DB4A0ED222D5BA5900F6EC57 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Italic.ttf"; path = "../../../../fonts/Poppins/Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		DB4A0ED322D5BA5900F6EC57 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../fonts/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		DB4A0ED422D5BA5900F6EC57 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../../fonts/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		DB4A0ED522D5BA5900F6EC57 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "../../../../fonts/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
+		DB4A0ED622D5BA5900F6EC57 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../../fonts/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		DB4A0EDC22D5BA9A00F6EC57 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Bold.ttf"; path = "../../../../fonts/Rubik/Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		DB4A0EDD22D5BA9A00F6EC57 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Medium.ttf"; path = "../../../../fonts/Rubik/Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Regular.ttf"; path = "../../../../fonts/Rubik/Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Italic.ttf"; path = "../../../../fonts/Rubik/Rubik-Italic.ttf"; sourceTree = "<group>"; };
+		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
+		DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateAcctViewController.swift; sourceTree = "<group>"; };
+		DBA917C522D939560088A520 /* PinRefViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRefViewController.swift; sourceTree = "<group>"; };
+		DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRefTableViewCell.swift; sourceTree = "<group>"; };
 		DBCCC64422CB292500B00A68 /* Dante Patient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dante Patient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCCC64722CB292500B00A68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DBCCC64922CB292500B00A68 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		DBCCC64922CB292500B00A68 /* OncMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OncMapViewController.swift; sourceTree = "<group>"; };
 		DBCCC64C22CB292500B00A68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DBCCC64E22CB292900B00A68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DBCCC65122CB292900B00A68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -61,6 +91,57 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DB5BCF6A22D5B98E004237E9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DB4A0EDC22D5BA9A00F6EC57 /* Rubik-Bold.ttf */,
+				DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */,
+				DB4A0EDD22D5BA9A00F6EC57 /* Rubik-Medium.ttf */,
+				DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */,
+				DB4A0ED622D5BA5900F6EC57 /* Poppins-Bold.ttf */,
+				DB4A0ED222D5BA5900F6EC57 /* Poppins-Italic.ttf */,
+				DB4A0ED522D5BA5900F6EC57 /* Poppins-Light.ttf */,
+				DB4A0ED422D5BA5900F6EC57 /* Poppins-Regular.ttf */,
+				DB4A0ED322D5BA5900F6EC57 /* Poppins-SemiBold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		DB837A2822D9CEB7003F3A4E /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */,
+				DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		DBA8117E22DA9693006CE057 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		DBA8118122DABA9F006CE057 /* Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */,
+			);
+			path = "Sign Up";
+			sourceTree = "<group>";
+		};
+		DBA917C922D93A440088A520 /* Oncology Map */ = {
+			isa = PBXGroup;
+			children = (
+				DBCCC64922CB292500B00A68 /* OncMapViewController.swift */,
+				DBA917C522D939560088A520 /* PinRefViewController.swift */,
+				DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */,
+			);
+			path = "Oncology Map";
+			sourceTree = "<group>";
+		};
 		DBCCC63B22CB292500B00A68 = {
 			isa = PBXGroup;
 			children = (
@@ -83,13 +164,17 @@
 			isa = PBXGroup;
 			children = (
 				DBCCC64722CB292500B00A68 /* AppDelegate.swift */,
-				DBCCC64922CB292500B00A68 /* ViewController.swift */,
+				DB837A2822D9CEB7003F3A4E /* Sign In */,
+				DBA8118122DABA9F006CE057 /* Sign Up */,
+				DBA917C922D93A440088A520 /* Oncology Map */,
+				DBA8117E22DA9693006CE057 /* Profile */,
 				DBCCC64B22CB292500B00A68 /* Main.storyboard */,
 				DBCCC64E22CB292900B00A68 /* Assets.xcassets */,
 				DBCCC65022CB292900B00A68 /* LaunchScreen.storyboard */,
-				DBCCC65322CB292900B00A68 /* Info.plist */,
 				DBCCC65922CB412700B00A68 /* extensions.swift */,
+				DBCCC65322CB292900B00A68 /* Info.plist */,
 				DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */,
+				DB5BCF6A22D5B98E004237E9 /* Fonts */,
 			);
 			path = "Dante Patient";
 			sourceTree = "<group>";
@@ -155,9 +240,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBCCC65222CB292900B00A68 /* LaunchScreen.storyboard in Resources */,
+				DB4A0EE222D5BA9A00F6EC57 /* Rubik-Regular.ttf in Resources */,
+				DB4A0EDB22D5BA5900F6EC57 /* Poppins-Bold.ttf in Resources */,
 				DBCCC65C22CB55AC00B00A68 /* GoogleService-Info.plist in Resources */,
+				DB4A0ED922D5BA5900F6EC57 /* Poppins-Regular.ttf in Resources */,
+				DB4A0EDA22D5BA5900F6EC57 /* Poppins-Light.ttf in Resources */,
 				DBCCC64F22CB292900B00A68 /* Assets.xcassets in Resources */,
+				DB4A0ED822D5BA5900F6EC57 /* Poppins-SemiBold.ttf in Resources */,
+				DB4A0ED722D5BA5900F6EC57 /* Poppins-Italic.ttf in Resources */,
 				DBCCC64D22CB292500B00A68 /* Main.storyboard in Resources */,
+				DB4A0EE322D5BA9A00F6EC57 /* Rubik-Italic.ttf in Resources */,
+				DB4A0EE122D5BA9A00F6EC57 /* Rubik-Medium.ttf in Resources */,
+				DB4A0EE022D5BA9A00F6EC57 /* Rubik-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,24 +264,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Dante Patient/Pods-Dante Patient-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-			);
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-Dante Patient/Pods-Dante Patient-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dante Patient/Pods-Dante Patient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		4D21B2C6D4E1E8722FBEE1A6 /* [CP] Check Pods Manifest.lock */ = {
@@ -219,9 +304,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBCCC64A22CB292500B00A68 /* ViewController.swift in Sources */,
+				DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */,
+				DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */,
+				DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */,
+				DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */,
+				DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */,
 				DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */,
 				DBCCC65A22CB412700B00A68 /* extensions.swift in Sources */,
+				DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */,
+				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

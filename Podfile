@@ -7,6 +7,11 @@ target 'Dante Patient' do
 
   # Pods for Dante Patient
   pod 'Firebase/Core'
+  pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
-  pod 'Firebase/Database'	
+  pod 'Firebase/Database'
+  pod 'SnapKit', '~>4.0'
+  pod 'UIColor_Hex_Swift'
+  pod 'IQKeyboardManagerSwift'
+  pod 'FloatingPanel'	
 end

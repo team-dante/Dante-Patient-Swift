@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import UIColor_Hex_Swift
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +20,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        
+        // wait for user feedback to see if to keep the blue header
+        let nav = UINavigationBar.appearance()
+        nav.barTintColor = UIColor("#31c1ff")
+        nav.tintColor = UIColor("#fcfcfc")
+        nav.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor("#fff"), NSAttributedString.Key.font: UIFont(name:"Rubik-Medium", size: 18)!]
+        
+        IQKeyboardManager.shared.enable = true
+        
         return true
     }
 
