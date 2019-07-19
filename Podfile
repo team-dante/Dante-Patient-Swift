@@ -10,7 +10,6 @@ target 'Dante Patient' do
   pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
   pod 'Firebase/Database'
-  pod 'SnapKit', '~>4.0'
   pod 'UIColor_Hex_Swift'
   pod 'IQKeyboardManagerSwift'
   pod 'FloatingPanel'
