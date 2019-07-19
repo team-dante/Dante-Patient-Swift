@@ -13,5 +13,6 @@ target 'Dante Patient' do
   pod 'SnapKit', '~>4.0'
   pod 'UIColor_Hex_Swift'
   pod 'IQKeyboardManagerSwift'
-  pod 'FloatingPanel'	
+  pod 'FloatingPanel'
+  pod 'KontaktSDK', '~>2.0'	
 end

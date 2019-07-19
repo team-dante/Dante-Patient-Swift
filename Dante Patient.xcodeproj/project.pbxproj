@@ -59,6 +59,7 @@
 		DBCCC65322CB292900B00A68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCCC65922CB412700B00A68 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DBEC145722DBADF30039FE3B /* DantePatient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DantePatient-Bridging-Header.h"; sourceTree = "<group>"; };
 		DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dante_Patient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -175,6 +176,7 @@
 				DBCCC65322CB292900B00A68 /* Info.plist */,
 				DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */,
 				DB5BCF6A22D5B98E004237E9 /* Fonts */,
+				DBEC145722DBADF30039FE3B /* DantePatient-Bridging-Header.h */,
 			);
 			path = "Dante Patient";
 			sourceTree = "<group>";
@@ -213,6 +215,11 @@
 				TargetAttributes = {
 					DBCCC64322CB292500B00A68 = {
 						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
