@@ -30,6 +30,7 @@
 		DBCCC65222CB292900B00A68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC65022CB292900B00A68 /* LaunchScreen.storyboard */; };
 		DBCCC65A22CB412700B00A68 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC65922CB412700B00A68 /* extensions.swift */; };
 		DBCCC65C22CB55AC00B00A68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */; };
+		DBFF5B7A22E1A12700DFDA43 /* beacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF5B7922E1A12700DFDA43 /* beacons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		DBCCC65922CB412700B00A68 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBEC145722DBADF30039FE3B /* DantePatient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DantePatient-Bridging-Header.h"; sourceTree = "<group>"; };
+		DBFF5B7922E1A12700DFDA43 /* beacons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = beacons.swift; sourceTree = "<group>"; };
 		DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dante_Patient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -165,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				DBCCC64722CB292500B00A68 /* AppDelegate.swift */,
+				DBFF5B7922E1A12700DFDA43 /* beacons.swift */,
 				DB837A2822D9CEB7003F3A4E /* Sign In */,
 				DBA8118122DABA9F006CE057 /* Sign Up */,
 				DBA917C922D93A440088A520 /* Oncology Map */,
@@ -318,6 +321,7 @@
 				DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */,
 				DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */,
 				DBCCC65A22CB412700B00A68 /* extensions.swift in Sources */,
+				DBFF5B7A22E1A12700DFDA43 /* beacons.swift in Sources */,
 				DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
