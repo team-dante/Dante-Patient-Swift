@@ -28,7 +28,9 @@ class Beacons: NSObject {
     let threshold = 5
     
     var count = 0
+    var prevRoom = ""
     var currRoom = ""
+    var startTime = 0
     
     var dateToday: String!
     var userPhoneNum: String?
@@ -68,6 +70,23 @@ class Beacons: NSObject {
         // ----------- end of setting up kontakt beacons ----------------
     }
     
+    // when the app is about to terminate; stop monitoring and ranging; set room to "Private"
+    func stopRanging() {
+        // ---------------- set up kontakt beacons ------------------
+        Kontakt.setAPIKey("IKLlxikqjxJwiXbyAgokGeLkcZqipAnc")
+        // Initiate Beacon Manager
+        beaconManager = KTKBeaconManager(delegate: self)
+        beaconManager.requestLocationAlwaysAuthorization()
+        
+        // overall ranging region (more general, major not specified)
+        let region = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,identifier: "region-identifer")
+        beaconManager.stopMonitoring(for: region)
+        beaconManager.stopRangingBeacons(in: region)
+        
+        // set room to "Private" when patients close the app completely (slide up the app and throw it out)
+        ref.child("/PatientLocation/" + userPhoneNum!).setValue(["room": "Private"])
+    }
+    
     // return today's date in YYYY-MM-DD format
     func formattedDate() -> String {
         let calendar = Calendar.current
@@ -85,14 +104,15 @@ extension Beacons: KTKBeaconManagerDelegate {
     
     func beaconManager(_ manager: KTKBeaconManager, didRangeBeacons beacons: [CLBeacon], in region: KTKBeaconRegion) {
         
-//        // Debugging purposes
-//        for beacon in beacons {
-//            print(beacon.major, beacon.accuracy)
-//        }
+        // Debugging purposes
+        for beacon in beacons {
+            print(beacon.major, beacon.accuracy)
+        }
         
         // wait a few rounds to gather data to compute avg
         if (self.count < self.threshold) {
             self.count += 1
+            print(self.count)
             for beacon in beacons {
                 // if too far, assume 999m away
                 if beacon.accuracy == -1 {
@@ -104,7 +124,9 @@ extension Beacons: KTKBeaconManagerDelegate {
         } else {
             for beacon in beacons {
                 // queue system; FIFO
-                self.roomDict[Int(truncating: beacon.major)]?.remove(at: 0)
+                if self.roomDict[Int(truncating: beacon.major)]!.count >= threshold {
+                    self.roomDict[Int(truncating: beacon.major)]?.remove(at: 0)
+                }
                 if beacon.accuracy == -1 {
                     self.roomDict[Int(truncating: beacon.major)]?.append(999)
                 } else {
@@ -122,6 +144,7 @@ extension Beacons: KTKBeaconManagerDelegate {
             }
             // sort beacons by avg; [Int:Double] -> [(key: ..., value:...)]
             let sortedBeaconArr = avgList.sorted(by: { $0.1 < $1.1})
+            print(avgList)
             
             // if no beacons are detected or the distance of the nearest beacon is greater than the cutoff,
             //      set currRoom to Private
@@ -134,7 +157,51 @@ extension Beacons: KTKBeaconManagerDelegate {
             } else {
                 self.currRoom = "Private"
             }
-            print(self.currRoom)
+            
+            // get the prev room that patient is located
+            ref.child("/PatientLocation/\(userPhoneNum!)/room").observeSingleEvent(of: .value, with: { (snapshot) in
+                if let room = snapshot.value as? String {
+                    self.prevRoom = room
+                } else {
+                    self.prevRoom = "Private"
+                }
+            })
+            
+            // ------------------- Time Tracking Starts -----------------------
+            // if the prev room is "Private" but the current one isn't, update current room's start time
+            if self.prevRoom == "Private" && self.currRoom != "Private" {
+                // get the last non-private room
+                let prev = UserDefaults.standard.string(forKey: "prevRoom")
+                
+                // ex: CTRoom -> Private -> CTRoom, keep updating CTRoom's clock
+                // ex: CTRoom -> Private -> exam1, start a new clock for exam1
+                if prev == self.currRoom {
+                    self.updateEndTime()
+                } else {
+                    self.createNewTimeClock()
+                }
+            }
+            // if the prev room isn't "Private" but the current one is, update end time and time spent for prev room;
+            else if self.prevRoom != "Private" && self.currRoom == "Private" {
+                self.updateEndTime()
+                
+                // save the prev room first before going into Private
+                UserDefaults.standard.set(self.prevRoom, forKey: "prevRoom")
+            }
+            // if prev and curr rooms are not private
+            else if self.prevRoom != "Private" && self.currRoom != "Private" {
+                // if prev and curr rooms are NOT the same, update endTime and timeElapsed for prev room
+                // and create a new clock for the new room
+                if self.prevRoom != self.currRoom {
+                    self.updateEndTime()
+                    self.createNewTimeClock()
+                }
+                // else update endTime and timeElapsed for prev room
+                else {
+                    self.updateEndTime()
+                }
+            }
+            // ------------------- Time Tracking Ends --------------------------
             
             // update paitent's current location to database
             ref.child("/PatientLocation/" + userPhoneNum!).setValue(["room": self.currRoom])
@@ -149,5 +216,28 @@ extension Beacons: KTKBeaconManagerDelegate {
         print("Exit region \(region)")
     }
     
+    func createNewTimeClock() {
+        let time = Int(Date().timeIntervalSince1970)
+        
+        let obj = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)").childByAutoId()
+        obj.setValue(["room": self.currRoom, "startTime": time, "endTime": time, "timeElapsed": 0])
+        UserDefaults.standard.set(obj.key, forKey: "currObj")
+    }
+    
+    func updateEndTime() {
+        let time = Int(Date().timeIntervalSince1970)
+        let uid = UserDefaults.standard.string(forKey: "currObj")
+        
+        let path = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)/\(uid!)")
+        path.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                if let snap = snapshot.value as? [String: Any] {
+                    self.startTime = snap["startTime"] as! Int
+                    path.child("endTime").setValue(time)
+                    path.child("timeElapsed").setValue(Int(time - self.startTime))
+                }
+            }
+        })
+    }
 }
 
