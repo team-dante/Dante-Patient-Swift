@@ -78,9 +78,15 @@ class Beacons: NSObject {
         beaconManager = KTKBeaconManager(delegate: self)
         beaconManager.requestLocationAlwaysAuthorization()
         
-        // overall ranging region (more general, major not specified)
         let region = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,identifier: "region-identifer")
-        beaconManager.stopMonitoring(for: region)
+        
+        let region1 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
+                                      major: 1, identifier: "region-identifer")
+        let region2 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
+                                      major: 2, identifier: "region-identifer")
+        
+        beaconManager.stopMonitoring(for: region1)
+        beaconManager.stopMonitoring(for: region2)
         beaconManager.stopRangingBeacons(in: region)
         
         // set room to "Private" when patients close the app completely (slide up the app and throw it out)
