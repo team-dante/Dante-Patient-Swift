@@ -18,6 +18,7 @@
 		DB4A0EE222D5BA9A00F6EC57 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */; };
 		DB4A0EE322D5BA9A00F6EC57 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */; };
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
+		DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */; };
 		DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */; };
 		DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */; };
 		DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */; };
@@ -46,6 +47,7 @@
 		DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Regular.ttf"; path = "../../../../fonts/Rubik/Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Italic.ttf"; path = "../../../../fonts/Rubik/Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingViewController.swift; sourceTree = "<group>"; };
 		DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateAcctViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +94,15 @@
 				DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB4CF8DF22E3991F00F50A41 /* Time Tracking */ = {
+			isa = PBXGroup;
+			children = (
+				DBFF5B7922E1A12700DFDA43 /* Beacons.swift */,
+				DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */,
+			);
+			path = "Time Tracking";
 			sourceTree = "<group>";
 		};
 		DB5BCF6A22D5B98E004237E9 /* Fonts */ = {
@@ -167,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				DBCCC64722CB292500B00A68 /* AppDelegate.swift */,
-				DBFF5B7922E1A12700DFDA43 /* Beacons.swift */,
+				DB4CF8DF22E3991F00F50A41 /* Time Tracking */,
 				DB837A2822D9CEB7003F3A4E /* Sign In */,
 				DBA8118122DABA9F006CE057 /* Sign Up */,
 				DBA917C922D93A440088A520 /* Oncology Map */,
@@ -323,6 +334,7 @@
 				DBCCC65A22CB412700B00A68 /* extensions.swift in Sources */,
 				DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */,
 				DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */,
+				DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

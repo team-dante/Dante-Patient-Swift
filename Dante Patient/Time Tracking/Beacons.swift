@@ -17,6 +17,9 @@ class Beacons: NSObject {
     
     var beaconManager: KTKBeaconManager!
     var ref: DatabaseReference!
+    var region: KTKBeaconRegion!
+    var region1: KTKBeaconRegion!
+    var region2: KTKBeaconRegion!
     
     // records a queue of 10 distances for each beacon
     var roomDict: [Int: [Double]] = [1: [], 2: [], 3:[]]
@@ -50,19 +53,17 @@ class Beacons: NSObject {
         beaconManager.requestLocationAlwaysAuthorization()
         
         // overall ranging region (more general, major not specified)
-        let region = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
+        region = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
                                      identifier: "region-identifer")
         
         // monitoring region 1 (major 1)
-        let region1 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
+        region1 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
                                       major: 1, identifier: "region-identifer")
-        region1.notifyEntryStateOnDisplay = true
         beaconManager.startMonitoring(for: region1)
         
         // monitoring region 2(major 2)
-        let region2 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
+        region2 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
                                       major: 2, identifier: "region-identifer")
-        region1.notifyEntryStateOnDisplay = true
         beaconManager.startMonitoring(for: region2)
         
         // range for the overall region
@@ -72,25 +73,12 @@ class Beacons: NSObject {
     
     // when the app is about to terminate; stop monitoring and ranging; set room to "Private"
     func stopRanging() {
-        // ---------------- set up kontakt beacons ------------------
-        Kontakt.setAPIKey("IKLlxikqjxJwiXbyAgokGeLkcZqipAnc")
-        // Initiate Beacon Manager
-        beaconManager = KTKBeaconManager(delegate: self)
-        beaconManager.requestLocationAlwaysAuthorization()
-        
-        let region = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,identifier: "region-identifer")
-        
-        let region1 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
-                                      major: 1, identifier: "region-identifer")
-        let region2 = KTKBeaconRegion(proximityUUID: UUID(uuidString: "f7826da6-4fa2-4e98-8024-bc5b71e0893e")! as UUID,
-                                      major: 2, identifier: "region-identifer")
-        
         beaconManager.stopMonitoring(for: region1)
         beaconManager.stopMonitoring(for: region2)
         beaconManager.stopRangingBeacons(in: region)
         
         // set room to "Private" when patients close the app completely (slide up the app and throw it out)
-        ref.child("/PatientLocation/" + userPhoneNum!).setValue(["room": "Private"])
+        ref.child("/PatientLocation/\(userPhoneNum!)/room").setValue("Private")
     }
     
     // return today's date in YYYY-MM-DD format
@@ -115,10 +103,9 @@ extension Beacons: KTKBeaconManagerDelegate {
             print(beacon.major, beacon.accuracy)
         }
         
-        // wait a few rounds to gather data to compute avg
+        // wait a few rounds (5) to gather data to compute avg
         if (self.count < self.threshold) {
             self.count += 1
-            print(self.count)
             for beacon in beacons {
                 // if too far, assume 999m away
                 if beacon.accuracy == -1 {
@@ -129,7 +116,7 @@ extension Beacons: KTKBeaconManagerDelegate {
             }
         } else {
             for beacon in beacons {
-                // queue system; FIFO
+                // queue system; dequeue iff array length >= threshold
                 if self.roomDict[Int(truncating: beacon.major)]!.count >= threshold {
                     self.roomDict[Int(truncating: beacon.major)]?.remove(at: 0)
                 }
@@ -150,7 +137,6 @@ extension Beacons: KTKBeaconManagerDelegate {
             }
             // sort beacons by avg; [Int:Double] -> [(key: ..., value:...)]
             let sortedBeaconArr = avgList.sorted(by: { $0.1 < $1.1})
-            print(avgList)
             
             // if no beacons are detected or the distance of the nearest beacon is greater than the cutoff,
             //      set currRoom to Private
@@ -164,62 +150,55 @@ extension Beacons: KTKBeaconManagerDelegate {
                 self.currRoom = "Private"
             }
             
-            // get the prev room that patient is located
+            // get the prev room that patient is located; make sure to get the prev room first before tracking time
             ref.child("/PatientLocation/\(userPhoneNum!)/room").observeSingleEvent(of: .value, with: { (snapshot) in
                 if let room = snapshot.value as? String {
                     self.prevRoom = room
                 } else {
                     self.prevRoom = "Private"
                 }
+                self.startTimeTracking()
             })
-            
-            // ------------------- Time Tracking Starts -----------------------
-            // if the prev room is "Private" but the current one isn't, update current room's start time
-            if self.prevRoom == "Private" && self.currRoom != "Private" {
-                // get the last non-private room
-                let prev = UserDefaults.standard.string(forKey: "prevRoom")
-                
-                // ex: CTRoom -> Private -> CTRoom, keep updating CTRoom's clock
-                // ex: CTRoom -> Private -> exam1, start a new clock for exam1
-                if prev == self.currRoom {
-                    self.updateEndTime()
-                } else {
-                    self.createNewTimeClock()
-                }
-            }
-            // if the prev room isn't "Private" but the current one is, update end time and time spent for prev room;
-            else if self.prevRoom != "Private" && self.currRoom == "Private" {
-                self.updateEndTime()
-                
-                // save the prev room first before going into Private
-                UserDefaults.standard.set(self.prevRoom, forKey: "prevRoom")
-            }
-            // if prev and curr rooms are not private
-            else if self.prevRoom != "Private" && self.currRoom != "Private" {
-                // if prev and curr rooms are NOT the same, update endTime and timeElapsed for prev room
-                // and create a new clock for the new room
-                if self.prevRoom != self.currRoom {
-                    self.updateEndTime()
-                    self.createNewTimeClock()
-                }
-                // else update endTime and timeElapsed for prev room
-                else {
-                    self.updateEndTime()
-                }
-            }
-            // ------------------- Time Tracking Ends --------------------------
-            
-            // update paitent's current location to database
-            ref.child("/PatientLocation/" + userPhoneNum!).setValue(["room": self.currRoom])
         }
     }
     
-    func beaconManager(_ manager: KTKBeaconManager, didEnter region: KTKBeaconRegion) {
-        print("Enter region \(region)")
-    }
-    
-    func beaconManager(_ manager: KTKBeaconManager, didExitRegion region: KTKBeaconRegion) {
-        print("Exit region \(region)")
+    func startTimeTracking() {
+        // if the prev room is "Private" but the current one isn't, update current room's start time
+        if self.prevRoom == "Private" && self.currRoom != "Private" {
+            // get the last non-private room
+            let prev = UserDefaults.standard.string(forKey: "prevRoom")
+            
+            // ex: CTRoom -> Private -> CTRoom, keep updating CTRoom's clock
+            // ex: CTRoom -> Private -> exam1, start a new clock for exam1
+            if prev == self.currRoom {
+                self.updateEndTime()
+            } else {
+                self.createNewTimeClock()
+            }
+        }
+            // if the prev room isn't "Private" but the current one is, update end time and time spent for prev room;
+        else if self.prevRoom != "Private" && self.currRoom == "Private" {
+            self.updateEndTime()
+            
+            // save the prev room first before going into Private
+            UserDefaults.standard.set(self.prevRoom, forKey: "prevRoom")
+        }
+            // if prev and curr rooms are not private
+        else if self.prevRoom != "Private" && self.currRoom != "Private" {
+            // if prev and curr rooms are NOT the same, update endTime and timeElapsed for prev room
+            // and create a new clock for the new room
+            if self.prevRoom != self.currRoom {
+                print(self.prevRoom, self.currRoom)
+                self.updateEndTime()
+                self.createNewTimeClock()
+            }
+            // else update endTime and timeElapsed for prev room
+            else {
+                self.updateEndTime()
+            }
+        }
+        // update paitent's current location to database
+        ref.child("/PatientLocation/" + userPhoneNum!).setValue(["room": self.currRoom])
     }
     
     func createNewTimeClock() {
@@ -244,6 +223,15 @@ extension Beacons: KTKBeaconManagerDelegate {
                 }
             }
         })
+    }
+    
+    // ------------------------------- Monitoring ------------------------------------
+    func beaconManager(_ manager: KTKBeaconManager, didEnter region: KTKBeaconRegion) {
+        print("Enter region \(region)")
+    }
+    
+    func beaconManager(_ manager: KTKBeaconManager, didExitRegion region: KTKBeaconRegion) {
+        print("Exit region \(region)")
     }
 }
 

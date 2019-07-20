@@ -34,6 +34,9 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         // connecting to Firebase initially
         ref = Database.database().reference()
         
+        // Singleton Beacon class
+        Beacons.shared.detectBeacons()
+
         // --------------- settting up FloatingPanel ------------------
         // init FloatingPanelController
         fpc = FloatingPanelController()
