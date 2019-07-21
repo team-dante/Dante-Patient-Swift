@@ -125,6 +125,125 @@
             </objects>
             <point key="canvasLocation" x="1682" y="137"/>
         </scene>
+        <!--Time Tracking-->
+        <scene sceneID="FHT-H6-kPJ">
+            <objects>
+                <viewController id="zMR-9l-1fW" customClass="TimeTrackingViewController" customModule="Dante_Patient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kQf-6x-92K">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1u4-yn-59W">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CurrRoomTableViewCell" rowHeight="296" id="9Zc-h9-bR7" customClass="CurrRoomTableViewCell" customModule="Dante_Patient" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="296"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Zc-h9-bR7" id="1e6-rS-uAS">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="295.66666666666669"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CT Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feg-Tm-8M6">
+                                                    <rect key="frame" x="20" y="20" width="374" height="35"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="25"/>
+                                                    <color key="textColor" red="0.19215686274509802" green="0.75686274509803919" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9x-kF-07H">
+                                                    <rect key="frame" x="20" y="85" width="374" height="101.66666666666669"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="86"/>
+                                                    <color key="textColor" red="0.32941176470588235" green="0.36078431372549019" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start: 11:52 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSl-tO-5uY">
+                                                    <rect key="frame" x="20" y="221.66666666666666" width="374" height="28"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="20"/>
+                                                    <color key="textColor" red="0.67843137254901964" green="0.67843137254901964" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cSl-tO-5uY" firstAttribute="leading" secondItem="1e6-rS-uAS" secondAttribute="leading" constant="20" id="1aw-UD-UNu"/>
+                                                <constraint firstItem="feg-Tm-8M6" firstAttribute="top" secondItem="1e6-rS-uAS" secondAttribute="top" constant="20" id="Aj2-hG-VyA"/>
+                                                <constraint firstItem="N9x-kF-07H" firstAttribute="leading" secondItem="1e6-rS-uAS" secondAttribute="leading" constant="20" id="F2c-OC-iqx"/>
+                                                <constraint firstAttribute="trailing" secondItem="feg-Tm-8M6" secondAttribute="trailing" constant="20" id="JXB-z6-n0m"/>
+                                                <constraint firstAttribute="trailing" secondItem="N9x-kF-07H" secondAttribute="trailing" constant="20" id="dmT-dw-GbO"/>
+                                                <constraint firstItem="N9x-kF-07H" firstAttribute="top" secondItem="feg-Tm-8M6" secondAttribute="bottom" constant="30" id="gUZ-g4-N49"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cSl-tO-5uY" secondAttribute="bottom" constant="30" id="jxD-ZT-lwZ"/>
+                                                <constraint firstItem="feg-Tm-8M6" firstAttribute="leading" secondItem="1e6-rS-uAS" secondAttribute="leading" constant="20" id="kSG-lV-6AE"/>
+                                                <constraint firstAttribute="trailing" secondItem="cSl-tO-5uY" secondAttribute="trailing" constant="20" id="rhd-g3-Fb2"/>
+                                                <constraint firstItem="cSl-tO-5uY" firstAttribute="top" secondItem="N9x-kF-07H" secondAttribute="bottom" constant="35" id="vt2-E8-4sh"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.94901960784313721" green="0.99215686274509807" blue="0.99607843137254903" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="clockLabel" destination="N9x-kF-07H" id="Uo7-jG-4gg"/>
+                                            <outlet property="currRoom" destination="feg-Tm-8M6" id="yH0-fW-g5l"/>
+                                            <outlet property="startTimeLabel" destination="cSl-tO-5uY" id="mDb-eB-YOh"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PrevRoomsTableViewCell" rowHeight="112" id="thh-Tk-Ty2" customClass="PrevRoomsTableViewCell" customModule="Dante_Patient" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="324" width="414" height="112"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="thh-Tk-Ty2" id="AIa-Bj-h54">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="111.66666666666667"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tdT-sz-H8t">
+                                                    <rect key="frame" x="20" y="30" width="374" height="51.666666666666657"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Female Waiting Room" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SOy-u2-fdd">
+                                                            <rect key="frame" x="0.0" y="0.0" width="254" height="51.666666666666664"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
+                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:01" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Nx-vw-gJX">
+                                                            <rect key="frame" x="254" y="0.0" width="120" height="51.666666666666664"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="120" id="R63-Jz-o74"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="29"/>
+                                                            <color key="textColor" red="0.3294117647" green="0.36078431370000003" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="tdT-sz-H8t" secondAttribute="trailing" constant="20" id="EwX-If-X3C"/>
+                                                <constraint firstItem="tdT-sz-H8t" firstAttribute="top" secondItem="AIa-Bj-h54" secondAttribute="top" constant="30" id="Gvj-vk-EY9"/>
+                                                <constraint firstAttribute="bottom" secondItem="tdT-sz-H8t" secondAttribute="bottom" constant="30" id="X1R-sR-06N"/>
+                                                <constraint firstItem="tdT-sz-H8t" firstAttribute="leading" secondItem="AIa-Bj-h54" secondAttribute="leading" constant="20" id="o87-52-1Lo"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="prevRoom" destination="SOy-u2-fdd" id="XPf-Ih-ZCv"/>
+                                            <outlet property="timeElapsed" destination="4Nx-vw-gJX" id="dnn-Yd-fbB"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1u4-yn-59W" firstAttribute="top" secondItem="g4j-by-YVd" secondAttribute="top" id="4zB-A1-6dg"/>
+                            <constraint firstItem="g4j-by-YVd" firstAttribute="trailing" secondItem="1u4-yn-59W" secondAttribute="trailing" id="78o-U6-Swn"/>
+                            <constraint firstItem="1u4-yn-59W" firstAttribute="leading" secondItem="g4j-by-YVd" secondAttribute="leading" id="DrT-2X-uAo"/>
+                            <constraint firstItem="g4j-by-YVd" firstAttribute="bottom" secondItem="1u4-yn-59W" secondAttribute="bottom" id="eco-Yd-5GW"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="g4j-by-YVd"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Time Tracking" id="ska-dB-qZm"/>
+                    <connections>
+                        <outlet property="tableView" destination="1u4-yn-59W" id="E3f-xI-90D"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="leJ-Zj-Hw2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1679.7101449275362" y="839.73214285714278"/>
+        </scene>
         <!--Pin Ref View Controller-->
         <scene sceneID="VuW-P2-iCj">
             <objects>
@@ -158,13 +277,13 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. Roa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSb-T4-dhd">
-                                                                <rect key="frame" x="70" y="14.999999999999998" width="329" height="22.333333333333329"/>
+                                                                <rect key="frame" x="70" y="15.000000000000002" width="329" height="26.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="19"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CT Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zk-3T-E0K">
-                                                                <rect key="frame" x="70" y="41.333333333333336" width="329" height="18"/>
+                                                                <rect key="frame" x="70" y="45.666666666666664" width="329" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -255,19 +374,19 @@
                                 <rect key="frame" x="32" y="186" width="350" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQJ-eb-RKM">
-                                        <rect key="frame" x="25" y="25.000000000000004" width="300" height="32.333333333333343"/>
+                                        <rect key="frame" x="25" y="25" width="300" height="27"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="23"/>
                                         <color key="textColor" red="0.23921568627450979" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puN-u5-hzj">
-                                        <rect key="frame" x="25" y="82.333333333333314" width="300" height="19"/>
+                                        <rect key="frame" x="25" y="77" width="300" height="19"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="16"/>
                                         <color key="textColor" red="0.14901960784313725" green="0.59215686274509804" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9W-zD-s9W" customClass="Inputs" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="109.33333333333331" width="310" height="45"/>
+                                        <rect key="frame" x="20" y="104" width="310" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="65f-kA-0cU"/>
                                         </constraints>
@@ -276,13 +395,13 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBQ-9W-7Z9">
-                                        <rect key="frame" x="25" y="169.33333333333331" width="300" height="19"/>
+                                        <rect key="frame" x="25" y="164" width="300" height="19"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="16"/>
                                         <color key="textColor" red="0.14901960780000001" green="0.59215686270000001" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGu-oP-2Hh" customClass="Inputs" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="196.33333333333331" width="310" height="45"/>
+                                        <rect key="frame" x="20" y="191" width="310" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="QYH-xn-nq7"/>
                                         </constraints>
@@ -291,7 +410,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfp-Fh-MAB" customClass="Button" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="274.33333333333331" width="310" height="45"/>
+                                        <rect key="frame" x="20" y="269" width="310" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Owl-jM-EuF"/>
                                         </constraints>
@@ -301,26 +420,26 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FaceID will be auto-triggered once you've signed in" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFq-y2-WR7">
-                                        <rect key="frame" x="25" y="331.33333333333337" width="300" height="33.333333333333314"/>
+                                        <rect key="frame" x="25" y="326" width="300" height="32.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Patient?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d0-qs-u4y">
-                                        <rect key="frame" x="25" y="405.66666666666663" width="300" height="22.333333333333314"/>
+                                        <rect key="frame" x="25" y="399.66666666666663" width="300" height="18.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-WC-OGD">
-                                        <rect key="frame" x="25" y="389.66666666666663" width="300" height="1"/>
+                                        <rect key="frame" x="25" y="383.66666666666663" width="300" height="1"/>
                                         <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="TM1-7S-0pJ"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCN-I8-yuv" customClass="Button" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="443" width="300" height="45"/>
+                                        <rect key="frame" x="25" y="433.33333333333337" width="300" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Vbi-7r-C3D"/>
                                         </constraints>
@@ -412,6 +531,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="XiG-t7-4aA" kind="relationship" relationship="viewControllers" id="6rT-9B-S8V"/>
+                        <segue destination="Ami-l1-98Y" kind="relationship" relationship="viewControllers" id="nwZ-2k-Afb"/>
                         <segue destination="4Os-D9-EIv" kind="relationship" relationship="viewControllers" id="J0b-ho-Il6"/>
                     </connections>
                 </tabBarController>
@@ -626,7 +746,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bhP-W8-etf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="952.79999999999995" y="800.98522167487693"/>
+            <point key="canvasLocation" x="916" y="1725"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PFD-4s-lPg">
@@ -646,6 +766,25 @@
             </objects>
             <point key="canvasLocation" x="-1561" y="1533"/>
         </scene>
+        <!--Time Tracking-->
+        <scene sceneID="Pnb-RS-CiF">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Ami-l1-98Y" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Time Tracking" image="time_tracking" id="4on-dB-v1h"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4NN-dw-rJk">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zMR-9l-1fW" kind="relationship" relationship="rootViewController" id="tOH-nx-WE5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BQh-ng-ayw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="916" y="840"/>
+        </scene>
     </scenes>
     <resources>
         <image name="1FpcLGF - Imgur" width="3418" height="3492"/>
@@ -655,6 +794,7 @@
         <image name="profile" width="30" height="30"/>
         <image name="profileDefault" width="300" height="339"/>
         <image name="thoughts" width="300" height="188"/>
+        <image name="time_tracking" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="87V-b9-hqw"/>

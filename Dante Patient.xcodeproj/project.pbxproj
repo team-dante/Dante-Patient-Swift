@@ -19,6 +19,8 @@
 		DB4A0EE322D5BA9A00F6EC57 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */; };
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
 		DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */; };
+		DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */; };
+		DB4CF8E522E3D85B00F50A41 /* PrevRoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */; };
 		DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */; };
 		DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */; };
 		DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */; };
@@ -48,6 +50,8 @@
 		DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Italic.ttf"; path = "../../../../fonts/Rubik/Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingViewController.swift; sourceTree = "<group>"; };
+		DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrRoomTableViewCell.swift; sourceTree = "<group>"; };
+		DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrevRoomsTableViewCell.swift; sourceTree = "<group>"; };
 		DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateAcctViewController.swift; sourceTree = "<group>"; };
@@ -101,6 +105,8 @@
 			children = (
 				DBFF5B7922E1A12700DFDA43 /* Beacons.swift */,
 				DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */,
+				DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */,
+				DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */,
 			);
 			path = "Time Tracking";
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB4CF8E522E3D85B00F50A41 /* PrevRoomsTableViewCell.swift in Sources */,
 				DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */,
 				DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */,
 				DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */,
@@ -335,6 +342,7 @@
 				DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */,
 				DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */,
 				DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */,
+				DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
