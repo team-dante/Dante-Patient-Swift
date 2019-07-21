@@ -23,7 +23,6 @@
 		DBCCC64F22CB292900B00A68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC64E22CB292900B00A68 /* Assets.xcassets */; };
 		DBCCC65222CB292900B00A68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC65022CB292900B00A68 /* LaunchScreen.storyboard */; };
 		DBCCC65A22CB412700B00A68 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC65922CB412700B00A68 /* UIViewExtension.swift */; };
-		DBCCC65C22CB55AC00B00A68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */; };
 		DBF45F1922E41DDD00A18C7B /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */; };
 		DBF45F1B22E41E0300A18C7B /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */; };
 		DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1C22E41E2F00A18C7B /* UIViewControllerExtension.swift */; };
@@ -36,6 +35,7 @@
 		DBF45F2D22E4603300A18C7B /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2422E4603300A18C7B /* Rubik-Bold.ttf */; };
 		DBF45F2E22E4603300A18C7B /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */; };
 		DBF45F2F22E4603300A18C7B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */; };
+		DBF45F3122E4614A00A18C7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F3022E4614A00A18C7B /* GoogleService-Info.plist */; };
 		DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF5B7922E1A12700DFDA43 /* Beacons.swift */; };
 /* End PBXBuildFile section */
 
@@ -59,7 +59,6 @@
 		DBCCC65122CB292900B00A68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCCC65322CB292900B00A68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCCC65922CB412700B00A68 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBEC145722DBADF30039FE3B /* DantePatient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DantePatient-Bridging-Header.h"; sourceTree = "<group>"; };
 		DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -73,6 +72,7 @@
 		DBF45F2422E4603300A18C7B /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
 		DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		DBF45F3022E4614A00A18C7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBFF5B7922E1A12700DFDA43 /* Beacons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacons.swift; sourceTree = "<group>"; };
 		DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dante_Patient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -200,7 +200,7 @@
 				DBCCC64E22CB292900B00A68 /* Assets.xcassets */,
 				DBCCC65022CB292900B00A68 /* LaunchScreen.storyboard */,
 				DBCCC65322CB292900B00A68 /* Info.plist */,
-				DBCCC65B22CB55AC00B00A68 /* GoogleService-Info.plist */,
+				DBF45F3022E4614A00A18C7B /* GoogleService-Info.plist */,
 				DB5BCF6A22D5B98E004237E9 /* Fonts */,
 				DBEC145722DBADF30039FE3B /* DantePatient-Bridging-Header.h */,
 			);
@@ -283,6 +283,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF45F3122E4614A00A18C7B /* GoogleService-Info.plist in Resources */,
 				DBF45F2D22E4603300A18C7B /* Rubik-Bold.ttf in Resources */,
 				DBF45F2E22E4603300A18C7B /* Rubik-Regular.ttf in Resources */,
 				DBCCC65222CB292900B00A68 /* LaunchScreen.storyboard in Resources */,
@@ -290,7 +291,6 @@
 				DBF45F2F22E4603300A18C7B /* Poppins-SemiBold.ttf in Resources */,
 				DBF45F2922E4603300A18C7B /* Poppins-Italic.ttf in Resources */,
 				DBF45F2A22E4603300A18C7B /* Poppins-Bold.ttf in Resources */,
-				DBCCC65C22CB55AC00B00A68 /* GoogleService-Info.plist in Resources */,
 				DBF45F2B22E4603300A18C7B /* Rubik-Italic.ttf in Resources */,
 				DBF45F2822E4603300A18C7B /* Rubik-Medium.ttf in Resources */,
 				DBCCC64F22CB292900B00A68 /* Assets.xcassets in Resources */,

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>199635283277-iofvterc40kq6ie2a9pe10hn0n02s8c3.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.199635283277-iofvterc40kq6ie2a9pe10hn0n02s8c3</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB20FosX_LwWxQB0K2WdakTMkoth9ivVcI</string>
+	<key>GCM_SENDER_ID</key>
+	<string>199635283277</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.xhl.Dante-Patient</string>
+	<key>PROJECT_ID</key>
+	<string>dante-app-d6cc5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dante-app-d6cc5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:199635283277:ios:ad5fb5c34a5d4e07</string>
+	<key>DATABASE_URL</key>
+	<string>https://dante-app-d6cc5.firebaseio.com</string>
+</dict>
+</plist>
