@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A22BE7BAF0963CD4574D842 /* Pods_Dante_Patient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */; };
+		DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */; };
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
 		DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */; };
 		DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */; };
@@ -44,6 +45,7 @@
 /* Begin PBXFileReference section */
 		73DAB50266CD4D0CEF54150A /* Pods-Dante Patient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.release.xcconfig"; sourceTree = "<group>"; };
 		9E5D9A74D41EC12E8A1CF669 /* Pods-Dante Patient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.debug.xcconfig"; sourceTree = "<group>"; };
+		DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrRoomTableViewCell.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 			children = (
 				DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */,
 				DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */,
+				DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -366,6 +369,7 @@
 				DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */,
 				DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */,
 				DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */,
+				DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */,
 				DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */,
 				DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */,
 				DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */,
