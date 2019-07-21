@@ -19,19 +19,21 @@
 	<key>CFBundleShortVersionString</key>
 	<string>2.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSApplicationCategoryType</key>
 	<string></string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Allow access for bluetooth</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>Would you like to allow us to use your FaceID to simplify the sign-in process?</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Sharing your locations would strongly improve our staff&apos;s service quality as well as your visiting experience in the clinic.</string>
+	<string>Sharing your locations would strongly improve our staff's service quality as well as your visiting experience in the clinic.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Sharing your locations would strongly improve our staff&apos;s service quality as well as your visiting experience in the clinic.</string>
+	<string>Sharing your locations would strongly improve our staff's service quality as well as your visiting experience in the clinic.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Sharing your locations would strongly improve our staff&apos;s service quality as well as your visiting experience in the clinic.</string>
+	<string>Sharing your locations would strongly improve our staff's service quality as well as your visiting experience in the clinic.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Rubik-Bold.ttf</string>
@@ -68,7 +70,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Allow access for bluetooth</string>
 </dict>
 </plist>
