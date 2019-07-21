@@ -64,19 +64,6 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
-    func prettifyRoom(room: String) -> String {
-        switch room {
-        case "femaleWaitingRoom":
-            return "Female Waiting Room"
-        case "CTRoom":
-            return "CT Room"
-        case "exam1":
-            return "Exam 1 Room"
-        default:
-            return ""
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.doctors.count
     }

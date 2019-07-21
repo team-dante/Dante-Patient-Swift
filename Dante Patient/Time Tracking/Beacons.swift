@@ -215,17 +215,15 @@ extension Beacons: KTKBeaconManagerDelegate {
         let uid = UserDefaults.standard.string(forKey: "currObj")
         
         let path = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)/\(uid!)")
-        if path != nil {
-            path.observeSingleEvent(of: .value, with: { (snapshot) in
-                if snapshot.exists() {
-                    if let snap = snapshot.value as? [String: Any] {
-                        self.startTime = snap["startTime"] as! Int
-                        path.child("endTime").setValue(time)
-                        path.child("timeElapsed").setValue(Int(time - self.startTime))
-                    }
+        path.observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                if let snap = snapshot.value as? [String: Any] {
+                    self.startTime = snap["startTime"] as! Int
+                    path.child("endTime").setValue(time)
+                    path.child("timeElapsed").setValue(Int(time - self.startTime))
                 }
-            })
-        }
+            }
+        })
     }
     
     // ------------------------------- Monitoring ------------------------------------
