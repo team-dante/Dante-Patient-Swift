@@ -8,15 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		9A22BE7BAF0963CD4574D842 /* Pods_Dante_Patient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */; };
-		DB4A0ED722D5BA5900F6EC57 /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED222D5BA5900F6EC57 /* Poppins-Italic.ttf */; };
-		DB4A0ED822D5BA5900F6EC57 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED322D5BA5900F6EC57 /* Poppins-SemiBold.ttf */; };
-		DB4A0ED922D5BA5900F6EC57 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED422D5BA5900F6EC57 /* Poppins-Regular.ttf */; };
-		DB4A0EDA22D5BA5900F6EC57 /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED522D5BA5900F6EC57 /* Poppins-Light.ttf */; };
-		DB4A0EDB22D5BA5900F6EC57 /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0ED622D5BA5900F6EC57 /* Poppins-Bold.ttf */; };
-		DB4A0EE022D5BA9A00F6EC57 /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDC22D5BA9A00F6EC57 /* Rubik-Bold.ttf */; };
-		DB4A0EE122D5BA9A00F6EC57 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDD22D5BA9A00F6EC57 /* Rubik-Medium.ttf */; };
-		DB4A0EE222D5BA9A00F6EC57 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */; };
-		DB4A0EE322D5BA9A00F6EC57 /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */; };
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
 		DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */; };
 		DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */; };
@@ -36,21 +27,21 @@
 		DBF45F1922E41DDD00A18C7B /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */; };
 		DBF45F1B22E41E0300A18C7B /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */; };
 		DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1C22E41E2F00A18C7B /* UIViewControllerExtension.swift */; };
+		DBF45F2722E4603300A18C7B /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F1E22E4603300A18C7B /* Poppins-Light.ttf */; };
+		DBF45F2822E4603300A18C7B /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F1F22E4603300A18C7B /* Rubik-Medium.ttf */; };
+		DBF45F2922E4603300A18C7B /* Poppins-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2022E4603300A18C7B /* Poppins-Italic.ttf */; };
+		DBF45F2A22E4603300A18C7B /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2122E4603300A18C7B /* Poppins-Bold.ttf */; };
+		DBF45F2B22E4603300A18C7B /* Rubik-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2222E4603300A18C7B /* Rubik-Italic.ttf */; };
+		DBF45F2C22E4603300A18C7B /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2322E4603300A18C7B /* Poppins-Regular.ttf */; };
+		DBF45F2D22E4603300A18C7B /* Rubik-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2422E4603300A18C7B /* Rubik-Bold.ttf */; };
+		DBF45F2E22E4603300A18C7B /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */; };
+		DBF45F2F22E4603300A18C7B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */; };
 		DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF5B7922E1A12700DFDA43 /* Beacons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		73DAB50266CD4D0CEF54150A /* Pods-Dante Patient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.release.xcconfig"; sourceTree = "<group>"; };
 		9E5D9A74D41EC12E8A1CF669 /* Pods-Dante Patient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.debug.xcconfig"; sourceTree = "<group>"; };
-		DB4A0ED222D5BA5900F6EC57 /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Italic.ttf"; path = "../../../../fonts/Poppins/Poppins-Italic.ttf"; sourceTree = "<group>"; };
-		DB4A0ED322D5BA5900F6EC57 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-SemiBold.ttf"; path = "../../../../fonts/Poppins/Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
-		DB4A0ED422D5BA5900F6EC57 /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Regular.ttf"; path = "../../../../fonts/Poppins/Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		DB4A0ED522D5BA5900F6EC57 /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Light.ttf"; path = "../../../../fonts/Poppins/Poppins-Light.ttf"; sourceTree = "<group>"; };
-		DB4A0ED622D5BA5900F6EC57 /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Poppins-Bold.ttf"; path = "../../../../fonts/Poppins/Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		DB4A0EDC22D5BA9A00F6EC57 /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Bold.ttf"; path = "../../../../fonts/Rubik/Rubik-Bold.ttf"; sourceTree = "<group>"; };
-		DB4A0EDD22D5BA9A00F6EC57 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Medium.ttf"; path = "../../../../fonts/Rubik/Rubik-Medium.ttf"; sourceTree = "<group>"; };
-		DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Regular.ttf"; path = "../../../../fonts/Rubik/Rubik-Regular.ttf"; sourceTree = "<group>"; };
-		DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Rubik-Italic.ttf"; path = "../../../../fonts/Rubik/Rubik-Italic.ttf"; sourceTree = "<group>"; };
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrRoomTableViewCell.swift; sourceTree = "<group>"; };
@@ -73,6 +64,15 @@
 		DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		DBF45F1C22E41E2F00A18C7B /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		DBF45F1E22E4603300A18C7B /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		DBF45F1F22E4603300A18C7B /* Rubik-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Medium.ttf"; sourceTree = "<group>"; };
+		DBF45F2022E4603300A18C7B /* Poppins-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Italic.ttf"; sourceTree = "<group>"; };
+		DBF45F2122E4603300A18C7B /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		DBF45F2222E4603300A18C7B /* Rubik-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Italic.ttf"; sourceTree = "<group>"; };
+		DBF45F2322E4603300A18C7B /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		DBF45F2422E4603300A18C7B /* Rubik-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Bold.ttf"; sourceTree = "<group>"; };
+		DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
+		DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		DBFF5B7922E1A12700DFDA43 /* Beacons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacons.swift; sourceTree = "<group>"; };
 		DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dante_Patient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -120,15 +120,15 @@
 		DB5BCF6A22D5B98E004237E9 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				DB4A0EDC22D5BA9A00F6EC57 /* Rubik-Bold.ttf */,
-				DB4A0EDF22D5BA9A00F6EC57 /* Rubik-Italic.ttf */,
-				DB4A0EDD22D5BA9A00F6EC57 /* Rubik-Medium.ttf */,
-				DB4A0EDE22D5BA9A00F6EC57 /* Rubik-Regular.ttf */,
-				DB4A0ED622D5BA5900F6EC57 /* Poppins-Bold.ttf */,
-				DB4A0ED222D5BA5900F6EC57 /* Poppins-Italic.ttf */,
-				DB4A0ED522D5BA5900F6EC57 /* Poppins-Light.ttf */,
-				DB4A0ED422D5BA5900F6EC57 /* Poppins-Regular.ttf */,
-				DB4A0ED322D5BA5900F6EC57 /* Poppins-SemiBold.ttf */,
+				DBF45F2122E4603300A18C7B /* Poppins-Bold.ttf */,
+				DBF45F2022E4603300A18C7B /* Poppins-Italic.ttf */,
+				DBF45F1E22E4603300A18C7B /* Poppins-Light.ttf */,
+				DBF45F2322E4603300A18C7B /* Poppins-Regular.ttf */,
+				DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */,
+				DBF45F2422E4603300A18C7B /* Rubik-Bold.ttf */,
+				DBF45F2222E4603300A18C7B /* Rubik-Italic.ttf */,
+				DBF45F1F22E4603300A18C7B /* Rubik-Medium.ttf */,
+				DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -283,19 +283,19 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF45F2D22E4603300A18C7B /* Rubik-Bold.ttf in Resources */,
+				DBF45F2E22E4603300A18C7B /* Rubik-Regular.ttf in Resources */,
 				DBCCC65222CB292900B00A68 /* LaunchScreen.storyboard in Resources */,
-				DB4A0EE222D5BA9A00F6EC57 /* Rubik-Regular.ttf in Resources */,
-				DB4A0EDB22D5BA5900F6EC57 /* Poppins-Bold.ttf in Resources */,
+				DBF45F2722E4603300A18C7B /* Poppins-Light.ttf in Resources */,
+				DBF45F2F22E4603300A18C7B /* Poppins-SemiBold.ttf in Resources */,
+				DBF45F2922E4603300A18C7B /* Poppins-Italic.ttf in Resources */,
+				DBF45F2A22E4603300A18C7B /* Poppins-Bold.ttf in Resources */,
 				DBCCC65C22CB55AC00B00A68 /* GoogleService-Info.plist in Resources */,
-				DB4A0ED922D5BA5900F6EC57 /* Poppins-Regular.ttf in Resources */,
-				DB4A0EDA22D5BA5900F6EC57 /* Poppins-Light.ttf in Resources */,
+				DBF45F2B22E4603300A18C7B /* Rubik-Italic.ttf in Resources */,
+				DBF45F2822E4603300A18C7B /* Rubik-Medium.ttf in Resources */,
 				DBCCC64F22CB292900B00A68 /* Assets.xcassets in Resources */,
-				DB4A0ED822D5BA5900F6EC57 /* Poppins-SemiBold.ttf in Resources */,
-				DB4A0ED722D5BA5900F6EC57 /* Poppins-Italic.ttf in Resources */,
 				DBCCC64D22CB292500B00A68 /* Main.storyboard in Resources */,
-				DB4A0EE322D5BA9A00F6EC57 /* Rubik-Italic.ttf in Resources */,
-				DB4A0EE122D5BA9A00F6EC57 /* Rubik-Medium.ttf in Resources */,
-				DB4A0EE022D5BA9A00F6EC57 /* Rubik-Bold.ttf in Resources */,
+				DBF45F2C22E4603300A18C7B /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
