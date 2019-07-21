@@ -36,6 +36,8 @@
 		DBF45F2E22E4603300A18C7B /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */; };
 		DBF45F2F22E4603300A18C7B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */; };
 		DBF45F3122E4614A00A18C7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F3022E4614A00A18C7B /* GoogleService-Info.plist */; };
+		DBF45F3422E466E300A18C7B /* VisitsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */; };
+		DBF45F3622E4671400A18C7B /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */; };
 		DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF5B7922E1A12700DFDA43 /* Beacons.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +75,8 @@
 		DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		DBF45F3022E4614A00A18C7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHistoryViewController.swift; sourceTree = "<group>"; };
+		DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBFF5B7922E1A12700DFDA43 /* Beacons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacons.swift; sourceTree = "<group>"; };
 		DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dante_Patient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -195,6 +199,7 @@
 				DBA8118122DABA9F006CE057 /* Sign Up */,
 				DBA917C922D93A440088A520 /* Oncology Map */,
 				DBA8117E22DA9693006CE057 /* Profile */,
+				DBF45F3222E4667A00A18C7B /* Statistics */,
 				DBF45F1522E41D4D00A18C7B /* Utilities */,
 				DBCCC64B22CB292500B00A68 /* Main.storyboard */,
 				DBCCC64E22CB292900B00A68 /* Assets.xcassets */,
@@ -216,6 +221,15 @@
 				DBF45F1C22E41E2F00A18C7B /* UIViewControllerExtension.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		DBF45F3222E4667A00A18C7B /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */,
+				DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */,
+			);
+			path = Statistics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,12 +371,14 @@
 				DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */,
 				DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */,
 				DBCCC65A22CB412700B00A68 /* UIViewExtension.swift in Sources */,
+				DBF45F3422E466E300A18C7B /* VisitsHistoryViewController.swift in Sources */,
 				DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */,
 				DBF45F1922E41DDD00A18C7B /* UITextFieldExtension.swift in Sources */,
 				DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */,
 				DBF45F1B22E41E0300A18C7B /* UIButtonExtension.swift in Sources */,
 				DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */,
 				DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */,
+				DBF45F3622E4671400A18C7B /* DateCollectionViewCell.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
