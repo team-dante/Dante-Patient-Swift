@@ -8,6 +8,8 @@
 
 import UIKit
 import Firebase
+import UIColor_Hex_Swift
+
 import FirebaseAuth
 
 struct Room {
@@ -57,6 +59,23 @@ class TimeTrackingViewController: UIViewController, UITableViewDataSource, UITab
                 }
             }
         })
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        var numOfSections = 0
+        if self.rooms.count != 0 {
+            tableView.separatorStyle = .singleLine
+            numOfSections = 1
+            tableView.backgroundView = nil
+        } else {
+            let defaultLabel: UILabel  = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            defaultLabel.text = "No time tracking data available"
+            defaultLabel.textColor = UIColor("#9e9e9e")
+            defaultLabel.textAlignment = .center
+            tableView.backgroundView = defaultLabel
+            tableView.separatorStyle = .none
+        }
+        return numOfSections
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
