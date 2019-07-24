@@ -30,6 +30,8 @@ class Beacons: NSObject {
     // after 10 rounds, perform stats analysis
     let threshold = 5
     
+    var counter = 0
+    
     var count = 0
     var prevRoom = ""
     var currRoom = ""
@@ -151,79 +153,107 @@ extension Beacons: KTKBeaconManagerDelegate {
                 self.currRoom = "Private"
             }
             
-            // get the prev room that patient is located; make sure to get the prev room first before tracking time
-            ref.child("/PatientLocation/\(userPhoneNum!)/room").observeSingleEvent(of: .value, with: { (snapshot) in
-                if let room = snapshot.value as? String {
-                    self.prevRoom = room
-                } else {
-                    self.prevRoom = "Private"
-                }
+            // get the room of the last round
+            if let prevRoom = UserDefaults.standard.string(forKey: "currRoom") {
+                self.prevRoom = prevRoom
+            } else {
+                self.prevRoom = "Private"
+            }
+            // then start time tracking
+            DispatchQueue.main.async {
                 self.startTimeTracking()
-            })
+            }
         }
     }
     
+    // ------------------------- Time Tracking Starts Here -----------------------------
     func startTimeTracking() {
         // if the prev room is "Private" but the current one isn't, update current room's start time
         if self.prevRoom == "Private" && self.currRoom != "Private" {
             // get the last non-private room
             let prev = UserDefaults.standard.string(forKey: "prevRoom")
             
-            // ex: CTRoom -> Private -> CTRoom, keep updating CTRoom's clock
+            // ex: CTRoom -> Private -> CTRoom, keep updating CTRoom's clock (if Private more than 1 hr, start new clock)
             // ex: CTRoom -> Private -> exam1, start a new clock for exam1
             if prev == self.currRoom {
-                self.updateEndTime()
+                let timeNow = Int(Date().timeIntervalSince1970)
+                let startTime = UserDefaults.standard.integer(forKey: "startTime")
+                if timeNow - startTime <= 3600 {
+                    UserDefaults.standard.set(timeNow, forKey: "startTime")
+                    // inefficient; update every sec
+                    self.updateEndTime()
+                } else {
+                    self.createNewTimeClock()
+                }
             } else {
                 self.createNewTimeClock()
             }
+            // set current room
+            DispatchQueue.main.async {
+                self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
+                UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
+            }
         }
-            // if the prev room isn't "Private" but the current one is, update end time and time spent for prev room;
+        // if the prev room isn't "Private" but the current one is, update end time and time spent for prev room;
         else if self.prevRoom != "Private" && self.currRoom == "Private" {
             self.updateEndTime()
             
-            // save the prev room first before going into Private
-            UserDefaults.standard.set(self.prevRoom, forKey: "prevRoom")
+            DispatchQueue.main.async {
+                // update paitent's current location "Private" to database
+                self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
+                UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
+                
+                // save the prev room first before going into Private
+                UserDefaults.standard.set(self.prevRoom, forKey: "prevRoom")
+            }
         }
-            // if prev and curr rooms are not private
+        // if prev and curr rooms are not private
+        // if prev and curr rooms are NOT the same, update endTime and timeElapsed for prev room
+        // and create a new clock for the new room
         else if self.prevRoom != "Private" && self.currRoom != "Private" {
-            // if prev and curr rooms are NOT the same, update endTime and timeElapsed for prev room
-            // and create a new clock for the new room
             if self.prevRoom != self.currRoom {
-                print(self.prevRoom, self.currRoom)
                 self.updateEndTime()
-                self.createNewTimeClock()
-            }
-            // else update endTime and timeElapsed for prev room
-            else {
-                self.updateEndTime()
+                DispatchQueue.main.async {
+                    self.createNewTimeClock()
+                    // update paitent's current location to database
+                    self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
+                    UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
+                }
+            } else {
+                // inefficient; update every sec
+                let timeNow = Int(Date().timeIntervalSince1970)
+                let startTime = UserDefaults.standard.integer(forKey: "startTime")
+                if timeNow - startTime >= 10800 {
+                    self.createNewTimeClock()
+                } else {
+                    self.updateEndTime()
+                }
             }
         }
-        // update paitent's current location to database
-        ref.child("/PatientLocation/" + userPhoneNum!).setValue(["room": self.currRoom])
     }
     
+    // new clock: 1. push the curr time to Firebase; 2. set UserDefaults "startTime"; 3. save the current uid; 4. counter back to 0
     func createNewTimeClock() {
         let time = Int(Date().timeIntervalSince1970)
         
         let obj = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)").childByAutoId()
-        obj.setValue(["room": self.currRoom, "startTime": time, "endTime": time, "timeElapsed": 0])
+        obj.setValue(["room": self.currRoom, "startTime": time, "endTime": 0, "timeElapsed": 0])
         UserDefaults.standard.set(obj.key, forKey: "currObj")
+        UserDefaults.standard.set(time, forKey: "startTime")
+        self.counter = 0
     }
     
+    // update end time: 1. check if uid of the curr timeObj exists; 2. if yes, update endTime and timeElapsed to database;
+    //      3. increment counter (aka timeElapsed)
     func updateEndTime() {
-        let time = Int(Date().timeIntervalSince1970)
-        let uid = UserDefaults.standard.string(forKey: "currObj")
-        
-        let path = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)/\(uid!)")
-        path.observeSingleEvent(of: .value, with: { (snapshot) in
-            if snapshot.exists() {
-                if let snap = snapshot.value as? [String: Any] {
-                    self.startTime = snap["startTime"] as! Int
-                    path.child("endTime").setValue(time)
-                    path.child("timeElapsed").setValue(Int(time - self.startTime))
-                }
-            }
-        })
+        let timeNow = Int(Date().timeIntervalSince1970)
+        if let uid = UserDefaults.standard.string(forKey: "currObj") {
+            let path = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)/\(uid)")
+            let start = UserDefaults.standard.integer(forKey: "startTime")
+            path.child("endTime").setValue(timeNow)
+            path.child("timeElapsed").setValue(Int(timeNow - start))
+            self.counter = Int(timeNow - start)
+        }
     }
     
     // ------------------------------- Monitoring ------------------------------------

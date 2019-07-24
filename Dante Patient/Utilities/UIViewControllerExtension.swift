@@ -35,13 +35,13 @@ extension UIViewController {
     }
     
     func parseTimeElapsed(timeElapsed: Int) -> String {
-        let hr = timeElapsed / 3600
+//        let hr = timeElapsed / 3600
         let sec = timeElapsed % 60
         let min = (timeElapsed % 3600) / 60
-        let hrStr = (hr < 10) ? "0\(hr)" : "\(hr)"
+//        let hrStr = (hr < 10) ? "0\(hr)" : "\(hr)"
         let minStr = (min < 10) ? "0\(min)" : "\(min)"
         let secStr = (sec < 10) ? "0\(sec)" : "\(sec)"
-        return "\(hrStr):\(minStr):\(secStr)"
+        return "\(minStr):\(secStr)"
     }
     
     func parseStartTime(startTime: Int) -> String {

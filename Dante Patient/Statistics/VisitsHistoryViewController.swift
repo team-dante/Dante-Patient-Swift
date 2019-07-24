@@ -22,6 +22,7 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
 //    let dates = ["2019-07-18", "2019-07-19", "2019-07-20", "2019-07-21", "2019-07-22", "2019-07-23","2019-07-24", "2019-07-25", "2019-07-26", "2019-07-27", "2019-07-28"]
     
     @IBOutlet weak var yearView: UIView!
+    @IBOutlet weak var dateUILabel: UILabel!
     var dates = [String]()
     var selectedDate: String!
     var selectedDateVisit = [Visit]()
@@ -57,9 +58,15 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         // init Firebase
         ref = Database.database().reference()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         // get date keys (in format "YYY-MM-DD") from Firebase /PatientVisitsByDates/123
         // starting 2019-07-18 since data prev dates do not adhere to the current format
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)").queryStarting(atValue: nil, childKey: "2019-07-18").observeSingleEvent(of: .value, with: { (snapshot) in
+            self.dates = []
             if let dateObjs = snapshot.value as? [String: Any] {
                 for dateObj in dateObjs {
                     self.dates.append(dateObj.key)
@@ -73,11 +80,6 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
                 }
             }
         })
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
     }
     
     func drawCollectionViewBorder() {
@@ -105,7 +107,6 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         let f = DateFormatter()
         
         cell.monthLabel.text = f.monthSymbols[Calendar.current.component(.month, from: parsedDate1!)-1].prefix(3).uppercased()
-        cell.weekdayLabel.text = f.weekdaySymbols[Calendar.current.component(.weekday, from: parsedDate1!)-1].prefix(3).uppercased()
         cell.dayLabel.text = String(date.split(separator: "-")[2])
         
         return cell
@@ -124,7 +125,18 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         
         // get the selected date
         self.selectedDate = dates[indexPath.item]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let parsedDate = dateFormatter.date(from: self.selectedDate)
         
+        // set the date string for the UIView at the top
+        let f = DateFormatter()
+        let month = f.monthSymbols[Calendar.current.component(.month, from: parsedDate!)-1].prefix(3)
+        let day = String(self.selectedDate.split(separator: "-")[2])
+        let year = String(self.selectedDate.split(separator: "-")[0])
+        let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: parsedDate!)-1]
+        self.dateUILabel.text = "\(weekday), \(month) \(day), \(year)"
+
         // get room, startTime, and timeElapsed for each time tracking slot and append them to a list of struct Visit(room, startTime, timeElapsed)
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.selectedDate!)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let timeObjs = snapshot.value as? [String: Any] {
