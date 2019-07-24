@@ -109,6 +109,7 @@ extension Beacons: KTKBeaconManagerDelegate {
         // wait a few rounds (5) to gather data to compute avg
         if (self.count < self.threshold) {
             self.count += 1
+            
             for beacon in beacons {
                 // if too far, assume 999m away
                 if beacon.accuracy == -1 {
@@ -202,6 +203,7 @@ extension Beacons: KTKBeaconManagerDelegate {
                 // update paitent's current location "Private" to database
                 self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
                 UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
+                print("setting rooms")
                 
                 // save the prev room first before going into Private
                 UserDefaults.standard.set(self.prevRoom, forKey: "prevRoom")

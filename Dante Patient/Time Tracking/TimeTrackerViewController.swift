@@ -76,8 +76,8 @@ class TimeTrackerViewController: UIViewController {
     
     @objc func processTimer() {
         currRoom = Beacons.shared.currRoom
-        if currRoom == "Detecting Beacons..." {
-            self.roomLabel.text = ""
+        if currRoom == "Private" {
+            self.roomLabel.text = "Detecting Beacons..."
             self.clockLabel.text = "00:00"
             self.startTimeLabel.text = ""
         } else {

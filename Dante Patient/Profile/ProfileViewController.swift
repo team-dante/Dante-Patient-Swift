@@ -81,7 +81,13 @@ class ProfileViewController: UIViewController {
         catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-        UserDefaults.standard.set(false, forKey: "hasLoggedIn")
+        Beacons.shared.stopRanging()
+        let domain = Bundle.main.bundleIdentifier!
+        UserDefaults.standard.removePersistentDomain(forName: domain)
+        UserDefaults.standard.synchronize()
+        DispatchQueue.main.async {
+            UserDefaults.standard.set(false, forKey: "hasLoggedIn")
+        }
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initial = storyboard.instantiateInitialViewController()
