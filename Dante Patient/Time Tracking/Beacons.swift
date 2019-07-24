@@ -180,7 +180,6 @@ extension Beacons: KTKBeaconManagerDelegate {
                 let timeNow = Int(Date().timeIntervalSince1970)
                 let startTime = UserDefaults.standard.integer(forKey: "startTime")
                 if timeNow - startTime <= 3600 {
-                    UserDefaults.standard.set(timeNow, forKey: "startTime")
                     // inefficient; update every sec
                     self.updateEndTime()
                 } else {
