@@ -117,13 +117,21 @@
 		DB4CF8DF22E3991F00F50A41 /* Time Tracking */ = {
 			isa = PBXGroup;
 			children = (
+				DB568A7C22E97A6B000E1B2C /* Old Time Tracking View */,
 				DBFF5B7922E1A12700DFDA43 /* Beacons.swift */,
-				DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */,
-				DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */,
-				DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */,
 				DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */,
 			);
 			path = "Time Tracking";
+			sourceTree = "<group>";
+		};
+		DB568A7C22E97A6B000E1B2C /* Old Time Tracking View */ = {
+			isa = PBXGroup;
+			children = (
+				DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */,
+				DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */,
+				DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */,
+			);
+			path = "Old Time Tracking View";
 			sourceTree = "<group>";
 		};
 		DB5BCF6A22D5B98E004237E9 /* Fonts */ = {

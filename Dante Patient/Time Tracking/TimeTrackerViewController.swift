@@ -21,9 +21,9 @@ class TimeTrackerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        roomLabel.text = "Loading..."
+        roomLabel.text = "Detecting Beacons..."
         clockLabel.text = "00:00"
-        startTimeLabel.text = "Start:"
+        startTimeLabel.text = ""
         
         let center = view.center
         
@@ -53,7 +53,6 @@ class TimeTrackerViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        print("view did appear")
     }
     
     func processStroke(elapsed: Int) {
@@ -76,7 +75,7 @@ class TimeTrackerViewController: UIViewController {
     
     @objc func processTimer() {
         currRoom = Beacons.shared.currRoom
-        if currRoom == "Private" {
+        if currRoom == "Private" || currRoom == "" {
             self.roomLabel.text = "Detecting Beacons..."
             self.clockLabel.text = "00:00"
             self.startTimeLabel.text = ""
