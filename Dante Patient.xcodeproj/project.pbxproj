@@ -13,8 +13,12 @@
 		DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */; };
 		DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */; };
 		DB4CF8E522E3D85B00F50A41 /* PrevRoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */; };
+		DB568A7E22E99AED000E1B2C /* ToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB568A7D22E99AED000E1B2C /* ToolTipView.swift */; };
+		DB777BC422EEE566002E7704 /* filterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB777BC322EEE566002E7704 /* filterTableViewCell.swift */; };
 		DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */; };
 		DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */; };
+		DB91A99D22EA8ECD0081EABB /* StatsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB91A99C22EA8ECD0081EABB /* StatsMasterViewController.swift */; };
+		DB91A99F22EA8F290081EABB /* VisitsHistoryGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB91A99E22EA8F290081EABB /* VisitsHistoryGraphViewController.swift */; };
 		DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */; };
 		DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */; };
 		DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA917C522D939560088A520 /* PinRefViewController.swift */; };
@@ -51,8 +55,12 @@
 		DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrRoomTableViewCell.swift; sourceTree = "<group>"; };
 		DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrevRoomsTableViewCell.swift; sourceTree = "<group>"; };
+		DB568A7D22E99AED000E1B2C /* ToolTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTipView.swift; sourceTree = "<group>"; };
+		DB777BC322EEE566002E7704 /* filterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterTableViewCell.swift; sourceTree = "<group>"; };
 		DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerViewController.swift; sourceTree = "<group>"; };
+		DB91A99C22EA8ECD0081EABB /* StatsMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMasterViewController.swift; sourceTree = "<group>"; };
+		DB91A99E22EA8F290081EABB /* VisitsHistoryGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHistoryGraphViewController.swift; sourceTree = "<group>"; };
 		DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateAcctViewController.swift; sourceTree = "<group>"; };
 		DBA917C522D939560088A520 /* PinRefViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRefViewController.swift; sourceTree = "<group>"; };
@@ -159,6 +167,25 @@
 			path = "Sign In";
 			sourceTree = "<group>";
 		};
+		DB91A9A022EA8F510081EABB /* Table */ = {
+			isa = PBXGroup;
+			children = (
+				DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */,
+				DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */,
+				DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */,
+			);
+			path = Table;
+			sourceTree = "<group>";
+		};
+		DB91A9A122EA8F6A0081EABB /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				DB91A99E22EA8F290081EABB /* VisitsHistoryGraphViewController.swift */,
+				DB777BC322EEE566002E7704 /* filterTableViewCell.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
 		DBA8117E22DA9693006CE057 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +259,7 @@
 				DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */,
 				DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */,
 				DBF45F1C22E41E2F00A18C7B /* UIViewControllerExtension.swift */,
+				DB568A7D22E99AED000E1B2C /* ToolTipView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -239,9 +267,9 @@
 		DBF45F3222E4667A00A18C7B /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
-				DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */,
-				DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */,
-				DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */,
+				DB91A99C22EA8ECD0081EABB /* StatsMasterViewController.swift */,
+				DB91A9A022EA8F510081EABB /* Table */,
+				DB91A9A122EA8F6A0081EABB /* Graph */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -379,12 +407,16 @@
 				DB4CF8E522E3D85B00F50A41 /* PrevRoomsTableViewCell.swift in Sources */,
 				DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */,
 				DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */,
+				DB568A7E22E99AED000E1B2C /* ToolTipView.swift in Sources */,
 				DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */,
+				DB777BC422EEE566002E7704 /* filterTableViewCell.swift in Sources */,
 				DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */,
+				DB91A99D22EA8ECD0081EABB /* StatsMasterViewController.swift in Sources */,
 				DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */,
 				DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */,
 				DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */,
 				DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */,
+				DB91A99F22EA8F290081EABB /* VisitsHistoryGraphViewController.swift in Sources */,
 				DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */,
 				DBCCC65A22CB412700B00A68 /* UIViewExtension.swift in Sources */,
 				DBF45F3422E466E300A18C7B /* VisitsHistoryViewController.swift in Sources */,

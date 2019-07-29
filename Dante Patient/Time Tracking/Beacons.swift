@@ -20,6 +20,7 @@ class Beacons: NSObject {
     var region: KTKBeaconRegion!
     var region1: KTKBeaconRegion!
     var region2: KTKBeaconRegion!
+    var isSnapshotExists = false
     
     // records a queue of 10 distances for each beacon
     var roomDict: [Int: [Double]] = [1: [], 2: [], 3:[]]
@@ -79,9 +80,6 @@ class Beacons: NSObject {
         beaconManager.stopMonitoring(for: region1)
         beaconManager.stopMonitoring(for: region2)
         beaconManager.stopRangingBeacons(in: region)
-        
-        // set room to "Private" when patients close the app completely (slide up the app and throw it out)
-        ref.child("/PatientLocation/\(userPhoneNum!)/room").setValue("Private")
     }
     
     // return today's date in YYYY-MM-DD format
@@ -160,6 +158,8 @@ extension Beacons: KTKBeaconManagerDelegate {
             } else {
                 self.prevRoom = "Private"
             }
+            
+            print(self.prevRoom)
             // then start time tracking
             DispatchQueue.main.async {
                 self.startTimeTracking()
@@ -173,6 +173,7 @@ extension Beacons: KTKBeaconManagerDelegate {
         if self.prevRoom == "Private" && self.currRoom != "Private" {
             // get the last non-private room
             let prev = UserDefaults.standard.string(forKey: "prevRoom")
+            print("1st prev room = \(prev ?? "none")")
             
             // ex: CTRoom -> Private -> CTRoom, keep updating CTRoom's clock (if Private more than 1 hr, start new clock)
             // ex: CTRoom -> Private -> exam1, start a new clock for exam1
@@ -181,28 +182,32 @@ extension Beacons: KTKBeaconManagerDelegate {
                 let startTime = UserDefaults.standard.integer(forKey: "startTime")
                 if timeNow - startTime <= 3600 {
                     // inefficient; update every sec
+                    print("1st prev == curr, < 1 hr, continue")
                     self.updateEndTime()
                 } else {
+                    print("1st prev == curr, > 1 hr, new clock")
                     self.createNewTimeClock()
                 }
             } else {
+                print("1st prev != curr, new clock")
                 self.createNewTimeClock()
             }
             // set current room
             DispatchQueue.main.async {
                 self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
                 UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
+                print("1st update curr room")
             }
         }
         // if the prev room isn't "Private" but the current one is, update end time and time spent for prev room;
         else if self.prevRoom != "Private" && self.currRoom == "Private" {
             self.updateEndTime()
-            
+            print("2nd !Private -> Private, update")
             DispatchQueue.main.async {
                 // update paitent's current location "Private" to database
                 self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
                 UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
-                print("setting rooms")
+                print("2nd update curr room")
                 
                 // save the prev room first before going into Private
                 UserDefaults.standard.set(self.prevRoom, forKey: "prevRoom")
@@ -214,20 +219,33 @@ extension Beacons: KTKBeaconManagerDelegate {
         else if self.prevRoom != "Private" && self.currRoom != "Private" {
             if self.prevRoom != self.currRoom {
                 self.updateEndTime()
+                print("3rd Room A -> Room B, A != B, update")
+                
                 DispatchQueue.main.async {
                     self.createNewTimeClock()
+                    print("3rd Room A -> Room B, A != B, new clock")
                     // update paitent's current location to database
                     self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
                     UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
+                    print("3rd update curr room")
                 }
             } else {
                 // inefficient; update every sec
                 let timeNow = Int(Date().timeIntervalSince1970)
                 let startTime = UserDefaults.standard.integer(forKey: "startTime")
-                if timeNow - startTime >= 10800 {
+                if timeNow - startTime >= 7000 {
                     self.createNewTimeClock()
+                    print("3rd Room A -> B, A == B, gap > 1.5 hrs, new clock")
+                    
+                    DispatchQueue.main.async {
+                        // update paitent's current location to database
+                        self.ref.child("/PatientLocation/" + self.userPhoneNum!).setValue(["room": self.currRoom])
+                        UserDefaults.standard.set(self.currRoom, forKey: "currRoom")
+                        print("3rd update curr room")
+                    }
                 } else {
                     self.updateEndTime()
+                    print("3rd Room A -> B, A == B, gap < 1.5 hrs, update clock")
                 }
             }
         }
@@ -236,12 +254,13 @@ extension Beacons: KTKBeaconManagerDelegate {
     // new clock: 1. push the curr time to Firebase; 2. set UserDefaults "startTime"; 3. save the current uid; 4. counter back to 0
     func createNewTimeClock() {
         let time = Int(Date().timeIntervalSince1970)
-        
         let obj = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)").childByAutoId()
         obj.setValue(["room": self.currRoom, "startTime": time, "endTime": 0, "timeElapsed": 0])
-        UserDefaults.standard.set(obj.key, forKey: "currObj")
-        UserDefaults.standard.set(time, forKey: "startTime")
-        self.counter = 0
+        DispatchQueue.main.async {
+            UserDefaults.standard.set(obj.key, forKey: "currObj")
+            UserDefaults.standard.set(time, forKey: "startTime")
+            self.counter = 0
+        }
     }
     
     // update end time: 1. check if uid of the curr timeObj exists; 2. if yes, update endTime and timeElapsed to database;
@@ -249,11 +268,22 @@ extension Beacons: KTKBeaconManagerDelegate {
     func updateEndTime() {
         let timeNow = Int(Date().timeIntervalSince1970)
         if let uid = UserDefaults.standard.string(forKey: "currObj") {
-            let path = ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)/\(uid)")
-            let start = UserDefaults.standard.integer(forKey: "startTime")
-            path.child("endTime").setValue(timeNow)
-            path.child("timeElapsed").setValue(Int(timeNow - start))
-            self.counter = Int(timeNow - start)
+            if self.isSnapshotExists == false {
+                ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.dateToday!)/\(uid)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if snapshot.exists() {
+                        self.isSnapshotExists = true
+                    }
+                })
+            }
+            DispatchQueue.main.async {
+                if self.isSnapshotExists {
+                    let path = self.ref.child("/PatientVisitsByDates/\(self.userPhoneNum!)/\(self.dateToday!)/\(uid)")
+                    let start = UserDefaults.standard.integer(forKey: "startTime")
+                    path.child("endTime").setValue(timeNow)
+                    path.child("timeElapsed").setValue(Int(timeNow - start))
+                    self.counter = Int(timeNow - start)
+                }
+            }
         }
     }
     

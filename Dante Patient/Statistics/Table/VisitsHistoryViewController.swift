@@ -18,7 +18,6 @@ struct Visit {
 
 class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
-    
 //    let dates = ["2019-07-18", "2019-07-19", "2019-07-20", "2019-07-21", "2019-07-22", "2019-07-23","2019-07-24", "2019-07-25", "2019-07-26", "2019-07-27", "2019-07-28"]
     
     @IBOutlet weak var yearView: UIView!
@@ -28,7 +27,9 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
     var selectedDateVisit = [Visit]()
     var userPhoneNum: String?
     let bottom = CALayer()
+    var indexPath: IndexPath?
     var ref: DatabaseReference!
+    var layout: UICollectionViewFlowLayout!
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var tableView: UITableView!
@@ -41,7 +42,7 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
         
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         
@@ -57,41 +58,58 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         
         // init Firebase
         ref = Database.database().reference()
-        
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        loadData { (success) -> Void in
+            if success {
+                self.processData()
+            }
+        }
+    }
+    
+    func loadData(completion: @escaping (_ success: Bool) -> Void) {
         // get date keys (in format "YYY-MM-DD") from Firebase /PatientVisitsByDates/123
         // starting 2019-07-18 since data prev dates do not adhere to the current format
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)").queryStarting(atValue: nil, childKey: "2019-07-18").observeSingleEvent(of: .value, with: { (snapshot) in
-            self.dates = []
+            self.dates.removeAll()
             if let dateObjs = snapshot.value as? [String: Any] {
                 for dateObj in dateObjs {
                     self.dates.append(dateObj.key)
                 }
                 self.dates.sort(by: {$0 < $1})
                 self.collectionView.reloadData()
-                
-                // make sure reload data is done before auto selecting the last day in the date list
-                DispatchQueue.main.async {
-                    self.collectionView.delegate?.collectionView!(self.collectionView, didSelectItemAt: IndexPath(item: self.dates.count-1, section: 0))
-                }
+                completion(true)
             }
         })
     }
     
+    // pre-select the last visited cell if indexPath exists; otherwise select today
+    func processData() {
+        if let indexPath = self.indexPath {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.01) {
+                self.collectionView(self.collectionView, didSelectItemAt: indexPath)
+            }
+        } else {
+            let index = IndexPath(item: self.dates.count-1, section: 0)
+            self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.collectionView(self.collectionView, didSelectItemAt: index)
+            }
+        }
+    }
+    
     func drawCollectionViewBorder() {
-        let bottomBorder = CALayer()
-        bottomBorder.frame = CGRect(x: 0.0, y: collectionView.frame.height-2,
-                                    width: collectionView.frame.width, height: 1.0)
-        bottomBorder.backgroundColor = UIColor("#B8C9D2").cgColor
-        collectionView.layer.addSublayer(bottomBorder)
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0.0, y: 0.0,
+                                    width: tableView.frame.width-1, height: 1.0)
+        topBorder.backgroundColor = UIColor("#B8C9D2").cgColor
+        tableView.layer.addSublayer(topBorder)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(section)
         return dates.count
     }
     
@@ -116,9 +134,12 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         // when tapped on a collectionView cell, the tapped cell will be auto centered
         collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
         
-        // add thick border to the selected cell
+        self.indexPath = indexPath
+        
+        // add thick bottom border to the selected cell
         if let cell = collectionView.cellForItem(at: indexPath) {
-            bottom.frame = CGRect(x: 0.0, y: (cell.frame.height) - 4, width: (cell.frame.width), height: 4.0)
+            print("exectued")
+            bottom.frame = CGRect(x: 0.0, y: (cell.frame.height) - 3.6, width: (cell.frame.width), height: 3.6)
             bottom.backgroundColor = UIColor("#5C7B8C").cgColor
             cell.layer.addSublayer(bottom)
         }
@@ -137,10 +158,10 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: parsedDate!)-1]
         self.dateUILabel.text = "\(weekday), \(month) \(day), \(year)"
 
-        // get room, startTime, and timeElapsed for each time tracking slot and append them to a list of struct Visit(room, startTime, timeElapsed)
+        // get room, startTime, and timeElapsed for each time tracking slot and append them to a list of struct Visit(room, startTime, timeElapsed); else get empty list
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.selectedDate!)").observeSingleEvent(of: .value, with: { (snapshot) in
             if let timeObjs = snapshot.value as? [String: Any] {
-                self.selectedDateVisit = []
+                self.selectedDateVisit.removeAll()
                 for timeObj in timeObjs {
                     if let obj = timeObj.value as? [String: Any] {
                         let room = obj["room"] as? String
@@ -151,14 +172,21 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
                 }
                 self.selectedDateVisit.sort(by: {$0.startTime > $1.startTime})
                 self.tableView.reloadData()
+            } else {
+                self.selectedDateVisit.removeAll()
+                self.tableView.reloadData()
             }
         })
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.bottom.removeFromSuperlayer()
+    }
+    
     // when deselecting a cell, remove thick border, clear selectedDateVisit
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        bottom.removeFromSuperlayer()
-        self.selectedDateVisit = []
+        self.bottom.removeFromSuperlayer()
+        self.selectedDateVisit.removeAll()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

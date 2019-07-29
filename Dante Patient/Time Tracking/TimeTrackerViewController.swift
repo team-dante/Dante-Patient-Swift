@@ -17,7 +17,7 @@ class TimeTrackerViewController: UIViewController {
     var progressTimer: Timer?
     let shapeLayer = CAShapeLayer()
     var currRoom = "Private"
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
