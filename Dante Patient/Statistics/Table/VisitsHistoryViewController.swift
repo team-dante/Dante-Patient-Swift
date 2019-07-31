@@ -95,7 +95,7 @@ class VisitsHistoryViewController: UIViewController, UICollectionViewDelegate, U
         } else {
             let index = IndexPath(item: self.dates.count-1, section: 0)
             self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self.collectionView(self.collectionView, didSelectItemAt: index)
             }
         }

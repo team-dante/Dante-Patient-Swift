@@ -66,10 +66,6 @@ class StatsMasterViewController: UIViewController {
     
     @objc func selectionDidChange(_ sender: UISegmentedControl) {
         updateView()
-        
-        UIView.animate(withDuration: 0.5) {
-            self.view.layoutIfNeeded()
-        }
     }
     
     private func updateView() {
