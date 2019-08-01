@@ -21,6 +21,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dateUILabel: UILabel!
     @IBOutlet weak var pieChartView: PieChartView!
+    @IBOutlet weak var legendTableView: UITableView!
     
     var selectedDate: String!
     let filterCat = ["Day", "Month", "Year"]
@@ -28,6 +29,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     var visitObjs = [VisitForGraph]()
     var filterTableViewIndexPath: IndexPath?
     var spinner: UIView?
+    var colors: [UIColor] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         customizeFilterView()
         customizeFilterTableView()
         customizeCollectionView()
+        customizeLegendTableView()
         
         pieChartView.backgroundColor = UIColor("#f3f5f7")
         pieChartView.legend.enabled = false
@@ -60,6 +63,12 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         collectionView.layer.borderColor = UIColor("#adadad").cgColor
         collectionView.layer.borderWidth = 0.4
         collectionView.showsHorizontalScrollIndicator = false
+    }
+    
+    func customizeLegendTableView() {
+        legendTableView.delegate = self
+        legendTableView.dataSource = self
+        legendTableView.estimatedRowHeight = 60.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -190,6 +199,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                                   VisitForGraph(room: "CTRoom", timeElapsed: 1200)]
                 self.removeSpinner()
                 self.customizeCharts(dataObj: visitObjs)
+                self.legendTableView.reloadData()
                 
             } else if index.row == 1 {
                 self.dateUILabel.text = "2019"
@@ -221,15 +231,15 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     }
     
     private func colorsOfCharts(numberOfColor: Int) -> [UIColor] {
-        var colors: [UIColor] = []
+        self.colors = []
         for _ in 0..<numberOfColor {
             let red = Double(arc4random_uniform(256))
             let green = Double(arc4random_uniform(256))
             let blue = Double(arc4random_uniform(256))
             let color = UIColor(red: CGFloat(red/255), green: CGFloat(green/255), blue: CGFloat(blue/255), alpha: 1)
-            colors.append(color)
+            self.colors.append(color)
         }
-        return colors
+        return self.colors
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -241,7 +251,11 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        if tableView === filterTableView {
+            return self.filterCat.count
+        } else {
+            return self.visitObjs.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -251,6 +265,16 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
             let cell = tableView.dequeueReusableCell(withIdentifier: "filterTableViewCell", for: indexPath) as! filterTableViewCell
             
             cell.filterLabel.text = filter
+            
+            return cell
+        } else if tableView === legendTableView {
+
+            let cell = tableView.dequeueReusableCell(withIdentifier: "LegendTableViewCell", for: indexPath) as! LegendTableViewCell
+            let legend = self.visitObjs[indexPath.row]
+            let color = self.colors[indexPath.row]
+            cell.colorView.backgroundColor = color
+            cell.roomLabel.text = self.prettifyRoom(room: legend.room)
+            cell.timeLabel.text = "\(Double(legend.timeElapsed) / 60.0) min"
             
             return cell
         }
@@ -266,6 +290,9 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
             cell.checkBtn.image = UIImage(named: "checkBtn")
             filterView.fadeOut()
             self.loadDataBasedOnFilter()
+        } else if tableView === legendTableView {
+            let cell = tableView.cellForRow(at: indexPath) as! LegendTableViewCell
+            cell.selectionStyle = .none
         }
     }
     

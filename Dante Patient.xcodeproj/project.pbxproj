@@ -10,6 +10,7 @@
 		9A22BE7BAF0963CD4574D842 /* Pods_Dante_Patient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */; };
 		DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */; };
 		DB1B0DA122EFF45C00F3B281 /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B0DA022EFF45C00F3B281 /* GraphCollectionViewCell.swift */; };
+		DB46F69322F2BCF200A042EF /* LegendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB46F69222F2BCF200A042EF /* LegendTableViewCell.swift */; };
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
 		DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */; };
 		DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */; };
@@ -53,6 +54,7 @@
 		9E5D9A74D41EC12E8A1CF669 /* Pods-Dante Patient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.debug.xcconfig"; sourceTree = "<group>"; };
 		DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		DB1B0DA022EFF45C00F3B281 /* GraphCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewCell.swift; sourceTree = "<group>"; };
+		DB46F69222F2BCF200A042EF /* LegendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendTableViewCell.swift; sourceTree = "<group>"; };
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingViewController.swift; sourceTree = "<group>"; };
 		DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrRoomTableViewCell.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				DB91A99E22EA8F290081EABB /* VisitsHistoryGraphViewController.swift */,
 				DB777BC322EEE566002E7704 /* filterTableViewCell.swift */,
 				DB1B0DA022EFF45C00F3B281 /* GraphCollectionViewCell.swift */,
+				DB46F69222F2BCF200A042EF /* LegendTableViewCell.swift */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				DB777BC422EEE566002E7704 /* filterTableViewCell.swift in Sources */,
 				DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */,
 				DB91A99D22EA8ECD0081EABB /* StatsMasterViewController.swift in Sources */,
+				DB46F69322F2BCF200A042EF /* LegendTableViewCell.swift in Sources */,
 				DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */,
 				DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */,
 				DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */,
