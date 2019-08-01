@@ -255,6 +255,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZH-fi-YKN" customClass="PieChartView" customModule="Charts">
+                                <rect key="frame" x="0.0" y="148.99999999999997" width="414" height="456.33333333333326"/>
+                                <color key="backgroundColor" red="0.94901960780000005" green="0.99215686270000003" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ymt-oj-wMX">
                                 <rect key="frame" x="0.0" y="89" width="414" height="60"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -276,7 +280,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jul 28" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agc-dF-NNt">
-                                                    <rect key="frame" x="23.333333333333332" y="12.333333333333334" width="50.333333333333343" height="25.333333333333329"/>
+                                                    <rect key="frame" x="23.666666666666671" y="12.333333333333336" width="50" height="25"/>
                                                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="18"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -305,13 +309,13 @@
                                 <rect key="frame" x="196" y="62" width="200" height="230"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filtered By" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H6l-ps-Rsa">
-                                        <rect key="frame" x="8" y="28" width="184" height="22.666666666666671"/>
+                                        <rect key="frame" x="8" y="28" width="184" height="23"/>
                                         <fontDescription key="fontDescription" name="Poppins-Light" family="Poppins Light" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3kF-sY-QmG">
-                                        <rect key="frame" x="0.0" y="54.666666666666671" width="200" height="145.33333333333331"/>
+                                        <rect key="frame" x="0.0" y="55" width="200" height="145"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="filterTableViewCell" id="mbw-QW-f03" customClass="filterTableViewCell" customModule="Dante_Patient" customModuleProvider="target">
@@ -365,6 +369,10 @@
                                     <constraint firstItem="3kF-sY-QmG" firstAttribute="top" secondItem="H6l-ps-Rsa" secondAttribute="bottom" constant="4" id="iUD-IX-iMS"/>
                                 </constraints>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="TBR-AH-Nzc">
+                                <rect key="frame" x="0.0" y="605.33333333333337" width="414" height="256.66666666666663"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -372,10 +380,19 @@
                             <constraint firstItem="48B-NP-Xk5" firstAttribute="top" secondItem="pvN-z8-h6V" secondAttribute="top" constant="18" id="5iR-lr-RhV"/>
                             <constraint firstItem="ymt-oj-wMX" firstAttribute="top" secondItem="8tU-oO-S3P" secondAttribute="bottom" id="7hp-BA-qUp"/>
                             <constraint firstItem="8tU-oO-S3P" firstAttribute="top" secondItem="pvN-z8-h6V" secondAttribute="top" constant="5" id="ALh-Gv-EOP"/>
+                            <constraint firstItem="pvN-z8-h6V" firstAttribute="bottom" secondItem="TBR-AH-Nzc" secondAttribute="bottom" id="CNe-5c-PuZ"/>
+                            <constraint firstItem="dZH-fi-YKN" firstAttribute="top" secondItem="ymt-oj-wMX" secondAttribute="bottom" id="JAf-yI-2YU"/>
+                            <constraint firstItem="TBR-AH-Nzc" firstAttribute="trailing" secondItem="pvN-z8-h6V" secondAttribute="trailing" id="KYQ-ta-nEJ"/>
+                            <constraint firstItem="TBR-AH-Nzc" firstAttribute="top" secondItem="dZH-fi-YKN" secondAttribute="bottom" id="Oso-SY-iL5"/>
+                            <constraint firstItem="dZH-fi-YKN" firstAttribute="trailing" secondItem="pvN-z8-h6V" secondAttribute="trailing" id="Oz6-yc-wpb"/>
                             <constraint firstItem="8tU-oO-S3P" firstAttribute="leading" secondItem="pvN-z8-h6V" secondAttribute="leading" id="btG-6v-Ehe"/>
                             <constraint firstItem="ymt-oj-wMX" firstAttribute="leading" secondItem="pvN-z8-h6V" secondAttribute="leading" id="cB6-yD-AFH"/>
+                            <constraint firstItem="TBR-AH-Nzc" firstAttribute="leading" secondItem="pvN-z8-h6V" secondAttribute="leading" id="iM1-1e-UD4"/>
                             <constraint firstItem="8tU-oO-S3P" firstAttribute="trailing" secondItem="pvN-z8-h6V" secondAttribute="trailing" id="qiU-WV-H6Z"/>
+                            <constraint firstItem="dZH-fi-YKN" firstAttribute="leading" secondItem="pvN-z8-h6V" secondAttribute="leading" id="rCe-XI-dgj"/>
                             <constraint firstItem="ymt-oj-wMX" firstAttribute="trailing" secondItem="pvN-z8-h6V" secondAttribute="trailing" id="rR5-pr-XXj"/>
+                            <constraint firstItem="dZH-fi-YKN" firstAttribute="height" secondItem="TBR-AH-Nzc" secondAttribute="height" multiplier="16:9" id="rT9-VI-HUh"/>
+                            <constraint firstItem="TBR-AH-Nzc" firstAttribute="top" secondItem="dZH-fi-YKN" secondAttribute="bottom" id="tJT-Q8-qIs"/>
                             <constraint firstItem="pvN-z8-h6V" firstAttribute="trailing" secondItem="48B-NP-Xk5" secondAttribute="trailing" constant="18" id="vaE-2p-3qk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pvN-z8-h6V"/>
@@ -385,6 +402,7 @@
                         <outlet property="dateUILabel" destination="8tU-oO-S3P" id="Cdp-Il-e8e"/>
                         <outlet property="filterTableView" destination="3kF-sY-QmG" id="nEB-38-gcU"/>
                         <outlet property="filterView" destination="48B-NP-Xk5" id="RYg-x0-scO"/>
+                        <outlet property="pieChartView" destination="dZH-fi-YKN" id="8d0-kK-1D7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WH7-hF-0j3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -714,19 +732,19 @@
                                 <rect key="frame" x="32" y="186" width="350" height="667"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome Back" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQJ-eb-RKM">
-                                        <rect key="frame" x="25" y="25" width="300" height="27"/>
+                                        <rect key="frame" x="25" y="25.000000000000004" width="300" height="32.333333333333343"/>
                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="23"/>
                                         <color key="textColor" red="0.23921568627450979" green="0.23921568627450979" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="puN-u5-hzj">
-                                        <rect key="frame" x="25" y="77" width="300" height="19"/>
+                                        <rect key="frame" x="25" y="82.333333333333314" width="300" height="19"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="16"/>
                                         <color key="textColor" red="0.14901960784313725" green="0.59215686274509804" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="d9W-zD-s9W" customClass="Inputs" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="104" width="310" height="45"/>
+                                        <rect key="frame" x="20" y="109.33333333333331" width="310" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="65f-kA-0cU"/>
                                         </constraints>
@@ -735,13 +753,13 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PIN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tBQ-9W-7Z9">
-                                        <rect key="frame" x="25" y="164" width="300" height="19"/>
+                                        <rect key="frame" x="25" y="169.33333333333331" width="300" height="19"/>
                                         <fontDescription key="fontDescription" name="Rubik-Medium" family="Rubik Medium" pointSize="16"/>
                                         <color key="textColor" red="0.14901960780000001" green="0.59215686270000001" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGu-oP-2Hh" customClass="Inputs" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="191" width="310" height="45"/>
+                                        <rect key="frame" x="20" y="196.33333333333331" width="310" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="QYH-xn-nq7"/>
                                         </constraints>
@@ -750,7 +768,7 @@
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfp-Fh-MAB" customClass="Button" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="20" y="269" width="310" height="45"/>
+                                        <rect key="frame" x="20" y="274.33333333333331" width="310" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Owl-jM-EuF"/>
                                         </constraints>
@@ -760,26 +778,26 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FaceID will be auto-triggered once you've signed in" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LFq-y2-WR7">
-                                        <rect key="frame" x="25" y="326" width="300" height="32.666666666666686"/>
+                                        <rect key="frame" x="25" y="331.33333333333337" width="300" height="33.333333333333314"/>
                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="14"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Patient?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d0-qs-u4y">
-                                        <rect key="frame" x="25" y="399.66666666666663" width="300" height="18.666666666666686"/>
+                                        <rect key="frame" x="25" y="405.66666666666663" width="300" height="22.666666666666686"/>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-WC-OGD">
-                                        <rect key="frame" x="25" y="383.66666666666663" width="300" height="1"/>
+                                        <rect key="frame" x="25" y="389.66666666666663" width="300" height="1"/>
                                         <color key="backgroundColor" red="0.88627450980392153" green="0.88627450980392153" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="TM1-7S-0pJ"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCN-I8-yuv" customClass="Button" customModule="Dante_Patient" customModuleProvider="target">
-                                        <rect key="frame" x="25" y="433.33333333333337" width="300" height="45"/>
+                                        <rect key="frame" x="25" y="443.33333333333337" width="300" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="Vbi-7r-C3D"/>
                                         </constraints>
