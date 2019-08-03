@@ -1,6 +1,4 @@
 # Dante Patient
-
-## Description
 Dante Patient is a medical mobile app designated to improve patient visit experience. As the primary audience in the medical fields are patients, patient care experience is an ongoing and noble goal. However, due to intense workloads, staff may oftentimes leave out how well do patients feel about their visits. Therefore, Dante Patient opens up a solution for enhancing patient visit experience and service quality by providing the following features:
 
 - Real-time location tracking of physicians inside the radiation oncology clinic
@@ -11,8 +9,8 @@ Dante Patient is a medical mobile app designated to improve patient visit experi
 ## Getting Started
 1. Open the terminal, go to the directory where you would like to store this project.
 2. Type `git clone https://github.com/team-dante/Dante-Patient-Swift.git`
-3. Navigate to project folder (`cd Dante-Patient-Swift`)
-4. Then, open (`Dante Patient.xcworkspace`); hit play at the top-left corner of Xcode
+3. Navigate to project folder `cd Dante-Patient-Swift`
+4. Then, open `Dante Patient.xcworkspace`; hit play at the top-left corner of Xcode
 
 ## Screen Archetypes
 * Login
@@ -36,7 +34,7 @@ Dante Patient is a medical mobile app designated to improve patient visit experi
 Please visit our [documentation](https://team-dante.github.io/dante-patient-docs/) website for a detailed walkthrough of the app.
 
 ## Future Development
-- 3D image rendering to illustrate patient treatment progress
+- 3D image rendering to illustrate patients' treatment progress
 
 ## Contributors
 
