@@ -75,7 +75,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QdV-py-ufM">
-                                <rect key="frame" x="0.0" y="153" width="414" height="680"/>
+                                <rect key="frame" x="0.0" y="153" width="414" height="540"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zE6-TN-GWf">
                                         <rect key="frame" x="19.666666666666657" y="20" width="375" height="383"/>
@@ -110,7 +110,7 @@
                             <constraint firstItem="ANa-RI-YWx" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-50" id="5cP-X0-3hD"/>
                             <constraint firstItem="QdV-py-ufM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="AC5-gd-KxK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QdV-py-ufM" secondAttribute="trailing" id="RbY-4H-h8v"/>
-                            <constraint firstItem="QdV-py-ufM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="20" id="We5-Zs-X0l"/>
+                            <constraint firstItem="QdV-py-ufM" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-120" id="We5-Zs-X0l"/>
                             <constraint firstItem="ANa-RI-YWx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="cIi-HJ-Ruy"/>
                             <constraint firstItem="ANa-RI-YWx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="p4x-4O-NN2"/>
                         </constraints>
@@ -148,19 +148,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CT Room" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feg-Tm-8M6">
-                                                    <rect key="frame" x="20" y="25" width="374" height="35"/>
+                                                    <rect key="frame" x="20" y="25" width="374" height="29.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="25"/>
                                                     <color key="textColor" red="0.19215686274509802" green="0.75686274509803919" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00:00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N9x-kF-07H">
-                                                    <rect key="frame" x="20" y="90" width="374" height="101.66666666666669"/>
+                                                    <rect key="frame" x="20" y="84.333333333333314" width="374" height="101.66666666666669"/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="86"/>
                                                     <color key="textColor" red="0.32941176470588235" green="0.36078431372549019" blue="0.46666666666666667" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start: 11:52 AM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSl-tO-5uY">
-                                                    <rect key="frame" x="20" y="226.66666666666666" width="374" height="28"/>
+                                                    <rect key="frame" x="20" y="221" width="374" height="23.333333333333343"/>
                                                     <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="20"/>
                                                     <color key="textColor" red="0.67843137254901964" green="0.67843137254901964" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -719,13 +719,13 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. Roa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSb-T4-dhd">
-                                                                <rect key="frame" x="70" y="14.999999999999998" width="329" height="22.333333333333329"/>
+                                                                <rect key="frame" x="70" y="15.000000000000002" width="329" height="26.666666666666671"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="19"/>
                                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CT Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zk-3T-E0K">
-                                                                <rect key="frame" x="70" y="41.333333333333336" width="329" height="18"/>
+                                                                <rect key="frame" x="70" y="45.666666666666664" width="329" height="18"/>
                                                                 <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
                                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
