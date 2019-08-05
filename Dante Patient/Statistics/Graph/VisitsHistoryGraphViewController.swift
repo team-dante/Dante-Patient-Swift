@@ -93,14 +93,17 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         self.barChartView.drawValueAboveBarEnabled = true
         self.barChartView.legend.enabled = false
         
+        // don't need x-axis
         let xAxis = self.barChartView.xAxis
         xAxis.labelPosition = .bottom
         xAxis.enabled = false
         
+        // format left y-axis
         let leftAxis = self.barChartView.leftAxis
         leftAxis.labelFont = UIFont(name: "Poppins-Regular", size: 14)!
         leftAxis.labelTextColor = UIColor("#adadad")
         
+        // don't need right y-axis
         let rightAxis = self.barChartView.rightAxis
         rightAxis.enabled = false
     }
@@ -110,6 +113,8 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         
         self.showSpinner()
         
+        // if filter is not selected, select day by default; otherwise, remember that last selected filter option when
+        // re-entering the screen
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let indexPath = self.filterTableViewIndexPath {
                 self.filterTableView.delegate?.tableView!(self.filterTableView, didSelectRowAt: indexPath)
@@ -123,7 +128,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         }
     }
     
-    // show loading status
+    // show loading status; user cannot tap away while loading
     func showSpinner() {
         let view = UIApplication.shared.keyWindow!
         self.spinner = NVActivityIndicatorView(frame: view.frame, type: .lineScale, color: .white, padding: 250)
@@ -149,8 +154,9 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         }
     }
     
-   func loadData(completion: @escaping (_ success: Bool) -> Void) {
+    func loadData(completion: @escaping (_ success: Bool) -> Void) {
         if let indexPath = self.filterTableViewIndexPath {
+            // if day is selected, pull the list of date keys from server (e.g. 2019-07-18, 2019-07-19)
             if indexPath.row == 0 {
                 
             ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -160,12 +166,14 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                             self.dates.append(dateObj.key)
                         }
                         self.dates.sort(by: {$0 < $1})
-                        print(self.dates)
                         self.collectionView.reloadData()
+                        // close block immediately
                         completion(true)
                     }
                 })
             } else if indexPath.row == 1 {
+                // if month is selected, pull the list of date keys that contain that month
+                // a set here is used to avoid duplicates (ex. elem:  "2019-07", "2019-08")
                 var month = Set<String>()
                 self.dates.removeAll()
                 ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -176,12 +184,13 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                         }
                         self.dates = Array(month)
                         self.dates.sort(by: {$0 < $1})
-                        print(self.dates)
                         self.collectionView.reloadData()
                         completion(true)
                     }
                 })
             } else {
+                // if month is selected, pull the list of date keys that contain that year
+                // a set here is used to avoid duplicates (ex. elem:  "2019", "2020")
                 var year = Set<String>()
                 self.dates.removeAll()
                 ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
@@ -194,7 +203,6 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                         if self.dates.count > 1 {
                             self.dates.sort(by: {$0 < $1})
                         }
-                        print(self.dates)
                         self.collectionView.reloadData()
                         completion(true)
                     }
@@ -203,6 +211,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         }
     }
 
+    // by default, select the last element (aka. the lastest data)
     func processData() {
         let index = IndexPath(item: self.dates.count-1, section: 0)
         self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
@@ -211,6 +220,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
             self.collectionView(self.collectionView, didSelectItemAt: index)
         }
     }
+    
     // estimate collectionView cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 80, height: 40)
@@ -234,19 +244,23 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
             cell.layer.masksToBounds = true
             
             if let index = self.filterTableViewIndexPath {
+                // for day, filter label will be "Jul 2019", "Aug 2019"
                 if index.row == 0 {
                     let month = self.parseMonth(mon: String(date.split(separator: "-")[1]))
                     let day = String(date.split(separator: "-")[2])
                     cell.filterLabel.text = "\(month) \(day)"
-                } else if index.row == 1 {
+                } // for month, filter label will be "Jul", "Aug"
+                else if index.row == 1 {
                     let month = self.parseMonth(mon: String(date.split(separator: "-")[1]))
                     cell.filterLabel.text = month
-                } else {
+                } // for year, filter label will be "2019"
+                else {
                     cell.filterLabel.text = date
                 }
             }
             return cell
         } else {
+            // if no cells, return default cell
             return UICollectionViewCell()
         }
     }
@@ -263,7 +277,10 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         // get the selected date
         self.selectedDate = dates[indexPath.item]
         if let index = self.filterTableViewIndexPath {
+            
+            // day is selected
             if index.row == 0 {
+                // hide barChart, show pie chart
                 self.barChartView.alpha = 0.0
                 self.avgReminderLabel.alpha = 0.0
                 self.pieChartView.alpha = 1.0
@@ -281,21 +298,25 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                 self.dateUILabel.text = "\(weekday), \(month) \(day), \(year)"
                 
                 var dict: [String:[Int]] = [:]
-            ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.selectedDate!)").observeSingleEvent(of: .value, with: { (snapshot) in
+                ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.selectedDate!)")
+                    .observeSingleEvent(of: .value, with: { (snapshot) in
                     if let timeObjs = snapshot.value as? [String: Any] {
                         self.visitObjs.removeAll()
                         for timeObj in timeObjs {
                             if let obj = timeObj.value as? [String: Any] {
                                 let room = obj["room"] as? String
                                 let timeElapsed = obj["timeElapsed"] as? Int
-                                
+                                // use defaultdict (like Python);
+                                // ex: [CTRoom: [1230, 2345]] in secs
                                 dict[room!, default: []].append(timeElapsed!)
                             }
                         }
-                        print(dict)
+                        // add up all time tracking data for that room of that single day
+                        // ex. [CTRoom: 3575]
                         let newdict = dict.map { (i) in
                             return (i.key, i.value.reduce(0,+))
                         }
+                        // conver to VisitForGraph obj with room = CTRoom and timeElapsed = 3575
                         self.visitObjs = newdict.map { (i) in
                             return VisitForGraph(room: i.0, timeElapsed: i.1)
                         }
@@ -309,6 +330,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                 })
                 
             } else if index.row == 1 {
+                // show bar chart instead of pie chart
                 self.barChartView.alpha = 1.0
                 self.avgReminderLabel.alpha = 1.0
                 self.pieChartView.alpha = 0.0
@@ -317,18 +339,21 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
 
                 var monthDict = [[(String, Int)]]()
                 var acc: [String:[Int]] = [:]
-
+                
+                // if selectedDate = 2019-01
+                // query start with selectedDate (e.g. 2019-01-01)
                 ref.child("/PatientVisitsByDates/\(userPhoneNum!)/").queryStarting(atValue: nil, childKey: "\(self.selectedDate!)-01")
                 .observeSingleEvent(of: .value, with: { (snapshot) in
                     if let dateObjs = snapshot.value as? [String: Any] {
                         self.visitObjs.removeAll()
                         for dateObj in dateObjs {
                             let key = dateObj.key
+                            
+                            // if key contains the month (2019-01)
                             if key.contains(self.selectedDate) {
-                                print(key)
                                 if let timeObjs = dateObj.value as? [String: Any] {
                                     var dict: [String:[Int]] = [:]
-
+                                    // for each day; loop thru all time tracking objs
                                     for timeObj in timeObjs {
                                         if let obj = timeObj.value as? [String: Any] {
                                             let room = obj["room"] as? String
@@ -336,6 +361,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                                             dict[room!, default: []].append(timeElapsed!)
                                         }
                                     }
+                                    // add up all time tracking data for that room of that single day
                                     let newdict = dict.map { (i) in
                                         return (i.key, i.value.reduce(0,+))
                                     }
@@ -343,14 +369,19 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                                 }
                             }
                         }
+                        // monthDict structure: [[("femaleWaitingRoom", 111), ("exam1", 222)],
+                        //                       [("CTRoom", 333), ("exam1", 444)]]
                         for data in monthDict {
                             for room in data {
                                 acc[room.0, default: []].append(room.1)
                             }
                         }
+                        // exam1 = 222 + 444 = 666/2 = 333
+                        // avg = [("femaleWaitingRoom", 111), ("exam1", 333), ("CTRoom", 333)]
                         let avg = acc.map { (i) in
                             return (i.key, i.value.reduce(0,+)/i.value.count)
                         }
+                        // convert to visitForGraph obj
                         self.visitObjs = avg.map { (i) in
                             return VisitForGraph(room: i.0, timeElapsed: i.1)
                         }
@@ -364,6 +395,8 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                 })
                 self.dateUILabel.text = year
             } else {
+                // the same algorithm for pulling data of the whole year as pulling data of a month
+                // as long as the date keys contain the year (e.g. "2019"), retrieve the data
                 self.barChartView.alpha = 1.0
                 self.avgReminderLabel.alpha = 1.0
                 self.pieChartView.alpha = 0.0
@@ -378,7 +411,6 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
                             for dateObj in dateObjs {
                                 let key = dateObj.key
                                 if key.contains(self.selectedDate) {
-                                    print(key)
                                     if let timeObjs = dateObj.value as? [String: Any] {
                                         var dict: [String:[Int]] = [:]
                                         
@@ -421,14 +453,17 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     }
     
     func customizePieCharts(dataObj: [VisitForGraph]) {
+        // pie chart animation
         self.pieChartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
+        // pie chart value = time spent at each room in minutes; label = room
         let entries = (0..<dataObj.count).map { (i) -> PieChartDataEntry in
             return PieChartDataEntry(value: Double(dataObj[i].timeElapsed)/60.0, label: self.roomGraphLabel(room: dataObj[i].room))
         }
-        
+        // create dataset for pie chart; generate random colors for each room
         let pieChartDataSet = PieChartDataSet(entries: entries, label: nil)
         pieChartDataSet.colors = colorsOfCharts(numberOfColor: dataObj.count)
         
+        // add min to the value
         let pieChartData = PieChartData(dataSet: pieChartDataSet)
         let pFormatter = NumberFormatter()
         pFormatter.positiveSuffix = " min"
@@ -440,17 +475,22 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     }
     
     func customizeBarCharts(dataObj: [VisitForGraph]) {
+        // animate bar chart
         self.barChartView.animate(yAxisDuration: 1.0)
+        
+        // bar char x-axis = temporarily indexes; y-axis = time tracking data in minutes
         let entries = (0..<dataObj.count).map { (i) -> BarChartDataEntry in
             return BarChartDataEntry(x: Double(i), y: Double(dataObj[i].timeElapsed)/60.0)
         }
+        // x-axis can be formatted as strings to show rooms
 //        let xAxisRooms = dataObj.map { (i) -> String in return i.room }
 //        self.barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xAxisRooms)
 //        self.barChartView.xAxis.granularity = 1
 
-        let barChartDataSet = BarChartDataSet(entries: entries, label: "On average")
+        let barChartDataSet = BarChartDataSet(entries: entries, label: nil)
         barChartDataSet.drawValuesEnabled = true
         
+        // generate random colors for each bar
         barChartDataSet.colors = colorsOfCharts(numberOfColor: dataObj.count)
 
         let barChartData = BarChartData(dataSet: barChartDataSet)
@@ -459,6 +499,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         self.barChartView.data = barChartData
     }
     
+    // generate random colors to display time tracking data for each room
     private func colorsOfCharts(numberOfColor: Int) -> [UIColor] {
         self.colors = []
         for _ in 0..<numberOfColor {
@@ -498,12 +539,13 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
             
             return cell
         } else if tableView === legendTableView {
-
             let cell = tableView.dequeueReusableCell(withIdentifier: "LegendTableViewCell", for: indexPath) as! LegendTableViewCell
             let legend = self.visitObjs[indexPath.row]
             let color = self.colors[indexPath.row]
             cell.colorView.backgroundColor = color
             cell.roomLabel.text = self.prettifyRoom(room: legend.room)
+            
+            // round minutes to two decimal places
             let timeSpent = (Double(legend.timeElapsed) / 60.0 * 100).rounded() / 100
             cell.timeLabel.text = "\(timeSpent) min"
             
