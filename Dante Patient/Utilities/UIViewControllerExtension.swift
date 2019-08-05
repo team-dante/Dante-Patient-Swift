@@ -34,6 +34,19 @@ extension UIViewController {
         }
     }
     
+    func roomGraphLabel(room: String) -> String {
+        switch room {
+        case "femaleWaitingRoom":
+            return "FW"
+        case "CTRoom":
+            return "CT"
+        case "exam1":
+            return "EM 1"
+        default:
+            return ""
+        }
+    }
+    
     func parseTimeElapsed(timeElapsed: Int) -> String {
 //        let hr = timeElapsed / 3600
         let sec = timeElapsed % 60
@@ -52,4 +65,34 @@ extension UIViewController {
         return parsedTime
     }
     
+    func parseMonth(mon: String) -> String {
+        switch mon {
+        case "01":
+            return "Jan"
+        case "02":
+            return "Feb"
+        case "03":
+            return "Mar"
+        case "04":
+            return "Apr"
+        case "05":
+            return "May"
+        case "06":
+            return "Jun"
+        case "07":
+            return "Jul"
+        case "08":
+            return "Aug"
+        case "09":
+            return "Sep"
+        case "10":
+            return "Oct"
+        case "11":
+            return "Nov"
+        case "12":
+            return "Dec"
+        default:
+            return "none"
+        }
+    }
 }

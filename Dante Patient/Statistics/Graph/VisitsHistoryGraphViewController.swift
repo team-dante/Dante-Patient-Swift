@@ -8,6 +8,9 @@
 
 import UIKit
 import Charts
+import Firebase
+import FirebaseAuth
+import NVActivityIndicatorView
 
 struct VisitForGraph {
     var room: String
@@ -20,27 +23,34 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     @IBOutlet weak var filterTableView: UITableView!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var dateUILabel: UILabel!
-    @IBOutlet weak var pieChartView: PieChartView!
+    @IBOutlet var chartView: UIView!
     @IBOutlet weak var legendTableView: UITableView!
+    @IBOutlet weak var pieChartView: PieChartView!
+    @IBOutlet weak var barChartView: BarChartView!
+    @IBOutlet weak var avgReminderLabel: UILabel!
     
     var selectedDate: String!
     let filterCat = ["Day", "Month", "Year"]
     var dates = [String]()
     var visitObjs = [VisitForGraph]()
     var filterTableViewIndexPath: IndexPath?
-    var spinner: UIView?
+    var spinner: NVActivityIndicatorView!
     var colors: [UIColor] = []
+    var ref: DatabaseReference!
+    var userPhoneNum: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
+        ref = Database.database().reference()
         customizeFilterView()
         customizeFilterTableView()
         customizeCollectionView()
         customizeLegendTableView()
         
-        pieChartView.backgroundColor = UIColor("#f3f5f7")
-        pieChartView.legend.enabled = false
+        customizePieChart()
+        customizeBarChart()
     }
     
     func customizeFilterView() {
@@ -71,10 +81,34 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         legendTableView.estimatedRowHeight = 60.0
     }
     
+    func customizePieChart() {
+        self.pieChartView.legend.enabled = false
+        self.pieChartView.backgroundColor = UIColor("#f9f9f9")
+    }
+    
+    func customizeBarChart() {
+        self.barChartView.drawBarShadowEnabled = false
+        self.barChartView.drawBordersEnabled = false
+        self.barChartView.doubleTapToZoomEnabled = false
+        self.barChartView.drawValueAboveBarEnabled = true
+        self.barChartView.legend.enabled = false
+        
+        let xAxis = self.barChartView.xAxis
+        xAxis.labelPosition = .bottom
+        xAxis.enabled = false
+        
+        let leftAxis = self.barChartView.leftAxis
+        leftAxis.labelFont = UIFont(name: "Poppins-Regular", size: 14)!
+        leftAxis.labelTextColor = UIColor("#adadad")
+        
+        let rightAxis = self.barChartView.rightAxis
+        rightAxis.enabled = false
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.showSpinner(onView: self.view)
+        self.showSpinner()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             if let indexPath = self.filterTableViewIndexPath {
@@ -90,49 +124,93 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     }
     
     // show loading status
-    func showSpinner(onView : UIView) {
-        let spinnerView = UIView.init(frame: onView.bounds)
-        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
-        let ai = UIActivityIndicatorView.init(style: .whiteLarge)
-        ai.startAnimating()
-        ai.center = spinnerView.center
-        
-        DispatchQueue.main.async {
-            spinnerView.addSubview(ai)
-            onView.addSubview(spinnerView)
-        }
-        spinner = spinnerView
+    func showSpinner() {
+        let view = UIApplication.shared.keyWindow!
+        self.spinner = NVActivityIndicatorView(frame: view.frame, type: .lineScale, color: .white, padding: 250)
+        view.addSubview(self.spinner)
+        self.spinner.backgroundColor = UIColor("#31c1ff")
+        self.spinner.startAnimating()
     }
     
     // clear spinner
     func removeSpinner() {
         DispatchQueue.main.async {
-            self.spinner?.removeFromSuperview()
-            self.spinner = nil
+            self.spinner.stopAnimating()
+            self.spinner.removeFromSuperview()
         }
     }
     
     // set collectionView data based on filters (day, month, or year)
     func loadDataBasedOnFilter() {
-        if let indexPath = self.filterTableViewIndexPath {
-            if indexPath.row == 0 {
-                self.dates = ["2019-06-27", "2019-06-28", "2019-07-29", "2019-07-30", "2019-07-31"]
-            } else if indexPath.row == 1 {
-                self.dates = ["June", "July"]
-                
-            } else {
-                self.dates = ["2019"]
-            }
-            self.collectionView.reloadData()
-            
-            DispatchQueue.main.async {
-                let index = IndexPath(item: self.dates.count-1, section: 0)
-                self.collectionView.selectItem(at: index, animated: false, scrollPosition: .right)
-                self.collectionView.delegate?.collectionView!(self.collectionView, didSelectItemAt: index)
+        loadData { (success) -> Void in
+            if success {
+                self.processData()
             }
         }
     }
     
+   func loadData(completion: @escaping (_ success: Bool) -> Void) {
+        if let indexPath = self.filterTableViewIndexPath {
+            if indexPath.row == 0 {
+                
+            ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    self.dates.removeAll()
+                    if let dateObjs = snapshot.value as? [String: Any] {
+                        for dateObj in dateObjs {
+                            self.dates.append(dateObj.key)
+                        }
+                        self.dates.sort(by: {$0 < $1})
+                        print(self.dates)
+                        self.collectionView.reloadData()
+                        completion(true)
+                    }
+                })
+            } else if indexPath.row == 1 {
+                var month = Set<String>()
+                self.dates.removeAll()
+                ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let dateObjs = snapshot.value as? [String: Any] {
+                        for dateObj in dateObjs {
+                            let key = (dateObj.key).prefix(7)
+                            month.insert(String(key))
+                        }
+                        self.dates = Array(month)
+                        self.dates.sort(by: {$0 < $1})
+                        print(self.dates)
+                        self.collectionView.reloadData()
+                        completion(true)
+                    }
+                })
+            } else {
+                var year = Set<String>()
+                self.dates.removeAll()
+                ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let dateObjs = snapshot.value as? [String: Any] {
+                        for dateObj in dateObjs {
+                            let key = (dateObj.key).prefix(4)
+                            year.insert(String(key))
+                        }
+                        self.dates = Array(year)
+                        if self.dates.count > 1 {
+                            self.dates.sort(by: {$0 < $1})
+                        }
+                        print(self.dates)
+                        self.collectionView.reloadData()
+                        completion(true)
+                    }
+                })
+            }
+        }
+    }
+
+    func processData() {
+        let index = IndexPath(item: self.dates.count-1, section: 0)
+        self.collectionView.scrollToItem(at: index, at: .centeredHorizontally, animated: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.collectionView.selectItem(at: index, animated: true, scrollPosition: [])
+            self.collectionView(self.collectionView, didSelectItemAt: index)
+        }
+    }
     // estimate collectionView cell size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 80, height: 40)
@@ -144,76 +222,208 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let date = self.dates[indexPath.item]
+        print(date)
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GraphCollectionViewCell", for: indexPath) as! GraphCollectionViewCell
-        
-        // cell stylings
-        cell.backgroundColor = UIColor("#fff")
-        cell.filterLabel.textColor = UIColor("#31c1ff")
-        cell.layer.borderColor = UIColor("#31c1ff").cgColor
-        cell.layer.borderWidth = 0.6
-        cell.layer.cornerRadius = cell.frame.height/2
-        cell.layer.masksToBounds = true
-        
-        if let index = self.filterTableViewIndexPath {
-            if index.row == 0 {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd"
-                let parsedDate = dateFormatter.date(from: date)
-                let f = DateFormatter()
-                let formattedMonth = f.monthSymbols[Calendar.current.component(.month, from: parsedDate!)-1].prefix(3)
-                let day = String(date.split(separator: "-")[2])
-                cell.filterLabel.text = "\(formattedMonth) \(day)"
-            } else {
-                cell.filterLabel.text = date
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GraphCollectionViewCell", for: indexPath) as? GraphCollectionViewCell {
+            // cell stylings
+            cell.backgroundColor = UIColor("#fff")
+            cell.filterLabel.textColor = UIColor("#31c1ff")
+            cell.layer.borderColor = UIColor("#31c1ff").cgColor
+            cell.layer.borderWidth = 0.6
+            cell.layer.cornerRadius = cell.frame.height/2
+            cell.layer.masksToBounds = true
+            
+            if let index = self.filterTableViewIndexPath {
+                if index.row == 0 {
+                    let month = self.parseMonth(mon: String(date.split(separator: "-")[1]))
+                    let day = String(date.split(separator: "-")[2])
+                    cell.filterLabel.text = "\(month) \(day)"
+                } else if index.row == 1 {
+                    let month = self.parseMonth(mon: String(date.split(separator: "-")[1]))
+                    cell.filterLabel.text = month
+                } else {
+                    cell.filterLabel.text = date
+                }
             }
+            return cell
+        } else {
+            return UICollectionViewCell()
         }
-        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         collectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
 
-        let cell = collectionView.cellForItem(at: indexPath) as! GraphCollectionViewCell
-        cell.backgroundColor = UIColor("#31c1ff")
-        cell.filterLabel.textColor = UIColor("#fff")
+        if let cell = collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
+            cell.backgroundColor = UIColor("#31c1ff")
+            cell.filterLabel.textColor = UIColor("#fff")
+        }
         
         // get the selected date
         self.selectedDate = dates[indexPath.item]
         if let index = self.filterTableViewIndexPath {
             if index.row == 0 {
+                self.barChartView.alpha = 0.0
+                self.avgReminderLabel.alpha = 0.0
+                self.pieChartView.alpha = 1.0
+                
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 let parsedDate = dateFormatter.date(from: self.selectedDate)
                 
                 // set the date string for the UIView at the top
                 let f = DateFormatter()
-                let month = f.monthSymbols[Calendar.current.component(.month, from: parsedDate!)-1].prefix(3)
+                let month = self.parseMonth(mon: String(self.selectedDate.split(separator: "-")[1]))
                 let day = String(self.selectedDate.split(separator: "-")[2])
                 let year = String(self.selectedDate.split(separator: "-")[0])
                 let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: parsedDate!)-1]
                 self.dateUILabel.text = "\(weekday), \(month) \(day), \(year)"
                 
-                self.visitObjs = [VisitForGraph(room: "exam1", timeElapsed: 1800),
-                                  VisitForGraph(room: "CTRoom", timeElapsed: 1200)]
-                self.removeSpinner()
-                self.customizeCharts(dataObj: visitObjs)
-                self.legendTableView.reloadData()
+                var dict: [String:[Int]] = [:]
+            ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(self.selectedDate!)").observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let timeObjs = snapshot.value as? [String: Any] {
+                        self.visitObjs.removeAll()
+                        for timeObj in timeObjs {
+                            if let obj = timeObj.value as? [String: Any] {
+                                let room = obj["room"] as? String
+                                let timeElapsed = obj["timeElapsed"] as? Int
+                                
+                                dict[room!, default: []].append(timeElapsed!)
+                            }
+                        }
+                        print(dict)
+                        let newdict = dict.map { (i) in
+                            return (i.key, i.value.reduce(0,+))
+                        }
+                        self.visitObjs = newdict.map { (i) in
+                            return VisitForGraph(room: i.0, timeElapsed: i.1)
+                        }
+                        self.removeSpinner()
+                        self.customizePieCharts(dataObj: self.visitObjs)
+                        self.legendTableView.reloadData()
+                    } else {
+                        self.visitObjs.removeAll()
+                        self.legendTableView.reloadData()
+                    }
+                })
                 
             } else if index.row == 1 {
-                self.dateUILabel.text = "2019"
+                self.barChartView.alpha = 1.0
+                self.avgReminderLabel.alpha = 1.0
+                self.pieChartView.alpha = 0.0
+                
+                let year = String(self.selectedDate.split(separator: "-")[0])
+
+                var monthDict = [[(String, Int)]]()
+                var acc: [String:[Int]] = [:]
+
+                ref.child("/PatientVisitsByDates/\(userPhoneNum!)/").queryStarting(atValue: nil, childKey: "\(self.selectedDate!)-01")
+                .observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let dateObjs = snapshot.value as? [String: Any] {
+                        self.visitObjs.removeAll()
+                        for dateObj in dateObjs {
+                            let key = dateObj.key
+                            if key.contains(self.selectedDate) {
+                                print(key)
+                                if let timeObjs = dateObj.value as? [String: Any] {
+                                    var dict: [String:[Int]] = [:]
+
+                                    for timeObj in timeObjs {
+                                        if let obj = timeObj.value as? [String: Any] {
+                                            let room = obj["room"] as? String
+                                            let timeElapsed = obj["timeElapsed"] as? Int
+                                            dict[room!, default: []].append(timeElapsed!)
+                                        }
+                                    }
+                                    let newdict = dict.map { (i) in
+                                        return (i.key, i.value.reduce(0,+))
+                                    }
+                                    monthDict.append(newdict)
+                                }
+                            }
+                        }
+                        for data in monthDict {
+                            for room in data {
+                                acc[room.0, default: []].append(room.1)
+                            }
+                        }
+                        let avg = acc.map { (i) in
+                            return (i.key, i.value.reduce(0,+)/i.value.count)
+                        }
+                        self.visitObjs = avg.map { (i) in
+                            return VisitForGraph(room: i.0, timeElapsed: i.1)
+                        }
+                        self.removeSpinner()
+                        self.customizeBarCharts(dataObj: self.visitObjs)
+                        self.legendTableView.reloadData()
+                    } else {
+                        self.visitObjs.removeAll()
+                        self.legendTableView.reloadData()
+                    }
+                })
+                self.dateUILabel.text = year
             } else {
+                self.barChartView.alpha = 1.0
+                self.avgReminderLabel.alpha = 1.0
+                self.pieChartView.alpha = 0.0
+                
+                var yearDict = [[(String, Int)]]()
+                var acc: [String:[Int]] = [:]
+                
+                ref.child("/PatientVisitsByDates/\(userPhoneNum!)/").queryStarting(atValue: nil, childKey: "\(self.selectedDate!)-01-01")
+                    .observeSingleEvent(of: .value, with: { (snapshot) in
+                        if let dateObjs = snapshot.value as? [String: Any] {
+                            self.visitObjs.removeAll()
+                            for dateObj in dateObjs {
+                                let key = dateObj.key
+                                if key.contains(self.selectedDate) {
+                                    print(key)
+                                    if let timeObjs = dateObj.value as? [String: Any] {
+                                        var dict: [String:[Int]] = [:]
+                                        
+                                        for timeObj in timeObjs {
+                                            if let obj = timeObj.value as? [String: Any] {
+                                                let room = obj["room"] as? String
+                                                let timeElapsed = obj["timeElapsed"] as? Int
+                                                dict[room!, default: []].append(timeElapsed!)
+                                            }
+                                        }
+                                        let newdict = dict.map { (i) in
+                                            return (i.key, i.value.reduce(0,+))
+                                        }
+                                        yearDict.append(newdict)
+                                    }
+                                }
+                            }
+                            for data in yearDict {
+                                for room in data {
+                                    acc[room.0, default: []].append(room.1)
+                                }
+                            }
+                            let avg = acc.map { (i) in
+                                return (i.key, i.value.reduce(0,+)/i.value.count)
+                            }
+                            self.visitObjs = avg.map { (i) in
+                                return VisitForGraph(room: i.0, timeElapsed: i.1)
+                            }
+                            self.removeSpinner()
+                            self.customizeBarCharts(dataObj: self.visitObjs)
+                            self.legendTableView.reloadData()
+                        } else {
+                            self.visitObjs.removeAll()
+                            self.legendTableView.reloadData()
+                        }
+                    })
                 self.dateUILabel.text = "Year"
             }
         }
     }
     
-    func customizeCharts(dataObj: [VisitForGraph]) {
+    func customizePieCharts(dataObj: [VisitForGraph]) {
         self.pieChartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
-        
         let entries = (0..<dataObj.count).map { (i) -> PieChartDataEntry in
-            return PieChartDataEntry(value: Double(dataObj[i].timeElapsed)/60.0, label: self.prettifyRoom(room: dataObj[i].room))
+            return PieChartDataEntry(value: Double(dataObj[i].timeElapsed)/60.0, label: self.roomGraphLabel(room: dataObj[i].room))
         }
         
         let pieChartDataSet = PieChartDataSet(entries: entries, label: nil)
@@ -225,9 +435,28 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         pieChartData.setValueFormatter(DefaultValueFormatter(formatter: pFormatter))
         
         pieChartData.setValueFont(UIFont(name: "Poppins-Bold", size: 15)!)
-        pieChartData.setValueTextColor(UIColor("#fcfcfc"))
+        pieChartData.setValueTextColor(UIColor("#fff"))
         self.pieChartView.data = pieChartData
+    }
+    
+    func customizeBarCharts(dataObj: [VisitForGraph]) {
+        self.barChartView.animate(yAxisDuration: 1.0)
+        let entries = (0..<dataObj.count).map { (i) -> BarChartDataEntry in
+            return BarChartDataEntry(x: Double(i), y: Double(dataObj[i].timeElapsed)/60.0)
+        }
+//        let xAxisRooms = dataObj.map { (i) -> String in return i.room }
+//        self.barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: xAxisRooms)
+//        self.barChartView.xAxis.granularity = 1
 
+        let barChartDataSet = BarChartDataSet(entries: entries, label: "On average")
+        barChartDataSet.drawValuesEnabled = true
+        
+        barChartDataSet.colors = colorsOfCharts(numberOfColor: dataObj.count)
+
+        let barChartData = BarChartData(dataSet: barChartDataSet)
+        barChartData.setValueFont(UIFont(name: "Poppins-Regular", size: 14)!)
+        barChartData.barWidth = 0.6
+        self.barChartView.data = barChartData
     }
     
     private func colorsOfCharts(numberOfColor: Int) -> [UIColor] {
@@ -243,11 +472,12 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! GraphCollectionViewCell
-        cell.backgroundColor = UIColor("#fff")
-        cell.filterLabel.textColor = UIColor("#31c1ff")
-        cell.layer.borderColor = UIColor("#31c1ff").cgColor
-        cell.layer.borderWidth = 0.6
+        if let cell = collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
+            cell.backgroundColor = UIColor("#fff")
+            cell.filterLabel.textColor = UIColor("#31c1ff")
+            cell.layer.borderColor = UIColor("#31c1ff").cgColor
+            cell.layer.borderWidth = 0.6
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -274,7 +504,8 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
             let color = self.colors[indexPath.row]
             cell.colorView.backgroundColor = color
             cell.roomLabel.text = self.prettifyRoom(room: legend.room)
-            cell.timeLabel.text = "\(Double(legend.timeElapsed) / 60.0) min"
+            let timeSpent = (Double(legend.timeElapsed) / 60.0 * 100).rounded() / 100
+            cell.timeLabel.text = "\(timeSpent) min"
             
             return cell
         }

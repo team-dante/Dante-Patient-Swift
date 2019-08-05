@@ -14,5 +14,6 @@ target 'Dante Patient' do
   pod 'IQKeyboardManagerSwift'
   pod 'FloatingPanel'
   pod 'KontaktSDK', '~>2.0'
-  pod 'Charts'	
+  pod 'Charts'
+  pod 'NVActivityIndicatorView'
 end
