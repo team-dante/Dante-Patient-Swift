@@ -18,9 +18,7 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
     var doctors = [[String: String]]()
     
     // Assume we have a set number of doctors for now (would make the pin coloring scheme dynamic in future)
-    var docDict: [String: UIImage] = [
-        "111": UIImage(named: "greenPin")!,
-        "222": UIImage(named: "purplePin")!]
+    var docDict: [String: UIImage] = [:]
     
     // For iOS 10 only
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
@@ -33,6 +31,10 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.view.backgroundColor = UIColor(white: 1, alpha: 0.5)
         
+        for i in 1...7 {
+            let pin = i * 111;
+            docDict[String(pin)] = UIImage(named: String(pin))
+        }
         ref = Database.database().reference()
     }
     

@@ -21,12 +21,12 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     @IBOutlet weak var mapImageView: UIImageView!
     @IBOutlet weak var queueNum: UILabel!
     
-    // import images
-    let img1 = UIImageView(image: UIImage(named: "greenPin"))
-    let img2 = UIImageView(image: UIImage(named: "purplePin"))
-    
     var docDict: [String: UIImageView] = [:]
-    var mapDict: [String: [(Int, Int)]] = [:]
+    var mapDict: [String: [(Int, Int)]] = [
+        "femaleWaitingRoom": [(159, 163),(175, 170),(166, 160),(180, 169), (157, 183), (171, 182), (182, 184)],
+        "CTRoom": [(20, 312),(47, 312), (57, 253), (44, 253), (10, 266), (28, 266), (50, 282)],
+        "exam1": [(225, 241),(242, 241),(232, 242),(226, 263),(243, 263),(231, 264), (237, 250)]
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,12 +79,10 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         queueNum.layer.masksToBounds = true
         
         // Assume we have a set number of doctors for now (would make the pin coloring scheme dynamic in future)
-        docDict = ["111": img1, "222": img2]
-        mapDict = [
-            "femaleWaitingRoom": [(162, 170),(177, 170)],
-            "CTRoom": [(22, 312),(47, 312)],
-            "exam1": [(229, 241),(237, 241)]
-        ]
+        for i in 1...7 {
+            let pin = i * 111;
+            docDict[String(pin)] = UIImageView(image: UIImage(named: String(pin)))
+        }
     }
     
     // if FloatingPanel's position is at tip, then it will be at half
@@ -113,16 +111,16 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                     // get doctor's value e.g. {"room": "CTRoom"}
                     if let doc = doctor.value as? [String: String] {
                         let room = doc["room"]! // e.g. "CTRoom"
-                        
+
                         if room == "Private" { // private room -> don't show pins
                             self.docDict[key]!.isHidden = true
                         }
                         else {
                             self.docDict[key]!.isHidden = false
-                            
+
                             // add the assigned doctor pin onto the image; re-render when event changes
                             self.updateDocLoc(doctor: self.docDict[key]!, x: self.mapDict[room]![0].0, y: self.mapDict[room]![0].1)
-                            
+
                             let firstElement = self.mapDict[room]!.remove(at: 0)
                             self.mapDict[room]!.append(firstElement)
                         }
@@ -147,7 +145,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     
     // utilize offsets; add doc pin(UIImage) to UIView
     func updateDocLoc(doctor: UIImageView, x: Int, y: Int) {
-        doctor.frame = CGRect(x: x, y: y, width: 15, height: 30)
+        doctor.frame = CGRect(x: x, y: y, width: 10, height: 21)
         self.mapUIView.addSubview(doctor)
     }
     
