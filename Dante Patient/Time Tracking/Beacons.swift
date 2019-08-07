@@ -25,7 +25,7 @@ class Beacons: NSObject {
     // records a queue of 10 distances for each beacon
     var roomDict: [Int: [Double]] = [1: [], 2: [], 3:[]]
     // map beacon major to the real clinic room
-    let majorToRoom = [ 1: "exam1", 2: "CTRoom", 3: "femaleWaitingRoom" ]
+    let majorToRoom = [ 1: "LA1", 2: "TLA", 3: "CT" ]
     // map beacon major to its corresponding cutoff value (1m)
     let cutoff = [1: 1.5, 2: 1.5, 3: 1.5]
     // after 10 rounds, perform stats analysis

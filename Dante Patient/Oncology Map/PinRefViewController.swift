@@ -15,7 +15,9 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
     var ref: DatabaseReference!
     
+    let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
     var doctors = [[String: String]]()
+    var docName = ["111":"Roa", "222":"Kuo", "333":"Gan", "444":"Shen", "555":"Moore"]
     
     // Assume we have a set number of doctors for now (would make the pin coloring scheme dynamic in future)
     var docDict: [String: UIImage] = [:]
@@ -31,7 +33,7 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.view.backgroundColor = UIColor(white: 1, alpha: 0.5)
         
-        for i in 1...7 {
+        for i in 1...5 {
             let pin = i * 111;
             docDict[String(pin)] = UIImage(named: String(pin))
         }
@@ -42,26 +44,28 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidAppear(animated)
         
         // call observe to always listen for doctor location changes
-        ref.child("DoctorLocation").observe(.value, with: {(snapshot) in
+        ref.child("StaffLocation").observe(.value, with: {(snapshot) in
             
             // clear doctors list data at refreshing
             self.doctors = []
             if let doctors = snapshot.value as? [String: Any] {
                 for doctor in doctors {
                     let docPhoneNum = doctor.key
-
-                    if let doc = doctor.value as? [String: String] {
-                        let room = doc["room"]! // e.g. "CTRoom"
-                        let docName = "Dr. \(doc["lastName"]!)"
-                        
-                        let formattedRoomStr = self.prettifyRoom(room: room)
-                        let doctorDict = ["docPhoneNum": docPhoneNum, "room": formattedRoomStr, "docName": docName]
-                        self.doctors.append(doctorDict)
-                        
-                        // reload the tableView immediately
-                        self.tableView.reloadData()
+                    if self.trackedStaff.contains(docPhoneNum) {
+                        if let doc = doctor.value as? [String: String] {
+                            let room = doc["room"]! // e.g. "CTRoom"
+                            if room != "Private" {
+                                let name = "Dr. \(self.docName[docPhoneNum]!)"
+                                
+                                let formattedRoomStr = self.prettifyRoom(room: room)
+                                let doctorDict = ["docPhoneNum": docPhoneNum, "room": formattedRoomStr, "docName": name]
+                                self.doctors.append(doctorDict)
+                            }
+                        }
                     }
                 }
+                // reload the tableView immediately
+                self.tableView.reloadData()
             }
         })
     }

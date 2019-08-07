@@ -21,11 +21,12 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     @IBOutlet weak var mapImageView: UIImageView!
     @IBOutlet weak var queueNum: UILabel!
     
+    let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
     var docDict: [String: UIImageView] = [:]
     var mapDict: [String: [(Int, Int)]] = [
-        "femaleWaitingRoom": [(159, 163),(175, 170),(166, 160),(180, 169), (157, 183), (171, 182), (182, 184)],
-        "CTRoom": [(20, 312),(47, 312), (57, 253), (44, 253), (10, 266), (28, 266), (50, 282)],
-        "exam1": [(225, 241),(242, 241),(232, 242),(226, 263),(243, 263),(231, 264), (237, 250)]
+        "LA1": [(142, 239),(170, 239),(157, 260),(143, 328), (173, 328)],
+        "TLA": [(302, 139),(349, 139),(312, 205),(351, 205),(324, 229)],
+        "CT": [(20, 312),(47, 312), (57, 253), (44, 253), (10, 266)]
     ]
     
     override func viewDidLoad() {
@@ -104,25 +105,28 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         fpc.addPanel(toParent: self, animated: true)
         
         // call observe to always listen for event changes
-        ref.child("DoctorLocation").observe(.value, with: {(snapshot) in
+        ref.child("StaffLocation").observe(.value, with: {(snapshot) in
+            var mapDictCopy = self.mapDict
             if let doctors = snapshot.value as? [String: Any] {
                 for doctor in doctors {
                     let key = doctor.key
-                    // get doctor's value e.g. {"room": "CTRoom"}
-                    if let doc = doctor.value as? [String: String] {
-                        let room = doc["room"]! // e.g. "CTRoom"
-
-                        if room == "Private" { // private room -> don't show pins
-                            self.docDict[key]!.isHidden = true
-                        }
-                        else {
-                            self.docDict[key]!.isHidden = false
-
-                            // add the assigned doctor pin onto the image; re-render when event changes
-                            self.updateDocLoc(doctor: self.docDict[key]!, x: self.mapDict[room]![0].0, y: self.mapDict[room]![0].1)
-
-                            let firstElement = self.mapDict[room]!.remove(at: 0)
-                            self.mapDict[room]!.append(firstElement)
+                    if self.trackedStaff.contains(key) {
+                        // get doctor's value e.g. {"room": "CTRoom"}
+                        if let doc = doctor.value as? [String: String] {
+                            let room = doc["room"]! // e.g. "CTRoom"
+                            
+                            if room == "Private" { // private room -> don't show pins
+                                self.docDict[key]!.isHidden = true
+                            }
+                            else {
+                                self.docDict[key]!.isHidden = false
+                                
+                                // add the assigned doctor pin onto the image; re-render when event changes
+                                self.updateDocLoc(doctor: self.docDict[key]!, x: mapDictCopy[room]![0].0, y: mapDictCopy[room]![0].1)
+                                
+                                let firstElement = mapDictCopy[room]!.remove(at: 0)
+                                mapDictCopy[room]!.append(firstElement)
+                            }
                         }
                     }
                 }

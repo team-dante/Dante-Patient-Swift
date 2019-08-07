@@ -23,25 +23,12 @@ extension UIViewController {
     
     func prettifyRoom(room: String) -> String {
         switch room {
-        case "femaleWaitingRoom":
-            return "Female Waiting Room"
-        case "CTRoom":
+        case "LA1":
+            return "Linear Accelerator 1"
+        case "TLA":
+            return "Trilogy Linear Acc."
+        case "CT":
             return "CT Room"
-        case "exam1":
-            return "Exam 1 Room"
-        default:
-            return ""
-        }
-    }
-    
-    func roomGraphLabel(room: String) -> String {
-        switch room {
-        case "femaleWaitingRoom":
-            return "FW"
-        case "CTRoom":
-            return "CT"
-        case "exam1":
-            return "EM 1"
         default:
             return ""
         }

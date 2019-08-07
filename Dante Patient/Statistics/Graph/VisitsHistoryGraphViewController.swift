@@ -457,7 +457,7 @@ class VisitsHistoryGraphViewController: UIViewController, UITableViewDelegate, U
         self.pieChartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
         // pie chart value = time spent at each room in minutes; label = room
         let entries = (0..<dataObj.count).map { (i) -> PieChartDataEntry in
-            return PieChartDataEntry(value: Double(dataObj[i].timeElapsed)/60.0, label: self.roomGraphLabel(room: dataObj[i].room))
+            return PieChartDataEntry(value: Double(dataObj[i].timeElapsed)/60.0, label: dataObj[i].room)
         }
         // create dataset for pie chart; generate random colors for each room
         let pieChartDataSet = PieChartDataSet(entries: entries, label: nil)
