@@ -16,6 +16,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     var pinRef: PinRefViewController!
     var ref: DatabaseReference!
     
+    @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mapUIView: UIView!
     @IBOutlet weak var mapImageView: UIImageView!
@@ -23,15 +24,15 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     
     let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
     var docDict: [String: UIImageView] = [:]
-    var mapDict: [String: [(Int, Int)]] = [
-        "LA1": [(142, 239),(170, 239),(157, 260),(143, 328), (173, 328)],
-        "TLA": [(302, 139),(349, 139),(312, 205),(351, 205),(324, 229)],
-        "CT": [(20, 312),(47, 312), (57, 253), (44, 253), (10, 266)]
+    var mapDict: [String: [(Double, Double)]] = [
+        "LA1": [(0.38, 0.7), (0.41, 0.75), (0.46, 0.75), (0.48, 0.7), (0.39, 0.8)],
+        "TLA": [(0.9, 0.36), (0.95, 0.5), (0.83, 0.54), (0.8, 0.5), (0.86, 0.4)],
+        "CT": [(0.11, 0.7), (0.03, 0.75), (0.12, 0.75), (0.06, 0.7), (0.04, 0.8)]
     ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         // connecting to Firebase initially
         ref = Database.database().reference()
         
@@ -74,7 +75,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         self.scrollView.maximumZoomScale = 4.0
         
         // stylings for queueNum label
-        queueNum.layer.cornerRadius = 15
+        queueNum.layer.cornerRadius = queueNum.frame.height/3
         queueNum.backgroundColor = UIColor("#fff")
         queueNum.textColor = UIColor("#62B245")
         queueNum.layer.masksToBounds = true
@@ -114,16 +115,16 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                         // get doctor's value e.g. {"room": "CTRoom"}
                         if let doc = doctor.value as? [String: String] {
                             let room = doc["room"]! // e.g. "CTRoom"
-                            
+
                             if room == "Private" { // private room -> don't show pins
                                 self.docDict[key]!.isHidden = true
                             }
                             else {
                                 self.docDict[key]!.isHidden = false
-                                
+
                                 // add the assigned doctor pin onto the image; re-render when event changes
                                 self.updateDocLoc(doctor: self.docDict[key]!, x: mapDictCopy[room]![0].0, y: mapDictCopy[room]![0].1)
-                                
+
                                 let firstElement = mapDictCopy[room]!.remove(at: 0)
                                 mapDictCopy[room]!.append(firstElement)
                             }
@@ -139,23 +140,39 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         return self.mapUIView
     }
     
-    // center scrollView when zooming
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        let subview = scrollView.subviews[0]
-        let offsetX = max((scrollView.bounds.size.width - scrollView.contentSize.width)*0.5, 0.0)
-        let offsetY = max((scrollView.bounds.size.height - scrollView.contentSize.height)*0.5, 0.0)
-        subview.center = CGPoint(x: scrollView.contentSize.width*0.5 + offsetX, y: scrollView.contentSize.height*0.5 + offsetY)
-    }
-    
     // utilize offsets; add doc pin(UIImage) to UIView
-    func updateDocLoc(doctor: UIImageView, x: Int, y: Int) {
-        doctor.frame = CGRect(x: x, y: y, width: 10, height: 21)
+    func updateDocLoc(doctor: UIImageView, x: Double, y: Double) {
+        let (xAxis, yAxis) = self.pinCoords(propX: x, propY: y)
+        doctor.frame = CGRect(x: xAxis, y: yAxis, width: 10, height: 21)
         self.mapUIView.addSubview(doctor)
     }
     
     // change the default floatingPanel layout
     func floatingPanel(_ vc: FloatingPanelController, layoutFor newCollection: UITraitCollection) -> FloatingPanelLayout? {
         return MyFloatingPanelLayout()
+    }
+    
+    func pinCoords(propX: Double, propY: Double) -> (CGFloat, CGFloat) {
+        var xyCoords: (CGFloat, CGFloat) = (0.0, 0.0)
+        
+        let deviceWidth = self.view.frame.width
+        let deviceHeight = self.middleView.frame.height
+
+        let propHeight = deviceWidth / 0.8333
+        print("propHeight: \(propHeight)")
+
+        if propHeight < deviceHeight {
+            let yAxisOffset = (deviceHeight - propHeight)/CGFloat(2.0)
+            print("y offset: \(yAxisOffset)")
+            xyCoords.0 = deviceWidth * CGFloat(propX)
+            xyCoords.1 = propHeight * CGFloat(propY) + yAxisOffset
+        } else {
+            let propWidth = deviceHeight * CGFloat(0.8333)
+            let xAxisOffset = (deviceWidth - propWidth)/CGFloat(2.0)
+            xyCoords.0 = propWidth * CGFloat(propX) + xAxisOffset
+            xyCoords.1 = deviceHeight * CGFloat(propY)
+        }
+        return xyCoords
     }
 }
 
@@ -167,7 +184,7 @@ class MyFloatingPanelLayout: FloatingPanelLayout {
         switch position {
         case .full: return 120.0 // A top inset from safe area
         case .half: return 250.0 // A bottom inset from the safe area
-        case .tip: return 150.0 // A bottom inset from the safe area
+        case .tip: return 90.0 // A bottom inset from the safe area
         default: return nil // Or `case .hidden: return nil`
         }
     }
