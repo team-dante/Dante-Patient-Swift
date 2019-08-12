@@ -159,11 +159,9 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         let deviceHeight = self.middleView.frame.height
 
         let propHeight = deviceWidth / 0.8333
-        print("propHeight: \(propHeight)")
 
         if propHeight < deviceHeight {
             let yAxisOffset = (deviceHeight - propHeight)/CGFloat(2.0)
-            print("y offset: \(yAxisOffset)")
             xyCoords.0 = deviceWidth * CGFloat(propX)
             xyCoords.1 = propHeight * CGFloat(propY) + yAxisOffset
         } else {
