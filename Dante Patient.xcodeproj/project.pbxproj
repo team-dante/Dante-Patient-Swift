@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E2AB9C230202090047C553 /* DeveloperFeedbackViewController.swift */; };
 		9A22BE7BAF0963CD4574D842 /* Pods_Dante_Patient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */; };
 		DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */; };
 		DB1B0DA122EFF45C00F3B281 /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B0DA022EFF45C00F3B281 /* GraphCollectionViewCell.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		24E2AB9C230202090047C553 /* DeveloperFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperFeedbackViewController.swift; sourceTree = "<group>"; };
 		73DAB50266CD4D0CEF54150A /* Pods-Dante Patient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.release.xcconfig"; sourceTree = "<group>"; };
 		9E5D9A74D41EC12E8A1CF669 /* Pods-Dante Patient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.debug.xcconfig"; sourceTree = "<group>"; };
 		DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitHistoryTableViewCell.swift; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */,
+				24E2AB9C230202090047C553 /* DeveloperFeedbackViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 				DBCCC64122CB292500B00A68 /* Frameworks */,
 				DBCCC64222CB292500B00A68 /* Resources */,
 				076E267C5445EB7FA9C60631 /* [CP] Embed Pods Frameworks */,
+				24E2AB9E2302064A0047C553 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -381,6 +385,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Dante Patient/Pods-Dante Patient-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		24E2AB9E2302064A0047C553 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "custom_sim=`xcrun simctl list | grep 'Custom Simulators' | awk -F'[()]' '{print $2}'`\nif [ ! -z \"${custom_sim}\" ] && [ \"${TARGET_DEVICE_IDENTIFIER}\" = \"${custom_sim}\" ]; then\n/bin/sh multipleSimulatorsStartup.sh\nfi\n";
+		};
 		4D21B2C6D4E1E8722FBEE1A6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -435,6 +456,7 @@
 				DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */,
 				DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */,
 				DBF45F3622E4671400A18C7B /* DateCollectionViewCell.swift in Sources */,
+				24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -584,13 +606,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4UZRYSG2AZ;
+				DEVELOPMENT_TEAM = X86U5N326S;
 				INFOPLIST_FILE = "Dante Patient/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xhl.patient-dante";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dante-patient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -605,13 +627,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4UZRYSG2AZ;
+				DEVELOPMENT_TEAM = X86U5N326S;
 				INFOPLIST_FILE = "Dante Patient/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xhl.patient-dante";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dante-patient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

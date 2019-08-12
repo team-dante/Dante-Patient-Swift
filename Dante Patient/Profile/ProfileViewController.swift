@@ -17,11 +17,32 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var myView: UIView!
     @IBOutlet weak var myInnerView: UIView!
+    @IBOutlet weak var cardComponentPressed: CardComponent!
     
     var ref: DatabaseReference!
     
+    // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
+    @objc func handleFeedbackPressed(_ sender: UITapGestureRecognizer) {
+        self.performSegue(withIdentifier: "goToDeveloperFeedback", sender: self)
+    }
+    
+    // hide navigation bar when ProfileViewController is about to appear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    // unhide navigation bar when ProfileViewController is about to disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let cardComponentGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleFeedbackPressed(_:)))
+        self.view.addGestureRecognizer(cardComponentGesture)
         
         // init Firebase
         ref = Database.database().reference()
