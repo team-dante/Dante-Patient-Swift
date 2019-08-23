@@ -16,6 +16,8 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
     var ref: DatabaseReference!
     var userPhoneNum: String?
     var yearArr = [Visit]()
+    var selectedYear = ""
+    var avgTimeSpent = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +37,10 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
+        self.loadData()
+    }
+    
+    func loadData() {
         var dict: [String:[Int]] = [:]
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
             if self.yearArr.count > 0 {
@@ -71,7 +77,6 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
                 self.tableView.reloadData()
             }
         })
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,19 +99,32 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let visit = self.yearArr[indexPath.row]
+        
+        self.avgTimeSpent = visit.timeElapsed
+        self.selectedYear = visit.date
+        
+        self.performSegue(withIdentifier: "YearGraphSegue", sender: nil)
+    }
+    
+    
+    @IBAction func onRefresh(_ sender: Any) {
+        self.loadData()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.yearArr.removeAll()
     }
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
+        if let graphVC = segue.destination as? YearGraphViewController {
+            graphVC.year = self.selectedYear
+            graphVC.avgTime = self.avgTimeSpent
+        }
      }
-     */
+
     
 }

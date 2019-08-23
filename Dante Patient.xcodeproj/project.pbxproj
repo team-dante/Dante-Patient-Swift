@@ -15,6 +15,7 @@
 		DB5277CA230E560700A0AE28 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5277C9230E560700A0AE28 /* TimelineViewController.swift */; };
 		DB568A7E22E99AED000E1B2C /* ToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB568A7D22E99AED000E1B2C /* ToolTipView.swift */; };
 		DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */; };
+		DB8F0B6A230FD44B00900B15 /* YearGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8F0B69230FD44B00900B15 /* YearGraphViewController.swift */; };
 		DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */; };
 		DB973342230BB73800F748DA /* DateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB973341230BB73800F748DA /* DateTableViewController.swift */; };
 		DB973344230BC25D00F748DA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB973343230BC25D00F748DA /* DateTableViewCell.swift */; };
@@ -59,6 +60,7 @@
 		DB5277C9230E560700A0AE28 /* TimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		DB568A7D22E99AED000E1B2C /* ToolTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTipView.swift; sourceTree = "<group>"; };
 		DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
+		DB8F0B69230FD44B00900B15 /* YearGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearGraphViewController.swift; sourceTree = "<group>"; };
 		DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerViewController.swift; sourceTree = "<group>"; };
 		DB973341230BB73800F748DA /* DateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewController.swift; sourceTree = "<group>"; };
 		DB973343230BC25D00F748DA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 			children = (
 				DB97334D230BDE1500F748DA /* YearTableViewController.swift */,
 				DB97334B230BDDFD00F748DA /* YearTableViewCell.swift */,
+				DB8F0B69230FD44B00900B15 /* YearGraphViewController.swift */,
 			);
 			path = Year;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				DBF45F1B22E41E0300A18C7B /* UIButtonExtension.swift in Sources */,
 				DB973342230BB73800F748DA /* DateTableViewController.swift in Sources */,
 				DBC8123A230D17B30022DF86 /* DateGraphViewController.swift in Sources */,
+				DB8F0B6A230FD44B00900B15 /* YearGraphViewController.swift in Sources */,
 				24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */,
 				DB100491230FADF500964970 /* MonthGraphViewController.swift in Sources */,
 				DB973348230BCFDE00F748DA /* MonthTableViewController.swift in Sources */,
