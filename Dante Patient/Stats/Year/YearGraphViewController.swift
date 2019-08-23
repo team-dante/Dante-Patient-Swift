@@ -59,7 +59,9 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
     func loadData() {
         var yearDict = [[(String, Int)]]()
         var acc: [String:[Int]] = [:]
-        var avgTime = 0
+        var totalTime = 0
+        var visitCount = 0
+        
         // if year = 2019
         // query start with year (e.g. 2019-01-01)
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/").queryStarting(atValue: nil, childKey: "\(self.year)-01-01")
@@ -75,6 +77,8 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                         
                         // if key contains the year (2019)
                         if key.contains(self.year) {
+                            visitCount += 1
+                            
                             if let timeObjs = dateObj.value as? [String: Any] {
                                 var dict: [String:[Int]] = [:]
                                 // for each day; loop thru all time tracking objs
@@ -88,11 +92,11 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                                         // current room duration = now() - entry time
                                         if inSession {
                                             timeElapsed = Int(NSDate().timeIntervalSince1970) - startTime
-                                            avgTime += timeElapsed
+                                            totalTime += timeElapsed
                                         } else {
                                             let endTime = obj["endTime"] as! Int
                                             timeElapsed = endTime - startTime
-                                            avgTime += timeElapsed
+                                            totalTime += timeElapsed
                                         }
                                         // use defaultdict (like Python);
                                         // ex: [CTRoom: [1230, 2345]] in secs
@@ -125,7 +129,7 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                     }
                     self.roomObjs.sort(by: {$0.name < $1.name})
                     
-                    self.avgTimeLabel.text = self.parseTotalTime(timeElapsed: avgTime)
+                    self.avgTimeLabel.text = self.parseTotalTime(timeElapsed: totalTime / visitCount)
                     self.customizeBarCharts(dataObj: self.roomObjs)
                     self.tableView.reloadData()
                     

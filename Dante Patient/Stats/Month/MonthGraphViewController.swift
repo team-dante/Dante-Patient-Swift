@@ -64,7 +64,8 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
         var monthDict = [[(String, Int)]]()
         var acc: [String:[Int]] = [:]
         
-        var avgTime = 0
+        var totalTime = 0
+        var visitCount = 0
         // if month = 2019-01
         // query start with month (e.g. 2019-01-01)
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/").queryStarting(atValue: nil, childKey: "\(self.month)-01")
@@ -80,6 +81,7 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
                         
                         // if key contains the month (2019-01)
                         if key.contains(self.month) {
+                            visitCount += 1
                             if let timeObjs = dateObj.value as? [String: Any] {
                                 var dict: [String:[Int]] = [:]
                                 // for each day; loop thru all time tracking objs
@@ -93,11 +95,11 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
                                         // current room duration = now() - entry time
                                         if inSession {
                                             timeElapsed = Int(NSDate().timeIntervalSince1970) - startTime
-                                            avgTime += timeElapsed
+                                            totalTime += timeElapsed
                                         } else {
                                             let endTime = obj["endTime"] as! Int
                                             timeElapsed = endTime - startTime
-                                            avgTime += timeElapsed
+                                            totalTime += timeElapsed
                                         }
                                         // use defaultdict (like Python);
                                         // ex: [CTRoom: [1230, 2345]] in secs
@@ -132,7 +134,7 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
 
                     self.customizeBarCharts(dataObj: self.roomObjs)
                     self.tableView.reloadData()
-                    self.avgTimeLabel.text = self.parseTotalTime(timeElapsed: avgTime)
+                    self.avgTimeLabel.text = self.parseTotalTime(timeElapsed: totalTime / visitCount)
 
                 } else {
                     self.roomObjs.removeAll()
