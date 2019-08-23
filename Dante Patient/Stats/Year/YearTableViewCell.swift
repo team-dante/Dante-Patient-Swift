@@ -1,18 +1,17 @@
 //
-//  currRoomTableViewCell.swift
+//  YearTableViewCell.swift
 //  Dante Patient
 //
-//  Created by Xinhao Liang on 7/20/19.
+//  Created by Xinhao Liang on 8/20/19.
 //  Copyright © 2019 Xinhao Liang. All rights reserved.
 //
 
 import UIKit
 
-class CurrRoomTableViewCell: UITableViewCell {
+class YearTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var currRoom: UILabel!
-    @IBOutlet weak var clockLabel: UILabel!
-    @IBOutlet weak var startTimeLabel: UILabel!
+    @IBOutlet weak var yearLabel: UILabel!
+    @IBOutlet weak var avgTimeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

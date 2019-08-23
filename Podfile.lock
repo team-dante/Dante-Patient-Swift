@@ -2,6 +2,7 @@ PODS:
   - Charts (3.3.0):
     - Charts/Core (= 3.3.0)
   - Charts/Core (3.3.0)
+  - DeviceKit (2.0.0)
   - Firebase/Analytics (5.15.0):
     - Firebase/Core
   - Firebase/Auth (5.15.0):
@@ -81,6 +82,7 @@ PODS:
 
 DEPENDENCIES:
   - Charts
+  - DeviceKit (~> 2.0)
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -94,6 +96,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Charts
+    - DeviceKit
     - Firebase
     - FirebaseAnalytics
     - FirebaseAuth
@@ -114,6 +117,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
+  DeviceKit: 72d36709552d4b3582abd76a53949148acad9811
   Firebase: 8bb9268bff82374f2cbaaabb143e725743c316ae
   FirebaseAnalytics: c06f9d70577d79074214700a71fd5d39de5550fb
   FirebaseAuth: 02e969ff430e156d99d4cb842d77b806b71ad7bb
@@ -132,6 +136,6 @@ SPEC CHECKSUMS:
   NVActivityIndicatorView: b19ddab2576f805cbe0fb2306cba3476e09a1dea
   UIColor_Hex_Swift: 8be7432edacb7fa91c78aa05ef3c30b66e4f9415
 
-PODFILE CHECKSUM: a6e5cc615d7e4cc8cc7a11aeedb7b32bf6739d91
+PODFILE CHECKSUM: 0213d5ff0637c0c6da5395c769777255b1074d20
 
 COCOAPODS: 1.7.3

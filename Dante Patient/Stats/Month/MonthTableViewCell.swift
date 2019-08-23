@@ -1,17 +1,17 @@
 //
-//  filterTableViewCell.swift
+//  MonthTableViewCell.swift
 //  Dante Patient
 //
-//  Created by Xinhao Liang on 7/29/19.
+//  Created by Xinhao Liang on 8/19/19.
 //  Copyright © 2019 Xinhao Liang. All rights reserved.
 //
 
 import UIKit
 
-class filterTableViewCell: UITableViewCell {
+class MonthTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var filterLabel: UILabel!
-    @IBOutlet weak var checkBtn: UIImageView!
+    @IBOutlet weak var monthLabel: UILabel!
+    @IBOutlet weak var avgTimeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

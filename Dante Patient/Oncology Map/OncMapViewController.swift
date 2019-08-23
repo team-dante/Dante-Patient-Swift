@@ -37,7 +37,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         ref = Database.database().reference()
         
         // Singleton Beacon class
-        Beacons.shared.detectBeacons()
+//        Beacons.shared.detectBeacons()
 
         // --------------- settting up FloatingPanel ------------------
         // init FloatingPanelController

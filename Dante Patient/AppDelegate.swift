@@ -55,7 +55,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        Beacons.shared.stopRanging()
+//        Beacons.shared.stopRanging()
         print("terminating....")
     }
     

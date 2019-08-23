@@ -28,7 +28,9 @@ extension UIViewController {
         case "TLA":
             return "Trilogy Linear Acc."
         case "CT":
-            return "CT Room"
+            return "CT Simulator"
+        case "WR":
+            return "Waiting Room"
         default:
             return ""
         }
@@ -44,8 +46,23 @@ extension UIViewController {
         return "\(minStr):\(secStr)"
     }
     
+    func parseTotalTime(timeElapsed: Int) -> String {
+        let hr = timeElapsed / 3600
+        let min = Int((Double(timeElapsed % 3600) / 60.0).rounded())
+        let minStr = (min < 10) ? "0\(min)" : "\(min)"
+        return "\(hr) hr \(minStr) min"
+    }
+    
     func parseStartTime(startTime: Int) -> String {
         let date = NSDate(timeIntervalSince1970: TimeInterval(startTime))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        let parsedTime = dateFormatter.string(from: date as Date)
+        return parsedTime
+    }
+    
+    func parseEndTime(endTime: Int) -> String {
+        let date = NSDate(timeIntervalSince1970: TimeInterval(endTime))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm a"
         let parsedTime = dateFormatter.string(from: date as Date)
@@ -81,5 +98,23 @@ extension UIViewController {
         default:
             return "none"
         }
+    }
+    
+    func hideNavigationBar() {
+        let navigationBar = navigationController!.navigationBar
+        navigationBar.barTintColor = UIColor("#E8FAFD")
+        navigationBar.tintColor = nil
+        navigationBar.isTranslucent = false
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+    }
+    
+    func customizeTableView(tableView: UITableView) {
+        tableView.layer.cornerRadius = 20
+        tableView.layer.masksToBounds = true
+        tableView.layer.shadowColor = UIColor.black.cgColor
+        tableView.layer.shadowOpacity = 0.3
+        tableView.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        tableView.layer.shadowRadius = 8
     }
 }

@@ -7,23 +7,32 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class TimeTrackerViewController: UIViewController {
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var clockLabel: UILabel!
     @IBOutlet weak var startTimeLabel: UILabel!
     
+    var ref: DatabaseReference!
     var timer: Timer?
-    var progressTimer: Timer?
     let shapeLayer = CAShapeLayer()
-    var currRoom = "Private"
+    
+    var counter = 0
+    var userPhoneNum: String?
+    var today: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        roomLabel.text = "Detecting Beacons..."
+        roomLabel.text = "Private"
         clockLabel.text = "00:00"
         startTimeLabel.text = ""
+        
+        ref = Database.database().reference()
+        
+        today = self.formattedDate()
         
         let center = view.center
         
@@ -48,11 +57,17 @@ class TimeTrackerViewController: UIViewController {
         
         view.layer.addSublayer(shapeLayer)
         
-        timer = Timer.scheduledTimer(timeInterval:1, target:self, selector:#selector(processTimer), userInfo: nil, repeats: true)
+        self.roomLabel.text = "Private"
+        self.clockLabel.text = "00:00"
+        self.startTimeLabel.text = ""
+        
+        timer = Timer.scheduledTimer(timeInterval:1.0, target:self, selector:#selector(processTimer), userInfo: nil, repeats: true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
     }
     
     func processStroke(elapsed: Int) {
@@ -74,21 +89,29 @@ class TimeTrackerViewController: UIViewController {
     }
     
     @objc func processTimer() {
-        currRoom = Beacons.shared.currRoom
-        if currRoom == "Private" || currRoom == "" {
-            self.roomLabel.text = "Detecting Beacons..."
-            self.clockLabel.text = "00:00"
-            self.startTimeLabel.text = ""
-        } else {
-            self.roomLabel.text = self.prettifyRoom(room: currRoom)
-            
-            let counter = Beacons.shared.counter
-            processStroke(elapsed: counter)
-
-            self.clockLabel.text = "\(self.parseTimeElapsed(timeElapsed: counter))"
-            
-            let start = UserDefaults.standard.integer(forKey: "startTime")
-            self.startTimeLabel.text = "Start: \(self.parseStartTime(startTime: start))"
-        }
+    ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(today!)").queryOrdered(byChild: "inSession").queryEqual(toValue: true).observeSingleEvent(of: .value, with: { (snapshot) in
+            if snapshot.exists() {
+                if let timeObj = snapshot.value as? [String:Any] {
+                    for object in timeObj {
+                        if let obj = object.value as? [String: Any]{
+                            
+                            let room = obj["room"] as! String
+                            let startTime = obj["startTime"] as! Int
+                            let now = Int(NSDate().timeIntervalSince1970)
+                            self.counter = now - startTime
+                            self.processStroke(elapsed: self.counter)
+                            self.roomLabel.text = self.prettifyRoom(room: room)
+                            self.clockLabel.text = "\(self.parseTimeElapsed(timeElapsed: self.counter))"
+                            self.startTimeLabel.text = "Start: \(self.parseStartTime(startTime: startTime))"
+                        }
+                    }
+                }
+            } else {
+                self.roomLabel.text = "Private"
+                self.clockLabel.text = "00:00"
+                self.startTimeLabel.text = ""
+                self.processStroke(elapsed: 0)
+            }
+        })
     }
 }

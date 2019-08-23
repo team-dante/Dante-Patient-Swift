@@ -1,18 +1,18 @@
 //
-//  VisitHistoryTableViewCell.swift
+//  DateTableViewCell.swift
 //  Dante Patient
 //
-//  Created by Xinhao Liang on 7/21/19.
+//  Created by Xinhao Liang on 8/19/19.
 //  Copyright © 2019 Xinhao Liang. All rights reserved.
 //
 
 import UIKit
 
-class VisitHistoryTableViewCell: UITableViewCell {
+class DateTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var roomLabel: UILabel!
-    @IBOutlet weak var startTimeLabel: UILabel!
-    @IBOutlet weak var timeElapsedLabel: UILabel!
+    @IBOutlet weak var weekdayLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var totalTimeLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

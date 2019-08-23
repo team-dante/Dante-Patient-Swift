@@ -102,7 +102,6 @@ class ProfileViewController: UIViewController {
         catch let signOutError as NSError {
             print ("Error signing out: %@", signOutError)
         }
-        Beacons.shared.stopRanging()
         let domain = Bundle.main.bundleIdentifier!
         UserDefaults.standard.removePersistentDomain(forName: domain)
         UserDefaults.standard.synchronize()

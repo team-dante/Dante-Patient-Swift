@@ -9,23 +9,24 @@
 /* Begin PBXBuildFile section */
 		24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E2AB9C230202090047C553 /* DeveloperFeedbackViewController.swift */; };
 		9A22BE7BAF0963CD4574D842 /* Pods_Dante_Patient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */; };
-		DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */; };
-		DB1B0DA122EFF45C00F3B281 /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB1B0DA022EFF45C00F3B281 /* GraphCollectionViewCell.swift */; };
-		DB46F69322F2BCF200A042EF /* LegendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB46F69222F2BCF200A042EF /* LegendTableViewCell.swift */; };
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
-		DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */; };
-		DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */; };
-		DB4CF8E522E3D85B00F50A41 /* PrevRoomsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */; };
+		DB5277C8230E51A500A0AE28 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */; };
+		DB5277CA230E560700A0AE28 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5277C9230E560700A0AE28 /* TimelineViewController.swift */; };
 		DB568A7E22E99AED000E1B2C /* ToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB568A7D22E99AED000E1B2C /* ToolTipView.swift */; };
-		DB777BC422EEE566002E7704 /* filterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB777BC322EEE566002E7704 /* filterTableViewCell.swift */; };
 		DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */; };
 		DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */; };
-		DB91A99D22EA8ECD0081EABB /* StatsMasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB91A99C22EA8ECD0081EABB /* StatsMasterViewController.swift */; };
-		DB91A99F22EA8F290081EABB /* VisitsHistoryGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB91A99E22EA8F290081EABB /* VisitsHistoryGraphViewController.swift */; };
+		DB973342230BB73800F748DA /* DateTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB973341230BB73800F748DA /* DateTableViewController.swift */; };
+		DB973344230BC25D00F748DA /* DateTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB973343230BC25D00F748DA /* DateTableViewCell.swift */; };
+		DB973348230BCFDE00F748DA /* MonthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB973347230BCFDE00F748DA /* MonthTableViewController.swift */; };
+		DB97334A230BD04500F748DA /* MonthTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB973349230BD04500F748DA /* MonthTableViewCell.swift */; };
+		DB97334C230BDDFD00F748DA /* YearTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB97334B230BDDFD00F748DA /* YearTableViewCell.swift */; };
+		DB97334E230BDE1500F748DA /* YearTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB97334D230BDE1500F748DA /* YearTableViewController.swift */; };
 		DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */; };
 		DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */; };
 		DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA917C522D939560088A520 /* PinRefViewController.swift */; };
 		DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */; };
+		DBC8123A230D17B30022DF86 /* DateGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC81239230D17B30022DF86 /* DateGraphViewController.swift */; };
+		DBC8123C230D1A0F0022DF86 /* GraphViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8123B230D1A0F0022DF86 /* GraphViewCell.swift */; };
 		DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC64722CB292500B00A68 /* AppDelegate.swift */; };
 		DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC64922CB292500B00A68 /* OncMapViewController.swift */; };
 		DBCCC64D22CB292500B00A68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC64B22CB292500B00A68 /* Main.storyboard */; };
@@ -45,32 +46,30 @@
 		DBF45F2E22E4603300A18C7B /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */; };
 		DBF45F2F22E4603300A18C7B /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */; };
 		DBF45F3122E4614A00A18C7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBF45F3022E4614A00A18C7B /* GoogleService-Info.plist */; };
-		DBF45F3422E466E300A18C7B /* VisitsHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */; };
-		DBF45F3622E4671400A18C7B /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */; };
-		DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFF5B7922E1A12700DFDA43 /* Beacons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		24E2AB9C230202090047C553 /* DeveloperFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperFeedbackViewController.swift; sourceTree = "<group>"; };
 		73DAB50266CD4D0CEF54150A /* Pods-Dante Patient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.release.xcconfig"; sourceTree = "<group>"; };
 		9E5D9A74D41EC12E8A1CF669 /* Pods-Dante Patient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.debug.xcconfig"; sourceTree = "<group>"; };
-		DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitHistoryTableViewCell.swift; sourceTree = "<group>"; };
-		DB1B0DA022EFF45C00F3B281 /* GraphCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewCell.swift; sourceTree = "<group>"; };
-		DB46F69222F2BCF200A042EF /* LegendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendTableViewCell.swift; sourceTree = "<group>"; };
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackingViewController.swift; sourceTree = "<group>"; };
-		DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrRoomTableViewCell.swift; sourceTree = "<group>"; };
-		DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrevRoomsTableViewCell.swift; sourceTree = "<group>"; };
+		DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
+		DB5277C9230E560700A0AE28 /* TimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 		DB568A7D22E99AED000E1B2C /* ToolTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTipView.swift; sourceTree = "<group>"; };
-		DB777BC322EEE566002E7704 /* filterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = filterTableViewCell.swift; sourceTree = "<group>"; };
 		DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerViewController.swift; sourceTree = "<group>"; };
-		DB91A99C22EA8ECD0081EABB /* StatsMasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsMasterViewController.swift; sourceTree = "<group>"; };
-		DB91A99E22EA8F290081EABB /* VisitsHistoryGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHistoryGraphViewController.swift; sourceTree = "<group>"; };
+		DB973341230BB73800F748DA /* DateTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewController.swift; sourceTree = "<group>"; };
+		DB973343230BC25D00F748DA /* DateTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTableViewCell.swift; sourceTree = "<group>"; };
+		DB973347230BCFDE00F748DA /* MonthTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTableViewController.swift; sourceTree = "<group>"; };
+		DB973349230BD04500F748DA /* MonthTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthTableViewCell.swift; sourceTree = "<group>"; };
+		DB97334B230BDDFD00F748DA /* YearTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearTableViewCell.swift; sourceTree = "<group>"; };
+		DB97334D230BDE1500F748DA /* YearTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearTableViewController.swift; sourceTree = "<group>"; };
 		DBA8117F22DA96BD006CE057 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateAcctViewController.swift; sourceTree = "<group>"; };
 		DBA917C522D939560088A520 /* PinRefViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRefViewController.swift; sourceTree = "<group>"; };
 		DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRefTableViewCell.swift; sourceTree = "<group>"; };
+		DBC81239230D17B30022DF86 /* DateGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGraphViewController.swift; sourceTree = "<group>"; };
+		DBC8123B230D1A0F0022DF86 /* GraphViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewCell.swift; sourceTree = "<group>"; };
 		DBCCC64422CB292500B00A68 /* Dante Patient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dante Patient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBCCC64722CB292500B00A68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DBCCC64922CB292500B00A68 /* OncMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OncMapViewController.swift; sourceTree = "<group>"; };
@@ -93,9 +92,6 @@
 		DBF45F2522E4603300A18C7B /* Rubik-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Rubik-Regular.ttf"; sourceTree = "<group>"; };
 		DBF45F2622E4603300A18C7B /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		DBF45F3022E4614A00A18C7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisitsHistoryViewController.swift; sourceTree = "<group>"; };
-		DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
-		DBFF5B7922E1A12700DFDA43 /* Beacons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beacons.swift; sourceTree = "<group>"; };
 		DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Dante_Patient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -131,21 +127,9 @@
 		DB4CF8DF22E3991F00F50A41 /* Time Tracking */ = {
 			isa = PBXGroup;
 			children = (
-				DB568A7C22E97A6B000E1B2C /* Old Time Tracking View */,
-				DBFF5B7922E1A12700DFDA43 /* Beacons.swift */,
 				DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */,
 			);
 			path = "Time Tracking";
-			sourceTree = "<group>";
-		};
-		DB568A7C22E97A6B000E1B2C /* Old Time Tracking View */ = {
-			isa = PBXGroup;
-			children = (
-				DB4CF8E022E3994C00F50A41 /* TimeTrackingViewController.swift */,
-				DB4CF8E222E3D83400F50A41 /* CurrRoomTableViewCell.swift */,
-				DB4CF8E422E3D85B00F50A41 /* PrevRoomsTableViewCell.swift */,
-			);
-			path = "Old Time Tracking View";
 			sourceTree = "<group>";
 		};
 		DB5BCF6A22D5B98E004237E9 /* Fonts */ = {
@@ -173,25 +157,15 @@
 			path = "Sign In";
 			sourceTree = "<group>";
 		};
-		DB91A9A022EA8F510081EABB /* Table */ = {
+		DB973340230BB12500F748DA /* Stats */ = {
 			isa = PBXGroup;
 			children = (
-				DBF45F3322E466E300A18C7B /* VisitsHistoryViewController.swift */,
-				DBF45F3522E4671400A18C7B /* DateCollectionViewCell.swift */,
-				DB0ABCB722E5062E00EE22E0 /* VisitHistoryTableViewCell.swift */,
+				DBC8123B230D1A0F0022DF86 /* GraphViewCell.swift */,
+				DBC81236230CC6170022DF86 /* Date */,
+				DBC81237230CC6450022DF86 /* Month */,
+				DBC81238230CC6560022DF86 /* Year */,
 			);
-			path = Table;
-			sourceTree = "<group>";
-		};
-		DB91A9A122EA8F6A0081EABB /* Graph */ = {
-			isa = PBXGroup;
-			children = (
-				DB91A99E22EA8F290081EABB /* VisitsHistoryGraphViewController.swift */,
-				DB777BC322EEE566002E7704 /* filterTableViewCell.swift */,
-				DB1B0DA022EFF45C00F3B281 /* GraphCollectionViewCell.swift */,
-				DB46F69222F2BCF200A042EF /* LegendTableViewCell.swift */,
-			);
-			path = Graph;
+			path = Stats;
 			sourceTree = "<group>";
 		};
 		DBA8117E22DA9693006CE057 /* Profile */ = {
@@ -221,6 +195,36 @@
 			path = "Oncology Map";
 			sourceTree = "<group>";
 		};
+		DBC81236230CC6170022DF86 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				DB973341230BB73800F748DA /* DateTableViewController.swift */,
+				DB973343230BC25D00F748DA /* DateTableViewCell.swift */,
+				DBC81239230D17B30022DF86 /* DateGraphViewController.swift */,
+				DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */,
+				DB5277C9230E560700A0AE28 /* TimelineViewController.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
+		DBC81237230CC6450022DF86 /* Month */ = {
+			isa = PBXGroup;
+			children = (
+				DB973347230BCFDE00F748DA /* MonthTableViewController.swift */,
+				DB973349230BD04500F748DA /* MonthTableViewCell.swift */,
+			);
+			path = Month;
+			sourceTree = "<group>";
+		};
+		DBC81238230CC6560022DF86 /* Year */ = {
+			isa = PBXGroup;
+			children = (
+				DB97334D230BDE1500F748DA /* YearTableViewController.swift */,
+				DB97334B230BDDFD00F748DA /* YearTableViewCell.swift */,
+			);
+			path = Year;
+			sourceTree = "<group>";
+		};
 		DBCCC63B22CB292500B00A68 = {
 			isa = PBXGroup;
 			children = (
@@ -243,12 +247,12 @@
 			isa = PBXGroup;
 			children = (
 				DBCCC64722CB292500B00A68 /* AppDelegate.swift */,
-				DB4CF8DF22E3991F00F50A41 /* Time Tracking */,
 				DB837A2822D9CEB7003F3A4E /* Sign In */,
 				DBA8118122DABA9F006CE057 /* Sign Up */,
 				DBA917C922D93A440088A520 /* Oncology Map */,
+				DB4CF8DF22E3991F00F50A41 /* Time Tracking */,
+				DB973340230BB12500F748DA /* Stats */,
 				DBA8117E22DA9693006CE057 /* Profile */,
-				DBF45F3222E4667A00A18C7B /* Statistics */,
 				DBF45F1522E41D4D00A18C7B /* Utilities */,
 				DBCCC64B22CB292500B00A68 /* Main.storyboard */,
 				DBCCC64E22CB292900B00A68 /* Assets.xcassets */,
@@ -271,16 +275,6 @@
 				DB568A7D22E99AED000E1B2C /* ToolTipView.swift */,
 			);
 			path = Utilities;
-			sourceTree = "<group>";
-		};
-		DBF45F3222E4667A00A18C7B /* Statistics */ = {
-			isa = PBXGroup;
-			children = (
-				DB91A99C22EA8ECD0081EABB /* StatsMasterViewController.swift */,
-				DB91A9A022EA8F510081EABB /* Table */,
-				DB91A9A122EA8F6A0081EABB /* Graph */,
-			);
-			path = Statistics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -320,7 +314,7 @@
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
-								enabled = 1;
+								enabled = 0;
 							};
 						};
 					};
@@ -431,32 +425,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB4CF8E522E3D85B00F50A41 /* PrevRoomsTableViewCell.swift in Sources */,
 				DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */,
 				DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */,
+				DB973344230BC25D00F748DA /* DateTableViewCell.swift in Sources */,
 				DB568A7E22E99AED000E1B2C /* ToolTipView.swift in Sources */,
 				DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */,
-				DB777BC422EEE566002E7704 /* filterTableViewCell.swift in Sources */,
 				DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */,
-				DB91A99D22EA8ECD0081EABB /* StatsMasterViewController.swift in Sources */,
-				DB46F69322F2BCF200A042EF /* LegendTableViewCell.swift in Sources */,
-				DB0ABCB822E5062E00EE22E0 /* VisitHistoryTableViewCell.swift in Sources */,
 				DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */,
 				DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */,
-				DB1B0DA122EFF45C00F3B281 /* GraphCollectionViewCell.swift in Sources */,
 				DBCCC64A22CB292500B00A68 /* OncMapViewController.swift in Sources */,
-				DB91A99F22EA8F290081EABB /* VisitsHistoryGraphViewController.swift in Sources */,
+				DB5277CA230E560700A0AE28 /* TimelineViewController.swift in Sources */,
 				DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */,
+				DB97334A230BD04500F748DA /* MonthTableViewCell.swift in Sources */,
+				DB97334E230BDE1500F748DA /* YearTableViewController.swift in Sources */,
 				DBCCC65A22CB412700B00A68 /* UIViewExtension.swift in Sources */,
-				DBF45F3422E466E300A18C7B /* VisitsHistoryViewController.swift in Sources */,
-				DBFF5B7A22E1A12700DFDA43 /* Beacons.swift in Sources */,
 				DBF45F1922E41DDD00A18C7B /* UITextFieldExtension.swift in Sources */,
+				DBC8123C230D1A0F0022DF86 /* GraphViewCell.swift in Sources */,
 				DBA8118022DA96BD006CE057 /* ProfileViewController.swift in Sources */,
+				DB5277C8230E51A500A0AE28 /* TimelineTableViewCell.swift in Sources */,
 				DBF45F1B22E41E0300A18C7B /* UIButtonExtension.swift in Sources */,
-				DB4CF8E122E3994C00F50A41 /* TimeTrackingViewController.swift in Sources */,
-				DB4CF8E322E3D83400F50A41 /* CurrRoomTableViewCell.swift in Sources */,
-				DBF45F3622E4671400A18C7B /* DateCollectionViewCell.swift in Sources */,
+				DB973342230BB73800F748DA /* DateTableViewController.swift in Sources */,
+				DBC8123A230D17B30022DF86 /* DateGraphViewController.swift in Sources */,
 				24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */,
+				DB973348230BCFDE00F748DA /* MonthTableViewController.swift in Sources */,
+				DB97334C230BDDFD00F748DA /* YearTableViewCell.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,13 +598,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X86U5N326S;
+				DEVELOPMENT_TEAM = 4UZRYSG2AZ;
 				INFOPLIST_FILE = "Dante Patient/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dante-patient";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhl.dante-patient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -627,13 +620,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = X86U5N326S;
+				DEVELOPMENT_TEAM = 4UZRYSG2AZ;
 				INFOPLIST_FILE = "Dante Patient/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.dante-patient";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.xhl.dante-patient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

@@ -1,18 +1,18 @@
 //
-//  LegendTableViewCell.swift
+//  DateGraphViewCell.swift
 //  Dante Patient
 //
-//  Created by Xinhao Liang on 7/31/19.
+//  Created by Xinhao Liang on 8/20/19.
 //  Copyright © 2019 Xinhao Liang. All rights reserved.
 //
 
 import UIKit
 
-class LegendTableViewCell: UITableViewCell {
+class GraphViewCell: UITableViewCell {
 
     @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var roomLabel: UILabel!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var timeElapsedLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
