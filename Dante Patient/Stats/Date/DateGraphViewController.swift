@@ -24,7 +24,6 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var totalTimeLabel: UILabel!
     
     var date = ""
-    var totalTime = 0
     var colors = [UIColor]()
     var userPhoneNum: String?
     var ref: DatabaseReference!
@@ -59,7 +58,6 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.loadData()
         
-        totalTimeLabel.text = self.parseTotalTime(timeElapsed: totalTime)
     }
     
     func changeDateLabel() {
@@ -78,6 +76,7 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func loadData() {
         var dict: [String:[Int]] = [:]
+        var totalTime = 0
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(date)")
             .observeSingleEvent(of: .value, with: { (snapshot) in
                 
@@ -96,9 +95,11 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                             // current room duration = now() - entry time
                             if inSession {
                                 timeElapsed = Int(NSDate().timeIntervalSince1970) - startTime
+                                totalTime += timeElapsed
                             } else {
                                 let endTime = obj["endTime"] as! Int
                                 timeElapsed = endTime - startTime
+                                totalTime += timeElapsed
                             }
                             // use defaultdict (like Python);
                             // ex: [CTRoom: [1230, 2345]] in secs
@@ -118,6 +119,7 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.customizePieCharts(dataObj: self.roomObjs)
                     // reload table
                     self.tableView.reloadData()
+                    self.totalTimeLabel.text = self.parseTotalTime(timeElapsed: totalTime)
                 } else {
                     self.roomObjs.removeAll()
                     self.tableView.reloadData()

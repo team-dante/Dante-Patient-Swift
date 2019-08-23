@@ -22,7 +22,6 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
     var userPhoneNum: String?
     var selectedDate = ""
     var dateArr = [Visit]()
-    var timeSpent = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,9 +108,6 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let visit = self.dateArr[indexPath.row]
-        self.timeSpent = visit.timeElapsed
-        
         if let cell = tableView.cellForRow(at: indexPath) as? DateTableViewCell {
             self.selectedDate = cell.dateLabel.text!
             self.performSegue(withIdentifier: "DateGraphSegue", sender: nil)
@@ -131,7 +127,6 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let graphVC = segue.destination as? DateGraphViewController {
             graphVC.date = self.selectedDate
-            graphVC.totalTime = self.timeSpent
         }
     }
 

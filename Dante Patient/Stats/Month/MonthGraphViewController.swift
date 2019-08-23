@@ -19,7 +19,6 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var avgTimeLabel: UILabel!
     
     var month = ""
-    var avgTime = 0
     var colors = [UIColor]()
     var userPhoneNum: String?
     var ref: DatabaseReference!
@@ -53,8 +52,6 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
         self.loadData()
-        
-        avgTimeLabel.text = self.parseTotalTime(timeElapsed: avgTime)
     }
     
     func changeDateLabel() {
@@ -67,6 +64,7 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
         var monthDict = [[(String, Int)]]()
         var acc: [String:[Int]] = [:]
         
+        var avgTime = 0
         // if month = 2019-01
         // query start with month (e.g. 2019-01-01)
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/").queryStarting(atValue: nil, childKey: "\(self.month)-01")
@@ -95,9 +93,11 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
                                         // current room duration = now() - entry time
                                         if inSession {
                                             timeElapsed = Int(NSDate().timeIntervalSince1970) - startTime
+                                            avgTime += timeElapsed
                                         } else {
                                             let endTime = obj["endTime"] as! Int
                                             timeElapsed = endTime - startTime
+                                            avgTime += timeElapsed
                                         }
                                         // use defaultdict (like Python);
                                         // ex: [CTRoom: [1230, 2345]] in secs
@@ -132,6 +132,8 @@ class MonthGraphViewController: UIViewController, UITableViewDelegate, UITableVi
 
                     self.customizeBarCharts(dataObj: self.roomObjs)
                     self.tableView.reloadData()
+                    self.avgTimeLabel.text = self.parseTotalTime(timeElapsed: avgTime)
+
                 } else {
                     self.roomObjs.removeAll()
                     self.tableView.reloadData()

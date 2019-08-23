@@ -19,7 +19,6 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
     @IBOutlet weak var avgTimeLabel: UILabel!
     
     var year = ""
-    var avgTime = 0
     var colors = [UIColor]()
     var userPhoneNum: String?
     var ref: DatabaseReference!
@@ -55,13 +54,12 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         
         self.loadData()
         
-        avgTimeLabel.text = self.parseTotalTime(timeElapsed: avgTime)
     }
     
     func loadData() {
         var yearDict = [[(String, Int)]]()
         var acc: [String:[Int]] = [:]
-        
+        var avgTime = 0
         // if year = 2019
         // query start with year (e.g. 2019-01-01)
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/").queryStarting(atValue: nil, childKey: "\(self.year)-01-01")
@@ -90,9 +88,11 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                                         // current room duration = now() - entry time
                                         if inSession {
                                             timeElapsed = Int(NSDate().timeIntervalSince1970) - startTime
+                                            avgTime += timeElapsed
                                         } else {
                                             let endTime = obj["endTime"] as! Int
                                             timeElapsed = endTime - startTime
+                                            avgTime += timeElapsed
                                         }
                                         // use defaultdict (like Python);
                                         // ex: [CTRoom: [1230, 2345]] in secs
@@ -125,8 +125,10 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                     }
                     self.roomObjs.sort(by: {$0.name < $1.name})
                     
+                    self.avgTimeLabel.text = self.parseTotalTime(timeElapsed: avgTime)
                     self.customizeBarCharts(dataObj: self.roomObjs)
                     self.tableView.reloadData()
+                    
                 } else {
                     self.roomObjs.removeAll()
                     self.tableView.reloadData()

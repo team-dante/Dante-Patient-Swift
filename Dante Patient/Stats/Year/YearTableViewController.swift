@@ -17,7 +17,6 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
     var userPhoneNum: String?
     var yearArr = [Visit]()
     var selectedYear = ""
-    var avgTimeSpent = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,8 +100,6 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let visit = self.yearArr[indexPath.row]
-        
-        self.avgTimeSpent = visit.timeElapsed
         self.selectedYear = visit.date
         
         self.performSegue(withIdentifier: "YearGraphSegue", sender: nil)
@@ -122,7 +119,6 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let graphVC = segue.destination as? YearGraphViewController {
             graphVC.year = self.selectedYear
-            graphVC.avgTime = self.avgTimeSpent
         }
      }
 

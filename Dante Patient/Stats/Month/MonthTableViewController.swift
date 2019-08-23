@@ -17,7 +17,6 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
     var userPhoneNum: String?
     var monthArr = [Visit]()
     var selectedMonth = ""
-    var avgTimeSpent = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,8 +108,6 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let visit = self.monthArr[indexPath.row]
-        
-        self.avgTimeSpent = visit.timeElapsed
         self.selectedMonth = visit.date
         
         self.performSegue(withIdentifier: "MonthGraphSegue", sender: nil)
@@ -129,7 +126,6 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let graphVC = segue.destination as? MonthGraphViewController {
             graphVC.month = self.selectedMonth
-            graphVC.avgTime = self.avgTimeSpent
         }
     }
 
