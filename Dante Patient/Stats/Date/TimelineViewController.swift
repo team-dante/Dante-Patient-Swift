@@ -83,7 +83,7 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         
         cell.allRows = timelineArr.count
         cell.currentIndexPath = indexPath
-        cell.roomLabel.text = timeSlot.room
+        cell.roomLabel.text = self.prettifyRoom(room: timeSlot.room)
         
         var endTimeStr = ""
         if timeSlot.endTime == 0 {

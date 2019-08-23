@@ -114,6 +114,7 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.roomObjs = newdict.map { (i) in
                         return Room(name: i.0, timeElapsed: i.1)
                     }
+                    self.roomObjs.sort(by: {$0.name < $1.name})
                     self.customizePieCharts(dataObj: self.roomObjs)
                     // reload table
                     self.tableView.reloadData()

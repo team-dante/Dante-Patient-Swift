@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E2AB9C230202090047C553 /* DeveloperFeedbackViewController.swift */; };
 		9A22BE7BAF0963CD4574D842 /* Pods_Dante_Patient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF107DC56C320E2FE372B743 /* Pods_Dante_Patient.framework */; };
+		DB100491230FADF500964970 /* MonthGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB100490230FADF500964970 /* MonthGraphViewController.swift */; };
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
 		DB5277C8230E51A500A0AE28 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */; };
 		DB5277CA230E560700A0AE28 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5277C9230E560700A0AE28 /* TimelineViewController.swift */; };
@@ -52,6 +53,7 @@
 		24E2AB9C230202090047C553 /* DeveloperFeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperFeedbackViewController.swift; sourceTree = "<group>"; };
 		73DAB50266CD4D0CEF54150A /* Pods-Dante Patient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.release.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.release.xcconfig"; sourceTree = "<group>"; };
 		9E5D9A74D41EC12E8A1CF669 /* Pods-Dante Patient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Dante Patient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Dante Patient/Pods-Dante Patient.debug.xcconfig"; sourceTree = "<group>"; };
+		DB100490230FADF500964970 /* MonthGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthGraphViewController.swift; sourceTree = "<group>"; };
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		DB5277C9230E560700A0AE28 /* TimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				DB973347230BCFDE00F748DA /* MonthTableViewController.swift */,
 				DB973349230BD04500F748DA /* MonthTableViewCell.swift */,
+				DB100490230FADF500964970 /* MonthGraphViewController.swift */,
 			);
 			path = Month;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				DB973342230BB73800F748DA /* DateTableViewController.swift in Sources */,
 				DBC8123A230D17B30022DF86 /* DateGraphViewController.swift in Sources */,
 				24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */,
+				DB100491230FADF500964970 /* MonthGraphViewController.swift in Sources */,
 				DB973348230BCFDE00F748DA /* MonthTableViewController.swift in Sources */,
 				DB97334C230BDDFD00F748DA /* YearTableViewCell.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,

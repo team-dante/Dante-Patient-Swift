@@ -114,7 +114,7 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         if let cell = tableView.cellForRow(at: indexPath) as? DateTableViewCell {
             self.selectedDate = cell.dateLabel.text!
-            self.performSegue(withIdentifier: "ShowGraphSegue", sender: nil)
+            self.performSegue(withIdentifier: "DateGraphSegue", sender: nil)
         }
     }
     

@@ -15,7 +15,9 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet weak var tableView: UITableView!
     var ref: DatabaseReference!
     var userPhoneNum: String?
-    var dateArr = [Visit]()
+    var monthArr = [Visit]()
+    var selectedMonth = ""
+    var avgTimeSpent = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,12 +37,22 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
         
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
+        self.loadData()
+    }
+    
+    func loadData() {
         var dict: [String:[Int]] = [:]
-        self.dateArr.removeAll()
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if self.monthArr.count > 0 {
+                self.monthArr.removeAll()
+            }
+            
             if let dateObjs = snapshot.value as? [String: Any] {
                 for dateObj in dateObjs {
+                    // e.g. 2019-07
                     let key = String((dateObj.key).prefix(7))
+                    
+                    // calculate the total visit time for each day
                     var totalTime = 0
                     if let timeObjs = dateObj.value as? [String:Any] {
                         for timeObj in timeObjs {
@@ -56,28 +68,30 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
                             }
                         }
                     }
+                    // default dict: e.g. [2019-07 : [104, 120]]
                     dict[key, default: []].append(totalTime)
                 }
+                // e.g. [2019-07 : <Avg Time>]
                 let avg = dict.map { (i) in
                     return (i.key, i.value.reduce(0,+)/i.value.count)
                 }
-                self.dateArr = avg.map { (i) in
+                // transform to Visit object
+                self.monthArr = avg.map { (i) in
                     return Visit(date: i.0, timeElapsed: i.1)
                 }
-                self.dateArr.sort(by: {$0.date > $1.date})
+                self.monthArr.sort(by: {$0.date > $1.date})
                 self.tableView.reloadData()
             }
         })
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dateArr.count
+        return self.monthArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "MonthTableViewCell", for: indexPath) as? MonthTableViewCell {
-            let visit = self.dateArr[indexPath.row]
+            let visit = self.monthArr[indexPath.row]
             let date = visit.date
             
             let month = self.parseMonth(mon: String(date.split(separator: "-")[1]))
@@ -92,14 +106,31 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
             return UITableViewCell()
         }
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let visit = self.monthArr[indexPath.row]
+        
+        self.avgTimeSpent = visit.timeElapsed
+        self.selectedMonth = visit.date
+        
+        self.performSegue(withIdentifier: "MonthGraphSegue", sender: nil)
     }
-    */
+    
+    @IBAction func onRefresh(_ sender: Any) {
+        self.loadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.monthArr.removeAll()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let graphVC = segue.destination as? MonthGraphViewController {
+            graphVC.month = self.selectedMonth
+            graphVC.avgTime = self.avgTimeSpent
+        }
+    }
 
 }

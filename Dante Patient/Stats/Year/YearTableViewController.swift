@@ -15,7 +15,7 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var tableView: UITableView!
     var ref: DatabaseReference!
     var userPhoneNum: String?
-    var dateArr = [Visit]()
+    var yearArr = [Visit]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,8 +36,11 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
         var dict: [String:[Int]] = [:]
-        self.dateArr.removeAll()
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
+            if self.yearArr.count > 0 {
+                self.yearArr.removeAll()
+            }
+            
             if let dateObjs = snapshot.value as? [String: Any] {
                 for dateObj in dateObjs {
                     let key = String((dateObj.key).prefix(4))
@@ -61,10 +64,10 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
                 let avg = dict.map { (i) in
                     return (i.key, i.value.reduce(0,+)/i.value.count)
                 }
-                self.dateArr = avg.map { (i) in
+                self.yearArr = avg.map { (i) in
                     return Visit(date: i.0, timeElapsed: i.1)
                 }
-                self.dateArr.sort(by: {$0.date > $1.date})
+                self.yearArr.sort(by: {$0.date > $1.date})
                 self.tableView.reloadData()
             }
         })
@@ -72,12 +75,12 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dateArr.count
+        return self.yearArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "YearTableViewCell", for: indexPath) as? YearTableViewCell {
-            let visit = self.dateArr[indexPath.row]
+            let visit = self.yearArr[indexPath.row]
             
             let year = visit.date
             cell.yearLabel.text = "\(year)"
@@ -89,6 +92,12 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
         } else {
             return UITableViewCell()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.yearArr.removeAll()
     }
     /*
      // MARK: - Navigation
