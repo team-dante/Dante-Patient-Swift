@@ -201,8 +201,8 @@
 				DB973341230BB73800F748DA /* DateTableViewController.swift */,
 				DB973343230BC25D00F748DA /* DateTableViewCell.swift */,
 				DBC81239230D17B30022DF86 /* DateGraphViewController.swift */,
-				DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */,
 				DB5277C9230E560700A0AE28 /* TimelineViewController.swift */,
+				DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */,
 			);
 			path = Date;
 			sourceTree = "<group>";

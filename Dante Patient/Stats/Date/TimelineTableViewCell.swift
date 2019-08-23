@@ -29,14 +29,16 @@ class TimelineTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    // draw timeline on the left
     override func draw(_ rect: CGRect) {
         let circlePath = UIBezierPath(arcCenter: CGPoint(x: offSet,y: self.bounds.midY), radius: CGFloat(circleRadius), startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
         UIColor("#00446A").setStroke()
         circlePath.stroke()
         
-        let dashes: [CGFloat] = [12, 1] //line with dash pattern of 4 thick and i unit space
+        // draw dashes
+        let dashes: [CGFloat] = [12, 1]
 
-        //creating the top line with dashed pattern
+        //creating the top-half dashes with dashed pattern
         let dashPath1 = UIBezierPath()
         let startPoint1 = CGPoint(x: offSet, y: 0)
         dashPath1.move(to: startPoint1)
@@ -48,7 +50,7 @@ class TimelineTableViewCell: UITableViewCell {
         dashPath1.lineWidth = 2.0
         dashPath1.lineCapStyle = .butt
         
-        //creating the bottom line with dashed pattern
+        //creating the bottom-half dashes with dashed pattern
         let dashPath2 = UIBezierPath()
         let startPoint2 = CGPoint(x: offSet, y: self.bounds.midY + circleRadius)
         dashPath2.move(to: startPoint2)
@@ -60,6 +62,9 @@ class TimelineTableViewCell: UITableViewCell {
         dashPath2.lineWidth = 2.0
         dashPath2.lineCapStyle = .butt
         
+        // first row: if only 1 row in total, no dashes; if > 1 row in total, draw the bottom half dashes
+        // last row: draw the top-half dashes
+        // the rest: draw both top and bottom dashes
         switch currentIndexPath.row {
         case 0:
             if allRows > 1 {
@@ -72,7 +77,8 @@ class TimelineTableViewCell: UITableViewCell {
             dashPath2.stroke()
         }
     }
-
+    
+    // redraw UIBezierPath when table cells are being recycled (e.g. scrolling)
     override func prepareForReuse() {
         super.prepareForReuse()
         self.setNeedsDisplay()

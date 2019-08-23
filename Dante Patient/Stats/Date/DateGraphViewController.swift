@@ -42,7 +42,8 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         pieChartView.layer.masksToBounds = true
         
         changeDateLabel()
-
+        
+        // configure tableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.isScrollEnabled = true
@@ -56,9 +57,34 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
+        self.loadData()
+        
+        totalTimeLabel.text = self.parseTotalTime(timeElapsed: totalTime)
+    }
+    
+    func changeDateLabel() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let parsedDate = dateFormatter.date(from: self.date)
+        
+        // set the date string for the UIView at the top
+        let f = DateFormatter()
+        let month = self.parseMonth(mon: String(self.date.split(separator: "-")[1]))
+        let day = String(self.date.split(separator: "-")[2])
+        let year = String(self.date.split(separator: "-")[0])
+        let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: parsedDate!)-1].prefix(3)
+        self.dateStr.text = "\(weekday) \(month) \(day), \(year)"
+    }
+    
+    func loadData() {
         var dict: [String:[Int]] = [:]
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(date)")
             .observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                if self.roomObjs.count != 0 {
+                    self.roomObjs.removeAll()
+                }
+                
                 if let timeObjs = snapshot.value as? [String: Any] {
                     for timeObj in timeObjs {
                         if let obj = timeObj.value as? [String: Any] {
@@ -66,6 +92,8 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                             let inSession = obj["inSession"] as! Bool
                             let startTime = obj["startTime"] as! Int
                             var timeElapsed = 0
+                            
+                            // current room duration = now() - entry time
                             if inSession {
                                 timeElapsed = Int(NSDate().timeIntervalSince1970) - startTime
                             } else {
@@ -87,32 +115,14 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                         return Room(name: i.0, timeElapsed: i.1)
                     }
                     self.customizePieCharts(dataObj: self.roomObjs)
-
-
+                    // reload table
                     self.tableView.reloadData()
-                self.tableView.heightAnchor.constraint(equalToConstant: self.tableView.contentSize.height)
                 } else {
                     self.roomObjs.removeAll()
                     self.tableView.reloadData()
                 }
             })
-        totalTimeLabel.text = self.parseTotalTime(timeElapsed: totalTime)
     }
-    
-    func changeDateLabel() {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let parsedDate = dateFormatter.date(from: self.date)
-        
-        // set the date string for the UIView at the top
-        let f = DateFormatter()
-        let month = self.parseMonth(mon: String(self.date.split(separator: "-")[1]))
-        let day = String(self.date.split(separator: "-")[2])
-        let year = String(self.date.split(separator: "-")[0])
-        let weekday = f.weekdaySymbols[Calendar.current.component(.weekday, from: parsedDate!)-1].prefix(3)
-        self.dateStr.text = "\(weekday) \(month) \(day), \(year)"
-    }
-    
     func customizePieCharts(dataObj: [Room]) {
         // pie chart animation
         self.pieChartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
@@ -156,7 +166,10 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         if let cell = tableView.dequeueReusableCell(withIdentifier: "GraphViewCell", for: indexPath) as? GraphViewCell {
             let room = self.roomObjs[indexPath.row]
             let color = self.colors[indexPath.row]
+            
+            // match color in the pie chart
             cell.colorView.backgroundColor = color
+            
             cell.roomLabel.text = self.prettifyRoom(room: room.name)
             
             // round minutes to two decimal places
@@ -168,17 +181,23 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         return UITableViewCell()
     }
     
+    // --- IBActions ---
+    @IBAction func onRefresh(_ sender: Any) {
+        self.loadData()
+    }
+    
     @IBAction func onClickDetails(_ sender: Any) {
         self.performSegue(withIdentifier: "TimelineSegue", sender: nil)
     }
     
-    
+    // clear roomObjs array
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.roomObjs.removeAll()
     }
     
+    // pass date strings to the next VC (TimelineViewController)
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let timelineVC = segue.destination as! TimelineViewController
         timelineVC.dateStr = self.dateStr.text!

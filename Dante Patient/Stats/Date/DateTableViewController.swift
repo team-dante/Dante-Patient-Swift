@@ -41,8 +41,15 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
         
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
+        self.loadData()
+    }
+    
+    func loadData() {
         ref.child("/PatientVisitsByDates/\(userPhoneNum!)").observeSingleEvent(of: .value, with: { (snapshot) in
-            self.dateArr.removeAll()
+            
+            if self.dateArr.count != 0 {
+                self.dateArr.removeAll()
+            }
             
             if let dateObjs = snapshot.value as? [String: Any] {
                 for dateObj in dateObjs {
@@ -52,6 +59,9 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
                             if let obj = timeObj.value as? [String: Any] {
                                 let inSession = obj["inSession"] as! Bool
                                 let start = obj["startTime"] as! Int
+                                
+                                // curr room duration = now() - entry time
+                                // past rooms = end time - entry time
                                 if inSession {
                                     totalTime += Int(NSDate().timeIntervalSince1970) - start
                                 } else {
@@ -61,13 +71,14 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
                             }
                         }
                     }
+                    // e.g. Visit(date: 2019-07-08, timeElapsed: 103); in secs
                     self.dateArr.append(Visit(date: dateObj.key, timeElapsed: totalTime))
                 }
+                // sort by date; reload table data
                 self.dateArr.sort(by: {$0.date > $1.date})
                 self.tableView.reloadData()
             }
         })
-
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -83,6 +94,7 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
             let duration = (Double(visit.timeElapsed) / 60.0 * 100).rounded() / 100
             cell.totalTimeLabel.text = "\(duration) MINS SPENT"
             
+            // format weekday
             let f = DateFormatter()
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -104,6 +116,16 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
             self.selectedDate = cell.dateLabel.text!
             self.performSegue(withIdentifier: "ShowGraphSegue", sender: nil)
         }
+    }
+    
+    @IBAction func onRefresh(_ sender: Any) {
+        self.loadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.dateArr.removeAll()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
