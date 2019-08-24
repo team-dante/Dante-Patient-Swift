@@ -1267,10 +1267,9 @@
                                                                     <constraint firstAttribute="height" constant="30" id="FhR-Ct-bkh"/>
                                                                 </constraints>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CI9-DZ-RGf">
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="czc-g5-VcR">
                                                                 <rect key="frame" x="0.0" y="36" width="335" height="305.66666666666669"/>
-                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                            </view>
+                                                            </imageView>
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
@@ -1388,6 +1387,7 @@
                     <connections>
                         <outlet property="logoutButton" destination="8Kq-tL-DWs" id="Qic-Fi-bMx"/>
                         <outlet property="phoneNumLabel" destination="gSM-xT-zQ8" id="6Qf-ZS-Eqp"/>
+                        <outlet property="qrCodeImageView" destination="czc-g5-VcR" id="2Gr-0Y-SaD"/>
                         <outlet property="surveyCard" destination="pUx-lx-eG3" id="LWD-xf-nFK"/>
                         <outlet property="usernameLabel" destination="9NK-L1-pmT" id="yLu-vM-xOT"/>
                         <segue destination="hse-yV-ZNW" kind="show" identifier="goToDeveloperFeedback" id="agJ-ZR-Bui"/>

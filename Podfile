@@ -9,6 +9,7 @@ target 'Dante Patient' do
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Analytics'
+  pod 'Firebase/Storage'
   pod 'Firebase/Database'
   pod 'UIColor_Hex_Swift'
   pod 'IQKeyboardManagerSwift'

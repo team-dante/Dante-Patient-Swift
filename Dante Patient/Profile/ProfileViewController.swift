@@ -9,15 +9,18 @@
 import UIKit
 import Firebase
 import FirebaseAuth
+import FirebaseStorage
 
 class ProfileViewController: UIViewController {
 
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
-    
     @IBOutlet weak var surveyCard: UIView!
+    @IBOutlet weak var qrCodeImageView: UIImageView!
     var ref: DatabaseReference!
+    var userPhoneNumber : String!
+    var qrCodeLink : String!
     
     // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
     @objc func handleFeedbackPressed(_ sender: UITapGestureRecognizer) {
@@ -57,11 +60,11 @@ class ProfileViewController: UIViewController {
         let user = Auth.auth().currentUser;
         if let email = user?.email {
             // get current user's phone number
-            let phoneNum = email.split(separator: "@")[0]
-            self.phoneNumLabel.text = "phone: \(phoneNum)"
+            self.userPhoneNumber = String(email.split(separator: "@")[0])
+            self.phoneNumLabel.text = "phone: \(userPhoneNumber!)"
             
-            // if phoneNum == phone number stored in database, pull out the user's full name
-            ref.child("Patients").queryOrdered(byChild: "patientPhoneNumber").queryEqual(toValue: phoneNum).observeSingleEvent(of: .value, with: { (snapshot) in
+            // if userPhoneNumber == phone number stored in database, pull out the user's full name
+            ref.child("Patients").queryOrdered(byChild: "patientPhoneNumber").queryEqual(toValue: userPhoneNumber).observeSingleEvent(of: .value, with: { (snapshot) in
                 if let patients = snapshot.value as? [String: Any] {
                     for patient in patients {
                         if let patient = patient.value as? [String: String] {
@@ -72,6 +75,37 @@ class ProfileViewController: UIViewController {
                     }
                 }
             })
+        }
+        
+        // extract qrCodeLink from Firebase Database
+        ref.child("Patients").queryOrdered(byChild: "patientPhoneNumber").queryEqual(toValue: self.userPhoneNumber).observeSingleEvent(of: .value) { snapshot in
+            if snapshot.exists() {
+                let postDict = snapshot.value as? [String: AnyObject]
+                for (_, value) in postDict! {
+                    self.qrCodeLink = value["qrCodeLink"] as? String
+                    // get reference to the qrCode.jpg file
+                    let httpsReference = Storage.storage().reference(forURL: self.qrCodeLink!)
+                    // allows to download up to 10 MB file (10 * 1024 * 1024 = 10 MB)
+                    // download qrCode.jpg file
+                    httpsReference.getData(maxSize: 10 * 1024 * 1024, completion: { (downloadedData, error) in
+                        if error != nil {
+                            print("ERROR DOWNLOADING IMAGE")
+                        } else {
+                            // convert downloadedData from jpeg to CIImage
+                            let imageCII = CIImage(data: downloadedData!)
+                            // scale the width and height for the qr code
+                            let scaleX = self.qrCodeImageView.frame.width / (imageCII?.extent.size.width)!
+                            let scaleY = self.qrCodeImageView.frame.height / (imageCII?.extent.size.height)!
+                            let transformedImage = imageCII?.transformed(by: CGAffineTransform(scaleX: scaleX, y: scaleY))
+                            
+                            self.qrCodeImageView.image = UIImage(ciImage: transformedImage!)
+                        }
+                    })
+                }
+
+            } else {
+                print("This patient's information does not exist in Patient table.")
+            }
         }
     }
     
