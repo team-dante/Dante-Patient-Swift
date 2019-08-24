@@ -15,10 +15,8 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
-    @IBOutlet weak var myView: UIView!
-    @IBOutlet weak var myInnerView: UIView!
-    @IBOutlet weak var cardComponentPressed: CardComponent!
     
+    @IBOutlet weak var surveyCard: CardComponent!
     var ref: DatabaseReference!
     
     // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
@@ -42,19 +40,14 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         let cardComponentGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleFeedbackPressed(_:)))
-        self.view.addGestureRecognizer(cardComponentGesture)
+        self.surveyCard.addGestureRecognizer(cardComponentGesture)
         
         // init Firebase
         ref = Database.database().reference()
 
         // customize logout button
-        logoutButton.layer.cornerRadius = 18
+        logoutButton.layer.cornerRadius = logoutButton.frame.height/2.4
         logoutButton.layer.masksToBounds = true
-        
-        // customize card (e.g. Survey box)
-        self.myView.roundCorners([.topLeft, .topRight], radius: 40.0)
-        self.myView.addShadow()
-        self.myInnerView.roundCorners([.bottomLeft, .bottomRight], radius: 20.0)
     }
     
     override func viewDidAppear(_ animated: Bool) {
