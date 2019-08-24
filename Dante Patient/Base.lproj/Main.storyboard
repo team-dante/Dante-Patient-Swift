@@ -1161,7 +1161,7 @@
                                                                 <color key="textColor" red="0.0" green="0.2666666667" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUR-3i-xFz" userLabel="Background VIew" customClass="CardComponent" customModule="Dante_Patient" customModuleProvider="target">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xUR-3i-xFz" userLabel="Background VIew">
                                                                 <rect key="frame" x="0.0" y="53.999999999999993" width="335" height="119.33333333333331"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="FN6-GR-ZPI">
@@ -1267,7 +1267,7 @@
                                                                     <constraint firstAttribute="height" constant="30" id="FhR-Ct-bkh"/>
                                                                 </constraints>
                                                             </stackView>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CI9-DZ-RGf" customClass="CardComponent" customModule="Dante_Patient" customModuleProvider="target">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CI9-DZ-RGf">
                                                                 <rect key="frame" x="0.0" y="36" width="335" height="305.66666666666669"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </view>
@@ -1296,7 +1296,7 @@
                                                                 <color key="textColor" red="0.0" green="0.2666666667" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUx-lx-eG3" customClass="CardComponent" customModule="Dante_Patient" customModuleProvider="target">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pUx-lx-eG3">
                                                                 <rect key="frame" x="0.0" y="30" width="335" height="88"/>
                                                                 <subviews>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Ulo-cd-hfq">

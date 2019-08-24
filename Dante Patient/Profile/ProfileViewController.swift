@@ -16,7 +16,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     
-    @IBOutlet weak var surveyCard: CardComponent!
+    @IBOutlet weak var surveyCard: UIView!
     var ref: DatabaseReference!
     
     // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
@@ -48,6 +48,7 @@ class ProfileViewController: UIViewController {
         // customize logout button
         logoutButton.layer.cornerRadius = logoutButton.frame.height/2.4
         logoutButton.layer.masksToBounds = true
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
