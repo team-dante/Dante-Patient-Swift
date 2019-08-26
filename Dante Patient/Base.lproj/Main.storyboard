@@ -1254,31 +1254,30 @@
                                                         <rect key="frame" x="20" y="8" width="335" height="341.66666666666669"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="99y-9G-5lh">
-                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="46"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your QR Code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GH6-8p-rDI">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="50"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="167.66666666666666" height="46"/>
                                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="16"/>
                                                                         <color key="textColor" red="0.0" green="0.2666666667" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxt-UO-nPA">
-                                                                        <rect key="frame" x="167.66666666666663" y="0.0" width="167.33333333333337" height="50"/>
-                                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <rect key="frame" x="167.66666666666663" y="0.0" width="167.33333333333337" height="46"/>
                                                                         <accessibility key="accessibilityConfiguration">
                                                                             <accessibilityTraits key="traits" notEnabled="YES"/>
                                                                         </accessibility>
                                                                     </view>
                                                                 </subviews>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="height" constant="50" id="FhR-Ct-bkh"/>
+                                                                    <constraint firstAttribute="height" constant="46" id="FhR-Ct-bkh"/>
                                                                 </constraints>
                                                             </stackView>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yeg-Yb-ZXi">
-                                                                <rect key="frame" x="0.0" y="56" width="335" height="285.66666666666669"/>
+                                                                <rect key="frame" x="0.0" y="52" width="335" height="289.66666666666669"/>
                                                                 <subviews>
                                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="czc-g5-VcR">
-                                                                        <rect key="frame" x="27.666666666666657" y="3" width="280" height="280"/>
+                                                                        <rect key="frame" x="27.666666666666657" y="5" width="280" height="280"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="280" id="kzJ-7d-mUm"/>
                                                                             <constraint firstAttribute="width" constant="280" id="tc8-Zl-1VP"/>
@@ -1323,19 +1322,19 @@
                                                                         <rect key="frame" x="8" y="6" width="319" height="76"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="feedback" translatesAutoresizingMaskIntoConstraints="NO" id="v9Z-Uu-ig4">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="60" height="76"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="61.333333333333336" height="76"/>
                                                                             </imageView>
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="TsB-Yf-qay">
-                                                                                <rect key="frame" x="68" y="0.0" width="201" height="76"/>
+                                                                                <rect key="frame" x="69.333333333333329" y="0.0" width="205.66666666666669" height="76"/>
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feedback for Developers" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EG0-aF-Kdo">
-                                                                                        <rect key="frame" x="0.0" y="0.0" width="201" height="38"/>
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="205.66666666666666" height="38"/>
                                                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="15"/>
                                                                                         <color key="textColor" red="0.36078431370000003" green="0.4823529412" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
                                                                                     </label>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please fill out this survey to let us know if you have any thoughts about this app. " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="93o-Fw-Rnm">
-                                                                                        <rect key="frame" x="0.0" y="38" width="201" height="38"/>
+                                                                                        <rect key="frame" x="0.0" y="38" width="205.66666666666666" height="38"/>
                                                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="12"/>
                                                                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         <nil key="highlightedColor"/>
@@ -1343,7 +1342,7 @@
                                                                                 </subviews>
                                                                             </stackView>
                                                                             <button opaque="NO" userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4N7-hK-DUH">
-                                                                                <rect key="frame" x="277" y="0.0" width="42" height="76"/>
+                                                                                <rect key="frame" x="283" y="0.0" width="36" height="76"/>
                                                                                 <state key="normal" image="forward"/>
                                                                             </button>
                                                                         </subviews>
@@ -1982,35 +1981,35 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="641"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="oe2-Ua-mV1">
-                                                <rect key="frame" x="20" y="20" width="335" height="451.66666666666669"/>
+                                                <rect key="frame" x="20" y="20" width="335" height="434.66666666666669"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="How is the average time calculated?" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oyb-4J-5Cd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="73"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="60.666666666666664"/>
                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="26"/>
                                                         <color key="textColor" red="0.0" green="0.2666666667" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The average time for each room is calculated based on the number of days you have actually entered that particular room." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jT8-NG-rwm">
-                                                        <rect key="frame" x="0.0" y="93" width="335" height="85.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="80.666666666666657" width="335" height="84"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                                         <color key="textColor" red="0.36078431370000003" green="0.4823529412" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AFz-3u-iyp">
-                                                        <rect key="frame" x="0.0" y="198.33333333333331" width="335" height="106.66666666666669"/>
+                                                        <rect key="frame" x="0.0" y="184.66666666666669" width="335" height="105"/>
                                                         <string key="text">For instance, if you visit the clinic 10 times this month, but you only entered CT Simulator room twice, the average time you have spent at CT Simulator would be calculated as:</string>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                                         <color key="textColor" red="0.36078431370000003" green="0.4823529412" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total time spent at CT this month / 2" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHF-Sn-dwX">
-                                                        <rect key="frame" x="0.0" y="325" width="335" height="21.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="309.66666666666669" width="335" height="21"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Bold" family="Rubik" pointSize="18"/>
                                                         <color key="textColor" red="0.0" green="0.2666666667" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meanwhile, the average visit time is calculated by adding up all visit durations this month dividing by the number of visits." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eUJ-ey-jC6">
-                                                        <rect key="frame" x="0.0" y="366.33333333333331" width="335" height="85.333333333333314"/>
+                                                        <rect key="frame" x="0.0" y="350.66666666666669" width="335" height="84"/>
                                                         <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="18"/>
                                                         <color key="textColor" red="0.36078431370000003" green="0.4823529412" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>

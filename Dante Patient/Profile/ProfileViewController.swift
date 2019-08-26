@@ -14,68 +14,50 @@ import PassKit
 
 class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate {
     
-    
     @IBOutlet weak var walletBtnView: UIView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var surveyCard: UIView!
     @IBOutlet weak var qrCodeImageView: UIImageView!
+    
     var ref: DatabaseReference!
     var userPhoneNumber : String!
     var qrCodeLink : String!
     var pass : PKPass!
     
     func addPassesViewControllerDidFinish(_ controller: PKAddPassesViewController) {
-        print("enter DidFinish")
         let passLib = PKPassLibrary()
 
         // Get your pass
         guard let pass = self.pass else { return }
 
         if passLib.containsPass(pass) {
-            print("if start")
-
             // Show alert message for example
             let alertController = UIAlertController(title: "", message: "Successfully added to Wallet", preferredStyle: .alert)
 
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                 controller.dismiss(animated: true, completion: nil)
             }))
-
             controller.show(alertController, sender: nil)
-            print("if end")
 
         } else {
-            // Cancel button pressed
-            print("else start");
             controller.dismiss(animated: true, completion: nil)
-            print("else end");
         }
-    }
-    
-    // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
-    @objc func handleFeedbackPressed(_ sender: UITapGestureRecognizer) {
-        self.performSegue(withIdentifier: "goToDeveloperFeedback", sender: self)
-    }
-    
-    // hide navigation bar when ProfileViewController is about to appear
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    // unhide navigation bar when ProfileViewController is about to disappear
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let pkButton = PKAddPassButton()
+        
         // !important: ADD TARGET TO BUTTON BEFORE ADDING TO SUBVIEW
         pkButton.addTarget(self, action: #selector(walletPressed(sender:)), for: UIControl.Event.touchUpInside)
+        
+        // scale down pkButton size
+        let scale = CGFloat(floatLiteral: 0.75)
+        pkButton.transform = CGAffineTransform(scaleX: scale, y: scale)
+        
         walletBtnView.addSubview(pkButton)
         
         let cardComponentGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleFeedbackPressed(_:)))
@@ -90,16 +72,26 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         
     }
     
+    // hide navigation bar when ProfileViewController is about to appear
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
+    @objc func handleFeedbackPressed(_ sender: UITapGestureRecognizer) {
+        self.performSegue(withIdentifier: "goToDeveloperFeedback", sender: self)
+    }
+    
     @objc func walletPressed(sender: UIButton) {
         self.wallet(phoneNum: userPhoneNumber)
     }
-    
     
     func wallet(phoneNum: String) {
         let pathReference = Storage.storage().reference(withPath: "userPkpass/\(phoneNum).pkpass")
         pathReference.getData(maxSize: 10 * 1024 * 1024) { (downloadedData, error) in
             if error != nil {
-                let alert = UIAlertController(title: "Information", message: "Your personal wallet is not ready yet. Please contact the developers.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Notice", message: "Your personal wallet is not ready yet. We will notify you as soon as possible when we set up the Add To Wallet feature.", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
                 
                 self.present(alert, animated: true)
@@ -140,7 +132,6 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
                 }
             })
         }
-        
         
         // extract qrCodeLink from Firebase Database
         ref.child("Patients").queryOrdered(byChild: "patientPhoneNumber").queryEqual(toValue: self.userPhoneNumber).observeSingleEvent(of: .value) { snapshot in
@@ -207,4 +198,9 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         UIApplication.shared.keyWindow?.rootViewController = initial
     }
     
+    // unhide navigation bar when ProfileViewController is about to disappear
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
 }
