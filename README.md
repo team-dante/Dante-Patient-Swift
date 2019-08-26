@@ -14,24 +14,28 @@ Dante Patient is a medical mobile app designated to improve patient visit experi
 
 ## Screen Archetypes
 * Login
-	* Allows patients to use their own phone numbers and PINs assigned by the oncology clinic staff. 
+    * Allows patients to use their own phone numbers and PINs assigned by the oncology clinic staff. 
 * Activate Account / Sign Up
-	* For first-time patients, they need to enter their phone numbers to activate their accounts (assigned by staff beforehand). 
+    * Allows first-time patients to enter their phone numbers to activate their accounts (assigned by staff beforehand). 
 * Radiation Oncology Clinic Map
-	* Allows a patient to their position in the waiting list.
-	* Allows a paitent to track doctors' location inside the oncology clinic in real-time.
+    * Allows patients to view their positions in the waiting list.
+    * Allows paitents to track physicians' location inside the oncology clinic in real-time.
 * Time Tracker
-  * When a patient enters a room, clock will start ticking automatically
-  * Reset clock to 0 secs when a patient switches to a new room.
+    * Allows patients to see how much time they have spent at treament rooms. For instance, when a patient enters a room, he/she will have his/her own qr code ready to scan in. Once they scan in, the clock will start automatically.
+    * Reset clock to 0 sec when a patient is out of the current treatment room.
 * Stats
-	* Allows patients to see the time spent at each treatment stage in both tables and graphs
-  * Allows patients to filter graphs by days, months, and years.
+    * Allows patients to see the time spent at each treatment stage in visual-appealing graphs. They may choose the time span of a day, month, or year
+    * Allows patients to see the visit flow of a paritcular day
 * Profile Screen
-	* Allows patients to logs out
-  * Patients can fill out surveys anytime (voluntarily)
+    * Allows patients to log out
+    * Allows patients to use their own qr codes for scanning into rooms
+    * Allows patients to add their own qr codes to Apple Wallet for easy access
+    * Allows patients to provide for feedback for the clinic services anytime (voluntarily)
 
 ## Documentation
 Please visit our [documentation](https://team-dante.github.io/dante-patient-docs/) website for a detailed walkthrough of the app.
+
+*Documentation will be updated soon.*
 
 ## Future Development
 - 3D image rendering to illustrate patients' treatment progress
