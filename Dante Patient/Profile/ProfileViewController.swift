@@ -10,9 +10,12 @@ import UIKit
 import Firebase
 import FirebaseAuth
 import FirebaseStorage
+import PassKit
 
-class ProfileViewController: UIViewController {
-
+class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate {
+    
+    
+    @IBOutlet weak var walletBtnView: UIView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var phoneNumLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
@@ -21,6 +24,35 @@ class ProfileViewController: UIViewController {
     var ref: DatabaseReference!
     var userPhoneNumber : String!
     var qrCodeLink : String!
+    var pass : PKPass!
+    
+    func addPassesViewControllerDidFinish(_ controller: PKAddPassesViewController) {
+        print("enter DidFinish")
+        let passLib = PKPassLibrary()
+
+        // Get your pass
+        guard let pass = self.pass else { return }
+
+        if passLib.containsPass(pass) {
+            print("if start")
+
+            // Show alert message for example
+            let alertController = UIAlertController(title: "", message: "Successfully added to Wallet", preferredStyle: .alert)
+
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                controller.dismiss(animated: true, completion: nil)
+            }))
+
+            controller.show(alertController, sender: nil)
+            print("if end")
+
+        } else {
+            // Cancel button pressed
+            print("else start");
+            controller.dismiss(animated: true, completion: nil)
+            print("else end");
+        }
+    }
     
     // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
     @objc func handleFeedbackPressed(_ sender: UITapGestureRecognizer) {
@@ -41,6 +73,10 @@ class ProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let pkButton = PKAddPassButton()
+        // !important: ADD TARGET TO BUTTON BEFORE ADDING TO SUBVIEW
+        pkButton.addTarget(self, action: #selector(walletPressed(sender:)), for: UIControl.Event.touchUpInside)
+        walletBtnView.addSubview(pkButton)
         
         let cardComponentGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleFeedbackPressed(_:)))
         self.surveyCard.addGestureRecognizer(cardComponentGesture)
@@ -54,6 +90,33 @@ class ProfileViewController: UIViewController {
         
     }
     
+    @objc func walletPressed(sender: UIButton) {
+        self.wallet(phoneNum: userPhoneNumber)
+    }
+    
+    
+    func wallet(phoneNum: String) {
+        let pathReference = Storage.storage().reference(withPath: "userPkpass/\(phoneNum).pkpass")
+        pathReference.getData(maxSize: 10 * 1024 * 1024) { (downloadedData, error) in
+            if error != nil {
+                let alert = UIAlertController(title: "Information", message: "Your personal wallet is not ready yet. Please contact the developers.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+                
+                self.present(alert, animated: true)
+            } else {
+                // data for userPkpass/...pkpass is returned
+                do {
+                    self.pass = try PKPass(data: downloadedData! as Data)
+                    let vc = PKAddPassesViewController(pass: self.pass)
+                    self.present(vc!, animated: true)
+                } catch {
+                    print("ERROR WITH PASSKIT")
+                }
+                
+            }
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -62,6 +125,7 @@ class ProfileViewController: UIViewController {
             // get current user's phone number
             self.userPhoneNumber = String(email.split(separator: "@")[0])
             self.phoneNumLabel.text = "phone: \(userPhoneNumber!)"
+        
             
             // if userPhoneNumber == phone number stored in database, pull out the user's full name
             ref.child("Patients").queryOrdered(byChild: "patientPhoneNumber").queryEqual(toValue: userPhoneNumber).observeSingleEvent(of: .value, with: { (snapshot) in
@@ -76,6 +140,7 @@ class ProfileViewController: UIViewController {
                 }
             })
         }
+        
         
         // extract qrCodeLink from Firebase Database
         ref.child("Patients").queryOrdered(byChild: "patientPhoneNumber").queryEqual(toValue: self.userPhoneNumber).observeSingleEvent(of: .value) { snapshot in

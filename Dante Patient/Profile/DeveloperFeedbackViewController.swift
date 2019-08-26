@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 class DeveloperFeedbackViewController: UIViewController, WKNavigationDelegate {
-
+    
     var webView : WKWebView!
     
     override func loadView() {

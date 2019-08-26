@@ -60,6 +60,10 @@ extension UIView {
             return self
         }
     }
+
+    var presentationFrame: CGRect {
+        return layer.presentation()?.frame ?? frame
+    }
 }
 
 extension UIView {
@@ -106,6 +110,9 @@ extension UIGestureRecognizerState: CustomDebugStringConvertible {
 extension UIScrollView {
     var contentOffsetZero: CGPoint {
         return CGPoint(x: 0.0, y: 0.0 - contentInset.top)
+    }
+    var isLocked: Bool {
+        return !showsVerticalScrollIndicator && !bounces &&  isDirectionalLockEnabled
     }
 }
 
