@@ -36,9 +36,8 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         if passLib.containsPass(pass) {
             // Show alert message for example
             let alertController = UIAlertController(title: "", message: "Successfully added to Apple Wallet", preferredStyle: .alert)
-
-            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-            }))
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            
             self.present(alertController, animated: true, completion: nil)
         }
     }
@@ -69,12 +68,6 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         
     }
     
-    // hide navigation bar when ProfileViewController is about to appear
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
     // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
     @objc func handleFeedbackPressed(_ sender: UITapGestureRecognizer) {
         self.performSegue(withIdentifier: "goToDeveloperFeedback", sender: self)
@@ -86,6 +79,7 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
     
     func wallet(phoneNum: String) {
         let pathReference = Storage.storage().reference(withPath: "userPkpass/\(phoneNum).pkpass")
+        
         pathReference.getData(maxSize: 10 * 1024 * 1024) { (downloadedData, error) in
             if error != nil {
                 let alert = UIAlertController(title: "Notice", message: "Your personal wallet is not ready yet. We will notify you as soon as possible when we set up the Add To Wallet feature.", preferredStyle: .alert)
@@ -101,12 +95,10 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
                     guard let pass = self.pass else { return }
                     
                     if passLib.containsPass(pass) {
-                        print("added")
-                        // Show alert message for example
+                        // Show alert message if already added
                         let alertController = UIAlertController(title: "", message: "QR Code has already been added to Your Apple Wallet", preferredStyle: .alert)
                         
-                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                        }))
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                         self.present(alertController, animated: true, completion: nil)
                     } else {
                         let vc = PKAddPassesViewController(pass: self.pass)
@@ -121,9 +113,11 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
+        navigationController?.setNavigationBarHidden(true, animated: false)
+
         let user = Auth.auth().currentUser;
         if let email = user?.email {
             // get current user's phone number
@@ -144,7 +138,7 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
                 }
             })
         }
-        
+
         // extract qrCodeLink from Firebase Database
         ref.child("Patients").queryOrdered(byChild: "patientPhoneNumber").queryEqual(toValue: self.userPhoneNumber).observeSingleEvent(of: .value) { snapshot in
             if snapshot.exists() {

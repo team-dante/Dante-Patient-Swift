@@ -35,6 +35,17 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         barChartView.layer.cornerRadius = 20
         barChartView.layer.masksToBounds = true
         
+        // customize axis
+        let xAxis = self.barChartView.xAxis
+        xAxis.enabled = false
+        
+        let leftAxis = self.barChartView.leftAxis
+        leftAxis.labelFont = .systemFont(ofSize: 12)
+        leftAxis.labelTextColor = UIColor("#adadad")
+        
+        let rightAxis = self.barChartView.rightAxis
+        rightAxis.enabled = false
+        
         self.yearStr.text = year
         
         // configure tableView
@@ -159,7 +170,7 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         barChartDataSet.colors = colorsOfCharts(numberOfColor: dataObj.count)
         
         let barChartData = BarChartData(dataSet: barChartDataSet)
-        barChartData.setValueFont(UIFont(name: "Poppins-Regular", size: 14)!)
+        barChartData.setValueFont(.systemFont(ofSize: 12))
         barChartData.barWidth = 0.6
         self.barChartView.data = barChartData
     }
