@@ -27,22 +27,20 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
     var pass : PKPass!
     
     func addPassesViewControllerDidFinish(_ controller: PKAddPassesViewController) {
-        let passLib = PKPassLibrary()
+        controller.dismiss(animated: true, completion: nil)
 
+        let passLib = PKPassLibrary()
         // Get your pass
         guard let pass = self.pass else { return }
 
         if passLib.containsPass(pass) {
+            print("added")
             // Show alert message for example
-            let alertController = UIAlertController(title: "", message: "Successfully added to Wallet", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "", message: "Successfully added to Apple Wallet", preferredStyle: .alert)
 
             alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                controller.dismiss(animated: true, completion: nil)
             }))
-            controller.show(alertController, sender: nil)
-
-        } else {
-            controller.dismiss(animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
@@ -100,6 +98,7 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
                 do {
                     self.pass = try PKPass(data: downloadedData! as Data)
                     let vc = PKAddPassesViewController(pass: self.pass)
+                    vc?.delegate = self
                     self.present(vc!, animated: true)
                 } catch {
                     print("ERROR WITH PASSKIT")
