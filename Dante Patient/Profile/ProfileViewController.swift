@@ -34,7 +34,6 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         guard let pass = self.pass else { return }
 
         if passLib.containsPass(pass) {
-            print("added")
             // Show alert message for example
             let alertController = UIAlertController(title: "", message: "Successfully added to Apple Wallet", preferredStyle: .alert)
 
@@ -96,10 +95,24 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
             } else {
                 // data for userPkpass/...pkpass is returned
                 do {
+                    let passLib = PKPassLibrary()
+                    // Get your pass
                     self.pass = try PKPass(data: downloadedData! as Data)
-                    let vc = PKAddPassesViewController(pass: self.pass)
-                    vc?.delegate = self
-                    self.present(vc!, animated: true)
+                    guard let pass = self.pass else { return }
+                    
+                    if passLib.containsPass(pass) {
+                        print("added")
+                        // Show alert message for example
+                        let alertController = UIAlertController(title: "", message: "QR Code has already been added to Your Apple Wallet", preferredStyle: .alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        }))
+                        self.present(alertController, animated: true, completion: nil)
+                    } else {
+                        let vc = PKAddPassesViewController(pass: self.pass)
+                        vc?.delegate = self
+                        self.present(vc!, animated: true)
+                    }
                 } catch {
                     print("ERROR WITH PASSKIT")
                 }
