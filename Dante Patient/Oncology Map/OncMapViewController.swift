@@ -173,6 +173,12 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         }
         return xyCoords
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        ref.removeAllObservers()
+    }
 }
 
 class MyFloatingPanelLayout: FloatingPanelLayout {

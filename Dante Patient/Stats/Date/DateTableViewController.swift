@@ -28,6 +28,7 @@ class DateTableViewController: UIViewController, UITableViewDelegate, UITableVie
 
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsMultipleSelection = false
         
         ref = Database.database().reference()
         

@@ -23,6 +23,7 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsMultipleSelection = false
         
         ref = Database.database().reference()
         
@@ -99,10 +100,12 @@ class YearTableViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let visit = self.yearArr[indexPath.row]
-        self.selectedYear = visit.date
-        
-        self.performSegue(withIdentifier: "YearGraphSegue", sender: nil)
+        if self.yearArr.count > 0 {
+            let visit = self.yearArr[indexPath.row]
+            self.selectedYear = visit.date
+            
+            self.performSegue(withIdentifier: "YearGraphSegue", sender: nil)
+        }
     }
     
     

@@ -23,6 +23,7 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsMultipleSelection = false
         
         ref = Database.database().reference()
         
@@ -107,10 +108,12 @@ class MonthTableViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let visit = self.monthArr[indexPath.row]
-        self.selectedMonth = visit.date
-        
-        self.performSegue(withIdentifier: "MonthGraphSegue", sender: nil)
+        if self.monthArr.count > 0 {
+            let visit = self.monthArr[indexPath.row]
+            self.selectedMonth = visit.date
+            
+            self.performSegue(withIdentifier: "MonthGraphSegue", sender: nil)
+        }
     }
     
     @IBAction func onRefresh(_ sender: Any) {
