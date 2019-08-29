@@ -53,7 +53,8 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         // scale down pkButton size
         let scale = CGFloat(floatLiteral: 0.75)
         pkButton.transform = CGAffineTransform(scaleX: scale, y: scale)
-        
+        pkButton.frame = CGRect(x: walletBtnView.bounds.origin.x, y: walletBtnView.bounds.origin.y, width: walletBtnView.bounds.width, height: walletBtnView.bounds.height)
+
         walletBtnView.addSubview(pkButton)
         
         let cardComponentGesture = UITapGestureRecognizer(target: self, action: #selector(self.handleFeedbackPressed(_:)))
@@ -119,8 +120,6 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.setNavigationBarHidden(true, animated: false)
-
         let user = Auth.auth().currentUser;
         if let email = user?.email {
             // get current user's phone number
@@ -205,12 +204,6 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initial = storyboard.instantiateInitialViewController()
         UIApplication.shared.keyWindow?.rootViewController = initial
-    }
-    
-    // unhide navigation bar when ProfileViewController is about to disappear
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func viewDidDisappear(_ animated: Bool) {
