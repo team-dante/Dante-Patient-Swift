@@ -15,19 +15,23 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     var fpc: FloatingPanelController!
     var pinRef: PinRefViewController!
     var ref: DatabaseReference!
+    var showDetails = false
+    var CTBtn: UIButton!
+    var TLABtn: UIButton!
     
     @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mapUIView: UIView!
     @IBOutlet weak var mapImageView: UIImageView!
     @IBOutlet weak var queueNum: UILabel!
+    @IBOutlet weak var detailBarItem: UIBarButtonItem!
     
     let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
     var docDict: [String: UIImageView] = [:]
     var mapDict: [String: [(Double, Double)]] = [
         "LA1": [(0.38, 0.7), (0.41, 0.75), (0.46, 0.75), (0.48, 0.7), (0.39, 0.8)],
         "TLA": [(0.9, 0.36), (0.95, 0.5), (0.83, 0.54), (0.8, 0.5), (0.86, 0.4)],
-        "CT": [(0.11, 0.7), (0.03, 0.75), (0.12, 0.75), (0.06, 0.7), (0.04, 0.8)],
+        "CT": [(0.0, 0.7), (0.03, 0.75), (0.12, 0.75), (0.06, 0.7), (0.04, 0.8)],
         "WR": [(0.27, 0.41), (0.3, 0.41), (0.27, 0.47), (0.31, 0.47), (0.33, 0.45)]
     ]
     
@@ -86,6 +90,20 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
             let pin = i * 111;
             docDict[String(pin)] = UIImageView(image: UIImage(named: String(pin)))
         }
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // set room buttons' positions
+        let (x1, y1, w1, h1) = self.pinCoords(propX: 0.0, propY: 0.629, propW: 0.178, propH: 0.303)
+        CTBtn = UIButton(frame: CGRect(x: x1, y: y1, width: w1, height: h1))
+        self.addRoomBtn(btn: CTBtn)
+        
+        let (x2, y2, w2, h2) = self.pinCoords(propX: 0.7944, propY: 0.3418, propW: 0.2045, propH: 0.3786)
+        TLABtn = UIButton(frame: CGRect(x: x2, y: y2, width: w2, height: h2))
+        self.addRoomBtn(btn: TLABtn)
     }
     
     // if FloatingPanel's position is at tip, then it will be at half
@@ -143,8 +161,8 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     
     // utilize offsets; add doc pin(UIImage) to UIView
     func updateDocLoc(doctor: UIImageView, x: Double, y: Double) {
-        let (xAxis, yAxis) = self.pinCoords(propX: x, propY: y)
-        doctor.frame = CGRect(x: xAxis, y: yAxis, width: 10, height: 21)
+        let coords = self.pinCoords(propX: x, propY: y, propW: 10/375.0, propH: 21/450.0)
+        doctor.frame = CGRect(x: coords.0, y: coords.1, width: coords.2, height: coords.3)
         self.mapUIView.addSubview(doctor)
     }
     
@@ -153,8 +171,11 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         return MyFloatingPanelLayout()
     }
     
-    func pinCoords(propX: Double, propY: Double) -> (CGFloat, CGFloat) {
-        var xyCoords: (CGFloat, CGFloat) = (0.0, 0.0)
+    func pinCoords(propX: Double, propY: Double, propW: Double, propH: Double) -> (CGFloat, CGFloat, CGFloat, CGFloat) {
+        var x: CGFloat = 0.0
+        var y: CGFloat = 0.0
+        var w: CGFloat = 0.0
+        var h: CGFloat = 0.0
         
         let deviceWidth = self.view.frame.width
         let deviceHeight = self.middleView.frame.height
@@ -163,15 +184,38 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
 
         if propHeight < deviceHeight {
             let yAxisOffset = (deviceHeight - propHeight)/CGFloat(2.0)
-            xyCoords.0 = deviceWidth * CGFloat(propX)
-            xyCoords.1 = propHeight * CGFloat(propY) + yAxisOffset
+            x = deviceWidth * CGFloat(propX)
+            y = propHeight * CGFloat(propY) + yAxisOffset
+            w = deviceWidth * CGFloat(propW)
+            h = propHeight * CGFloat(propH)
         } else {
             let propWidth = deviceHeight * CGFloat(0.8333)
             let xAxisOffset = (deviceWidth - propWidth)/CGFloat(2.0)
-            xyCoords.0 = propWidth * CGFloat(propX) + xAxisOffset
-            xyCoords.1 = deviceHeight * CGFloat(propY)
+            x = propWidth * CGFloat(propX) + xAxisOffset
+            y = deviceHeight * CGFloat(propY)
+            w = propWidth * CGFloat(propW)
+            h = deviceHeight * CGFloat(propH)
         }
-        return xyCoords
+        return (x, y, w, h)
+    }
+    
+    func addRoomBtn(btn: UIButton) {
+        btn.backgroundColor = UIColor("#00C213").withAlphaComponent(0.55)
+        btn.layer.borderColor = UIColor("#BBA012").cgColor
+        btn.layer.borderWidth = 1.5
+        mapUIView.addSubview(btn)
+        btn.isHidden = true
+    }
+    
+    @IBAction func onShowRoomDetails(_ sender: Any) {
+        self.showDetails = !self.showDetails
+        self.detailBarItem.title = self.showDetails ? "Done" : "Details"
+        self.CTBtn.isHidden = !self.CTBtn.isHidden
+        self.TLABtn.isHidden = !self.TLABtn.isHidden
+
+        UIView.animate(withDuration: 0.1, animations: {
+            self.mapUIView.backgroundColor = self.showDetails ? UIColor("#f5f5f5") : .white
+        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {

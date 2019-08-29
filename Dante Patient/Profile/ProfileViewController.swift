@@ -48,7 +48,7 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
         let pkButton = PKAddPassButton()
         
         // !important: ADD TARGET TO BUTTON BEFORE ADDING TO SUBVIEW
-        pkButton.addTarget(self, action: #selector(walletPressed(sender:)), for: UIControl.Event.touchUpInside)
+        pkButton.addTarget(self, action: #selector(walletPressed(sender:)), for: .touchDown)
         
         // scale down pkButton size
         let scale = CGFloat(floatLiteral: 0.75)
@@ -70,7 +70,10 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
     
     // when the user pressed the feedback card component, they go to the DeveloperFeedbackViewController
     @objc func handleFeedbackPressed(_ sender: UITapGestureRecognizer) {
-        self.performSegue(withIdentifier: "goToDeveloperFeedback", sender: self)
+        self.surveyCard.backgroundColor = UIColor("#f3f3f3")
+        DispatchQueue.main.async {
+            self.performSegue(withIdentifier: "goToDeveloperFeedback", sender: self)
+        }
     }
     
     @objc func walletPressed(sender: UIButton) {
@@ -208,5 +211,11 @@ class ProfileViewController: UIViewController, PKAddPassesViewControllerDelegate
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        self.surveyCard.backgroundColor = .white
     }
 }
