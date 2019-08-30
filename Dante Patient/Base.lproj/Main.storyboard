@@ -103,7 +103,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z6M-Ee-pUQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="491"/>
                                                 <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oncMap" translatesAutoresizingMaskIntoConstraints="NO" id="Ytn-cI-nLp">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="oncMap-1" translatesAutoresizingMaskIntoConstraints="NO" id="Ytn-cI-nLp">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="491"/>
                                                     </imageView>
                                                 </subviews>
@@ -1193,7 +1193,7 @@
                                                                                             <constraint firstItem="5Qg-sa-aye" firstAttribute="centerY" secondItem="rp9-hm-rSs" secondAttribute="centerY" id="dLT-kJ-QFI"/>
                                                                                         </constraints>
                                                                                     </view>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jenny Tang" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="9NK-L1-pmT">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Christopher Ronaldo" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9NK-L1-pmT">
                                                                                         <rect key="frame" x="0.0" y="95.666666666666686" width="139.33333333333334" height="39.666666666666657"/>
                                                                                         <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="18"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -2471,7 +2471,7 @@
         <image name="forward" width="36" height="36"/>
         <image name="logoImage" width="806" height="300"/>
         <image name="maps" width="30" height="30"/>
-        <image name="oncMap" width="3750" height="4504"/>
+        <image name="oncMap-1" width="3750" height="4504"/>
         <image name="profile" width="30" height="30"/>
         <image name="profile_default" width="300" height="339"/>
         <image name="stats" width="30" height="30"/>

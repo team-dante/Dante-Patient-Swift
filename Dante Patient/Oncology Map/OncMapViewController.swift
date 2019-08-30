@@ -101,7 +101,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         CTBtn = UIButton(frame: CGRect(x: x1, y: y1, width: w1, height: h1))
         self.addRoomBtn(btn: CTBtn)
         
-        let (x2, y2, w2, h2) = self.pinCoords(propX: 0.7944, propY: 0.3418, propW: 0.2045, propH: 0.3786)
+        let (x2, y2, w2, h2) = self.pinCoords(propX: 0.794, propY: 0.3418, propW: 0.2045, propH: 0.3786)
         TLABtn = UIButton(frame: CGRect(x: x2, y: y2, width: w2, height: h2))
         self.addRoomBtn(btn: TLABtn)
     }
@@ -212,7 +212,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         self.detailBarItem.title = self.showDetails ? "Done" : "Details"
         self.CTBtn.isHidden = !self.CTBtn.isHidden
         self.TLABtn.isHidden = !self.TLABtn.isHidden
-
         UIView.animate(withDuration: 0.1, animations: {
             self.mapUIView.backgroundColor = self.showDetails ? UIColor("#f5f5f5") : .white
         })
