@@ -72,6 +72,9 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         let backdropTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleBackdrop(tapGesture:)))
         fpc.backdropView.addGestureRecognizer(backdropTapGesture)
         
+        //  Add FloatingPanel to a view with animation.
+        fpc.addPanel(toParent: self, animated: true)
+        
         // --------------- Done setting up FloatingPanel ------------------
 
         // zoom in
@@ -120,9 +123,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        //  Add FloatingPanel to a view with animation.
-        fpc.addPanel(toParent: self, animated: true)
 
         // call observe to always listen for event changes
         ref.child("StaffLocation").observe(.value, with: {(snapshot) in
@@ -212,9 +212,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         self.detailBarItem.title = self.showDetails ? "Done" : "Details"
         self.CTBtn.isHidden = !self.CTBtn.isHidden
         self.TLABtn.isHidden = !self.TLABtn.isHidden
-        UIView.animate(withDuration: 0.1, animations: {
-            self.mapUIView.backgroundColor = self.showDetails ? UIColor("#f5f5f5") : .white
-        })
     }
     
     override func viewWillDisappear(_ animated: Bool) {

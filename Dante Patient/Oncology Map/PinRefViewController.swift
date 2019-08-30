@@ -13,6 +13,8 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var titleView: UIView!
+    
     var ref: DatabaseReference!
     
     let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
@@ -38,6 +40,12 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
             docDict[String(pin)] = UIImage(named: String(pin))
         }
         ref = Database.database().reference()
+        
+        let bottomBorder = CALayer()
+        bottomBorder.frame = CGRect(x: 20.0, y: titleView.frame.height - 3, width: 70, height: 3.0)
+        bottomBorder.backgroundColor = UIColor("#31c1ff").cgColor
+        titleView.layer.addSublayer(bottomBorder)
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,22 +78,6 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         })
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.doctors.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PinRefTableViewCell", for: indexPath)
-        
-        let doctor = self.doctors[indexPath.row]
-        if let cell = cell as? PinRefTableViewCell {
-            cell.pinImage.image = self.docDict[doctor["docPhoneNum"]!]
-            cell.docLabel.text = doctor["docName"]
-            cell.roomLabel.text = doctor["room"]
-        }
-        return cell
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         if #available(iOS 11, *) {
@@ -107,5 +99,39 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
             shadowLayer.shadowOpacity = 0.2
             shadowLayer.shadowRadius = 3.0
         }
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.doctors.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PinRefTableViewCell", for: indexPath)
+        
+        let doctor = self.doctors[indexPath.row]
+        if let cell = cell as? PinRefTableViewCell {
+            cell.pinImage.image = self.docDict[doctor["docPhoneNum"]!]
+            cell.docLabel.text = doctor["docName"]
+            cell.roomLabel.text = doctor["room"]
+        }
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        var numOfSections = 0
+        if self.doctors.count != 0 {
+            tableView.separatorStyle = .singleLine
+            numOfSections = 1
+            tableView.backgroundView = nil
+        } else {
+            let defaultLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
+            defaultLabel.text = "Doctors may choose to remain private in the meantime"
+            defaultLabel.textColor = UIColor("#9e9e9e")
+            defaultLabel.textAlignment = .center
+            defaultLabel.numberOfLines = 0
+            tableView.backgroundView = defaultLabel
+            tableView.separatorStyle = .none
+        }
+        return numOfSections
     }
 }
