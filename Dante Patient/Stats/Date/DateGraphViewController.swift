@@ -51,13 +51,13 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         self.customizeTableView(tableView: tableView)
         
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
         self.loadData()
-        
     }
     
     func changeDateLabel() {
@@ -126,6 +126,7 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
             })
     }
+    
     func customizePieCharts(dataObj: [Room]) {
         // pie chart animation
         self.pieChartView.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)

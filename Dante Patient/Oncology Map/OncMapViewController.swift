@@ -252,6 +252,7 @@ class MyFloatingPanelLayout: FloatingPanelLayout {
     public var initialPosition: FloatingPanelPosition {
         return .tip
     }
+    
     public func insetFor(position: FloatingPanelPosition) -> CGFloat? {
         switch position {
         case .full: return 120.0 // A top inset from safe area

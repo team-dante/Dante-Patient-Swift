@@ -64,7 +64,6 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
         userPhoneNum = String((Auth.auth().currentUser?.email?.split(separator: "@")[0] ?? ""))
         
         self.loadData()
-        
     }
     
     func loadData() {
