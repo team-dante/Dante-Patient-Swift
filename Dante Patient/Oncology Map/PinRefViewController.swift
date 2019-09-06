@@ -105,7 +105,6 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PinRefTableViewCell", for: indexPath) as? PinRefTableViewCell {
             
             let doctor = self.doctors[indexPath.row]
-            print(doctor)
             
             // parse color
             let color = doctor["pinColor"]!
