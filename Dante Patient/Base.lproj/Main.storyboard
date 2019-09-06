@@ -218,50 +218,41 @@
                                             <rect key="frame" x="0.0" y="60" width="375" height="674"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <prototypes>
-                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PinRefTableViewCell" rowHeight="107" id="bO2-ee-CuZ" customClass="PinRefTableViewCell" customModule="Dante_Patient" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="28" width="375" height="107"/>
+                                                <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PinRefTableViewCell" rowHeight="80" id="bO2-ee-CuZ" customClass="PinRefTableViewCell" customModule="Dante_Patient" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="28" width="375" height="80"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bO2-ee-CuZ" id="i7j-wj-3Vd">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="106.66666666666667"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="79.666666666666671"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
-                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xUU-Nj-wYH">
-                                                                <rect key="frame" x="15" y="15" width="35" height="50"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="width" constant="35" id="M0a-44-3oD"/>
-                                                                    <constraint firstAttribute="height" constant="50" id="OTy-m6-4qO"/>
-                                                                </constraints>
-                                                            </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. Roa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSb-T4-dhd">
-                                                                <rect key="frame" x="70" y="15" width="290" height="27"/>
-                                                                <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="19"/>
-                                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CT Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zk-3T-E0K">
-                                                                <rect key="frame" x="70" y="46" width="290" height="18"/>
-                                                                <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
-                                                                <color key="textColor" red="0.54117647058823526" green="0.54117647058823526" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <nil key="highlightedColor"/>
-                                                            </label>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="wJT-4E-o7P">
+                                                                <rect key="frame" x="70" y="16" width="289" height="47.666666666666657"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dr. Roa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mSb-T4-dhd">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="289" height="24"/>
+                                                                        <fontDescription key="fontDescription" name="Poppins-Bold" family="Poppins" pointSize="19"/>
+                                                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CT Room" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Zk-3T-E0K">
+                                                                        <rect key="frame" x="0.0" y="24" width="289" height="23.666666666666671"/>
+                                                                        <fontDescription key="fontDescription" name="Rubik-Regular" family="Rubik" pointSize="15"/>
+                                                                        <color key="textColor" red="0.54117647058823526" green="0.54117647058823526" blue="0.54117647058823526" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="0Zk-3T-E0K" secondAttribute="trailing" constant="15" id="BA6-yH-K3r"/>
-                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xUU-Nj-wYH" secondAttribute="bottom" constant="10" id="O2W-Aa-Kx6"/>
-                                                            <constraint firstItem="0Zk-3T-E0K" firstAttribute="leading" secondItem="xUU-Nj-wYH" secondAttribute="trailing" constant="20" id="OKC-Xn-3Tl"/>
-                                                            <constraint firstItem="xUU-Nj-wYH" firstAttribute="top" secondItem="i7j-wj-3Vd" secondAttribute="top" constant="15" id="P8N-f3-Box"/>
-                                                            <constraint firstItem="mSb-T4-dhd" firstAttribute="top" secondItem="i7j-wj-3Vd" secondAttribute="top" constant="15" id="SC0-2w-Fgy"/>
-                                                            <constraint firstAttribute="trailing" secondItem="mSb-T4-dhd" secondAttribute="trailing" constant="15" id="aiK-9d-gMe"/>
-                                                            <constraint firstItem="xUU-Nj-wYH" firstAttribute="leading" secondItem="i7j-wj-3Vd" secondAttribute="leading" constant="15" id="hKn-Wj-L2w"/>
-                                                            <constraint firstItem="0Zk-3T-E0K" firstAttribute="top" secondItem="mSb-T4-dhd" secondAttribute="bottom" constant="4" id="lfB-PS-wP7"/>
-                                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="0Zk-3T-E0K" secondAttribute="bottom" constant="10" id="o0Z-g3-wBs"/>
-                                                            <constraint firstItem="mSb-T4-dhd" firstAttribute="leading" secondItem="xUU-Nj-wYH" secondAttribute="trailing" constant="20" id="sK6-lb-8Fz"/>
+                                                            <constraint firstAttribute="bottom" secondItem="wJT-4E-o7P" secondAttribute="bottom" constant="16" id="BXe-pe-tOb"/>
+                                                            <constraint firstItem="wJT-4E-o7P" firstAttribute="leading" secondItem="i7j-wj-3Vd" secondAttribute="leading" constant="70" id="U3I-f6-r15"/>
+                                                            <constraint firstAttribute="trailing" secondItem="wJT-4E-o7P" secondAttribute="trailing" constant="16" id="Zz7-lf-3Nn"/>
+                                                            <constraint firstItem="wJT-4E-o7P" firstAttribute="top" secondItem="i7j-wj-3Vd" secondAttribute="top" constant="16" id="eAA-E8-muZ"/>
                                                         </constraints>
                                                     </tableViewCellContentView>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <connections>
                                                         <outlet property="docLabel" destination="mSb-T4-dhd" id="UL7-k8-hXt"/>
-                                                        <outlet property="pinImage" destination="xUU-Nj-wYH" id="SQl-zN-8OF"/>
                                                         <outlet property="roomLabel" destination="0Zk-3T-E0K" id="kzU-Bn-NQA"/>
                                                     </connections>
                                                 </tableViewCell>

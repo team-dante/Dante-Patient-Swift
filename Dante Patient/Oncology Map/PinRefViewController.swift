@@ -19,10 +19,6 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
     
     let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
     var doctors = [[String: String]]()
-    var docName = ["111":"Roa", "222":"Kuo", "333":"Gan", "444":"Shen", "555":"Moore"]
-    
-    // Assume we have a set number of doctors for now (would make the pin coloring scheme dynamic in future)
-    var docDict: [String: UIImage] = [:]
     
     // For iOS 10 only
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
@@ -32,20 +28,16 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         tableView.dataSource = self
         tableView.delegate = self
         tableView.allowsSelection = false
+        tableView.rowHeight = 70
         
         self.view.backgroundColor = UIColor(white: 1, alpha: 0.5)
-        
-        for i in 1...5 {
-            let pin = i * 111;
-            docDict[String(pin)] = UIImage(named: String(pin))
-        }
+    
         ref = Database.database().reference()
         
         let bottomBorder = CALayer()
         bottomBorder.frame = CGRect(x: 20.0, y: titleView.frame.height - 3, width: 70, height: 3.0)
         bottomBorder.backgroundColor = UIColor("#31c1ff").cgColor
         titleView.layer.addSublayer(bottomBorder)
-
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -63,10 +55,13 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
                         if let doc = doctor.value as? [String: String] {
                             let room = doc["room"]! // e.g. "CTRoom"
                             if room != "Private" {
-                                let name = "Dr. \(self.docName[docPhoneNum]!)"
+                                let lastName = doc["lastName"]!
+                                let color = doc["pinColor"]!
+                                
+                                let name = "Dr. \(lastName)"
                                 
                                 let formattedRoomStr = self.prettifyRoom(room: room)
-                                let doctorDict = ["docPhoneNum": docPhoneNum, "room": formattedRoomStr, "docName": name]
+                                let doctorDict = ["pinColor": color, "room": formattedRoomStr, "docName": name]
                                 self.doctors.append(doctorDict)
                             }
                         }
@@ -106,15 +101,34 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PinRefTableViewCell", for: indexPath)
         
-        let doctor = self.doctors[indexPath.row]
-        if let cell = cell as? PinRefTableViewCell {
-            cell.pinImage.image = self.docDict[doctor["docPhoneNum"]!]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "PinRefTableViewCell", for: indexPath) as? PinRefTableViewCell {
+            
+            let doctor = self.doctors[indexPath.row]
+            print(doctor)
+
+//            cell.layer.sublayers?.forEach({ $0.removeFromSuperlayer() })
+            
+            let circleLayer = CAShapeLayer()
+            circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 20.0, y: 16.0, width: 18.0, height: 18.0)).cgPath
+            circleLayer.fillColor = UIColor(doctor["pinColor"]!).cgColor
+            circleLayer.strokeColor = UIColor.black.cgColor
+
+            let rectLayer = CAShapeLayer()
+            rectLayer.path = UIBezierPath(rect: CGRect(x: 28.0, y: 34.0, width: 2.0, height: 20.0)).cgPath
+            rectLayer.fillColor = UIColor.black.cgColor
+
+            cell.layer.addSublayer(circleLayer)
+            cell.layer.addSublayer(rectLayer)
+            
             cell.docLabel.text = doctor["docName"]
             cell.roomLabel.text = doctor["room"]
+            
+            cell.setNeedsDisplay()
+            
+            return cell
         }
-        return cell
+        return UITableViewCell()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

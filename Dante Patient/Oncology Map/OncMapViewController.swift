@@ -18,6 +18,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     var showDetails = false
     var CTBtn: UIButton!
     var TLABtn: UIButton!
+    var allLayers = [String:[CAShapeLayer]]()
     
     @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -27,7 +28,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     @IBOutlet weak var detailBarItem: UIBarButtonItem!
     
     let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
-    var docDict: [String: UIImageView] = [:]
     var mapDict: [String: [(Double, Double)]] = [
         "LA1": [(0.38, 0.7), (0.41, 0.75), (0.46, 0.75), (0.48, 0.7), (0.39, 0.8)],
         "TLA": [(0.9, 0.36), (0.95, 0.5), (0.83, 0.54), (0.8, 0.5), (0.86, 0.4)],
@@ -87,13 +87,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         queueNum.backgroundColor = UIColor("#fff")
         queueNum.textColor = UIColor("#62B245")
         queueNum.layer.masksToBounds = true
-        
-        // Assume we have a set number of doctors for now (would make the pin coloring scheme dynamic in future)
-        for i in 1...7 {
-            let pin = i * 111;
-            docDict[String(pin)] = UIImageView(image: UIImage(named: String(pin)))
-        }
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -134,18 +127,21 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                         // get doctor's value e.g. {"room": "CTRoom"}
                         if let doc = doctor.value as? [String: String] {
                             let room = doc["room"]! // e.g. "CTRoom"
-
-                            if room == "Private" { // private room -> don't show pins
-                                self.docDict[key]!.isHidden = true
-                            }
-                            else {
-                                self.docDict[key]!.isHidden = false
-
-                                // add the assigned doctor pin onto the image; re-render when event changes
-                                self.updateDocLoc(doctor: self.docDict[key]!, x: mapDictCopy[room]![0].0, y: mapDictCopy[room]![0].1)
-
+                            if room != "Private" {
+                                let color = doc["pinColor"]!
+                                
+                                // remove the old pin before drawing the new pin
+                                self.removePin(key: key)
+                                
+                                // drawing the staff to the newest location
+                                self.updateDocLoc(doctor: key, color: color, x: mapDictCopy[room]![0].0, y: mapDictCopy[room]![0].1)
+                                
                                 let firstElement = mapDictCopy[room]!.remove(at: 0)
                                 mapDictCopy[room]!.append(firstElement)
+                                
+                            } else {
+                                // remove the old pin before being "invisible"
+                                self.removePin(key: key)
                             }
                         }
                     }
@@ -159,11 +155,36 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         return self.mapUIView
     }
     
+    // remove staff's pin
+    func removePin(key: String) {
+        // allLayers serve to record all pin layers
+        if let val = self.allLayers[key] {
+            // remove pin (circle + rect); remove from array
+            val.forEach({ $0.removeFromSuperlayer() })
+            self.allLayers.removeValue(forKey: key)
+        }
+    }
+    
     // utilize offsets; add doc pin(UIImage) to UIView
-    func updateDocLoc(doctor: UIImageView, x: Double, y: Double) {
-        let coords = self.pinCoords(propX: x, propY: y, propW: 10/375.0, propH: 21/450.0)
-        doctor.frame = CGRect(x: coords.0, y: coords.1, width: coords.2, height: coords.3)
-        self.mapUIView.addSubview(doctor)
+    func updateDocLoc(doctor: String, color: String, x: Double, y: Double) {
+        // coords.0: x in pixels; coords.1: y in pixels; coords.2: width; coords.3: total height of pin shape
+        let coords = self.pinCoords(propX: x, propY: y, propW: 10/375.0, propH: 23/450.0)
+        
+        // circle: same width and height
+        let circleLayer = CAShapeLayer()
+        circleLayer.path = UIBezierPath(ovalIn: CGRect(x: coords.0, y: coords.1, width: coords.2, height: coords.2)).cgPath
+        circleLayer.fillColor = UIColor(color).cgColor
+        circleLayer.strokeColor = UIColor.black.cgColor
+        
+        // pin stand: right under the circle, has width of 4, height = total height - circle height
+        let rectLayer = CAShapeLayer()
+        rectLayer.path = UIBezierPath(rect: CGRect(x: coords.0 + coords.2 / 2.0 - 1.0, y: coords.1 + coords.2, width: 2, height: coords.3 - coords.2)).cgPath
+        rectLayer.fillColor = UIColor.black.cgColor
+        
+        self.mapUIView.layer.addSublayer(circleLayer)
+        self.mapUIView.layer.addSublayer(rectLayer)
+        
+        self.allLayers[doctor] = [circleLayer, rectLayer]
     }
     
     // change the default floatingPanel layout

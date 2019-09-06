@@ -12,7 +12,6 @@ class PinRefTableViewCell: UITableViewCell {
     
     // three objects for each table cell: image, doctor's name, and room name
 
-    @IBOutlet weak var pinImage: UIImageView!
     @IBOutlet weak var docLabel: UILabel!
     @IBOutlet weak var roomLabel: UILabel!
     
