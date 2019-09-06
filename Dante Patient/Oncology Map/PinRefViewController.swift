@@ -106,12 +106,17 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
             
             let doctor = self.doctors[indexPath.row]
             print(doctor)
-
-//            cell.layer.sublayers?.forEach({ $0.removeFromSuperlayer() })
+            
+            // parse color
+            let color = doctor["pinColor"]!
+            let rgb = color.split(separator: "-")
+            let r = CGFloat(Int(rgb[0])!)
+            let g = CGFloat(Int(rgb[1])!)
+            let b = CGFloat(Int(rgb[2])!)
             
             let circleLayer = CAShapeLayer()
             circleLayer.path = UIBezierPath(ovalIn: CGRect(x: 20.0, y: 16.0, width: 18.0, height: 18.0)).cgPath
-            circleLayer.fillColor = UIColor(doctor["pinColor"]!).cgColor
+            circleLayer.fillColor = UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1.0).cgColor
             circleLayer.strokeColor = UIColor.black.cgColor
 
             let rectLayer = CAShapeLayer()

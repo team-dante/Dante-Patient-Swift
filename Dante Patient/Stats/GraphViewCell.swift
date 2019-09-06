@@ -10,7 +10,6 @@ import UIKit
 
 class GraphViewCell: UITableViewCell {
 
-    @IBOutlet weak var colorView: UIView!
     @IBOutlet weak var roomLabel: UILabel!
     @IBOutlet weak var timeElapsedLabel: UILabel!
     

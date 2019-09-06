@@ -38,7 +38,7 @@ class TimeTrackerViewController: UIViewController {
         
         let trackLayer = CAShapeLayer()
         
-        let circularPath = UIBezierPath(arcCenter: center, radius: 140, startAngle: CGFloat(-0.5 * .pi), endAngle: CGFloat(1.5 * .pi), clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: center, radius: self.view.bounds.width*0.39, startAngle: CGFloat(-0.5 * .pi), endAngle: CGFloat(1.5 * .pi), clockwise: true)
         trackLayer.path = circularPath.cgPath
         
         trackLayer.strokeColor = UIColor("#31c1ff").cgColor

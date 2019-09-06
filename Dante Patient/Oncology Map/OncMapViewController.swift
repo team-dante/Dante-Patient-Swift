@@ -167,13 +167,19 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     
     // utilize offsets; add doc pin(UIImage) to UIView
     func updateDocLoc(doctor: String, color: String, x: Double, y: Double) {
+        // parse color
+        let rgb = color.split(separator: "-")
+        let r = CGFloat(Int(rgb[0])!)
+        let g = CGFloat(Int(rgb[1])!)
+        let b = CGFloat(Int(rgb[2])!)
+
         // coords.0: x in pixels; coords.1: y in pixels; coords.2: width; coords.3: total height of pin shape
         let coords = self.pinCoords(propX: x, propY: y, propW: 10/375.0, propH: 23/450.0)
         
         // circle: same width and height
         let circleLayer = CAShapeLayer()
         circleLayer.path = UIBezierPath(ovalIn: CGRect(x: coords.0, y: coords.1, width: coords.2, height: coords.2)).cgPath
-        circleLayer.fillColor = UIColor(color).cgColor
+        circleLayer.fillColor = UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1.0).cgColor
         circleLayer.strokeColor = UIColor.black.cgColor
         
         // pin stand: right under the circle, has width of 4, height = total height - circle height

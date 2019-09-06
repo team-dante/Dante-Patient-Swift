@@ -171,7 +171,10 @@ class DateGraphViewController: UIViewController, UITableViewDelegate, UITableVie
             let color = self.colors[indexPath.row]
             
             // match color in the pie chart
-            cell.colorView.backgroundColor = color
+            let pin = CAShapeLayer()
+            pin.path = UIBezierPath(ovalIn: CGRect(x: 16, y: 17, width: 20.0, height: 20.0)).cgPath
+            pin.fillColor = color.cgColor
+            cell.layer.addSublayer(pin)
             
             cell.roomLabel.text = self.prettifyRoom(room: room.name)
             

@@ -198,7 +198,10 @@ class YearGraphViewController: UIViewController, UITableViewDelegate, UITableVie
             let color = self.colors[indexPath.row]
             
             // match color in the pie chart
-            cell.colorView.backgroundColor = color
+            let pin = CAShapeLayer()
+            pin.path = UIBezierPath(ovalIn: CGRect(x: 16, y: 15, width: 20, height: 20)).cgPath
+            pin.fillColor = color.cgColor
+            cell.layer.addSublayer(pin)
             
             cell.roomLabel.text = self.prettifyRoom(room: room.name)
             
