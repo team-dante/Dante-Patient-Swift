@@ -100,6 +100,45 @@ extension UIViewController {
         }
     }
     
+    func parseStartOfWeek(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = dateFormatter.date(from: date)
+        
+        let startWeek = formattedDate?.startOfWeek
+        let startDate = dateFormatter.string(from: startWeek!)
+        
+        return startDate
+    }
+    
+    func parseEndOfWeek(date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let formattedDate = dateFormatter.date(from: date)
+        
+        let endWeek = formattedDate?.endOfWeek
+        let endDate = dateFormatter.string(from: endWeek!)
+
+        return endDate
+    }
+    
+    func parseWeek(firstDay: String, lastDay: String) -> String {
+
+        // split the first day and the last day of the week
+        let startDateArr = firstDay.split(separator: "-")
+        let endDateArr = lastDay.split(separator: "-")
+        
+        // get month and day of the start and end of the week
+        let startMonth = self.parseMonth(mon: String(startDateArr[1]))
+        let endMonth = startDateArr[1] == endDateArr[1] ? "" : self.parseMonth(mon: String(endDateArr[1])) + " "
+        let firstDayOfWeek = startDateArr[2]
+        let lastDayOfWeek = endDateArr[2]
+        
+        let weekStr = "\(startMonth) \(firstDayOfWeek) - \(endMonth)\(lastDayOfWeek)"
+        
+        return weekStr
+    }
+    
     func hideNavigationBar() {
         let navigationBar = navigationController!.navigationBar
         navigationBar.barTintColor = UIColor("#E8FAFD")

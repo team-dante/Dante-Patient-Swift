@@ -13,7 +13,7 @@
 		DB4A0EE522D5CC3B00F6EC57 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */; };
 		DB5277C8230E51A500A0AE28 /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */; };
 		DB5277CA230E560700A0AE28 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB5277C9230E560700A0AE28 /* TimelineViewController.swift */; };
-		DB568A7E22E99AED000E1B2C /* ToolTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB568A7D22E99AED000E1B2C /* ToolTipView.swift */; };
+		DB6BC8C42324DCF300BEFBDE /* WeekGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6BC8C32324DCF300BEFBDE /* WeekGraphViewController.swift */; };
 		DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */; };
 		DB8F0B6A230FD44B00900B15 /* YearGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB8F0B69230FD44B00900B15 /* YearGraphViewController.swift */; };
 		DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */; };
@@ -27,6 +27,7 @@
 		DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */; };
 		DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA917C522D939560088A520 /* PinRefViewController.swift */; };
 		DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */; };
+		DBB901C623232EC200EAAC7C /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB901C523232EC200EAAC7C /* DateExtension.swift */; };
 		DBC8123A230D17B30022DF86 /* DateGraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC81239230D17B30022DF86 /* DateGraphViewController.swift */; };
 		DBC8123C230D1A0F0022DF86 /* GraphViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBC8123B230D1A0F0022DF86 /* GraphViewCell.swift */; };
 		DBCCC64822CB292500B00A68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC64722CB292500B00A68 /* AppDelegate.swift */; };
@@ -58,7 +59,7 @@
 		DB4A0EE422D5CC3B00F6EC57 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		DB5277C7230E51A500A0AE28 /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
 		DB5277C9230E560700A0AE28 /* TimelineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
-		DB568A7D22E99AED000E1B2C /* ToolTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolTipView.swift; sourceTree = "<group>"; };
+		DB6BC8C32324DCF300BEFBDE /* WeekGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekGraphViewController.swift; sourceTree = "<group>"; };
 		DB837A2922D9CF0A003F3A4E /* TouchIDAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchIDAuthentication.swift; sourceTree = "<group>"; };
 		DB8F0B69230FD44B00900B15 /* YearGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearGraphViewController.swift; sourceTree = "<group>"; };
 		DB911D3E22E786FD00D36F1F /* TimeTrackerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeTrackerViewController.swift; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		DBA8118222DABADB006CE057 /* ActivateAcctViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateAcctViewController.swift; sourceTree = "<group>"; };
 		DBA917C522D939560088A520 /* PinRefViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRefViewController.swift; sourceTree = "<group>"; };
 		DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinRefTableViewCell.swift; sourceTree = "<group>"; };
+		DBB901C523232EC200EAAC7C /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		DBC81239230D17B30022DF86 /* DateGraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateGraphViewController.swift; sourceTree = "<group>"; };
 		DBC8123B230D1A0F0022DF86 /* GraphViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewCell.swift; sourceTree = "<group>"; };
 		DBCCC64422CB292500B00A68 /* Dante Patient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dante Patient.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +154,14 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
+		DB6BC8C22324DCBD00BEFBDE /* Week */ = {
+			isa = PBXGroup;
+			children = (
+				DB6BC8C32324DCF300BEFBDE /* WeekGraphViewController.swift */,
+			);
+			path = Week;
+			sourceTree = "<group>";
+		};
 		DB837A2822D9CEB7003F3A4E /* Sign In */ = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				DBC8123B230D1A0F0022DF86 /* GraphViewCell.swift */,
+				DB6BC8C22324DCBD00BEFBDE /* Week */,
 				DBC81236230CC6170022DF86 /* Date */,
 				DBC81237230CC6450022DF86 /* Month */,
 				DBC81238230CC6560022DF86 /* Year */,
@@ -278,7 +289,7 @@
 				DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */,
 				DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */,
 				DBF45F1C22E41E2F00A18C7B /* UIViewControllerExtension.swift */,
-				DB568A7D22E99AED000E1B2C /* ToolTipView.swift */,
+				DBB901C523232EC200EAAC7C /* DateExtension.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -432,9 +443,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */,
+				DBB901C623232EC200EAAC7C /* DateExtension.swift in Sources */,
 				DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */,
 				DB973344230BC25D00F748DA /* DateTableViewCell.swift in Sources */,
-				DB568A7E22E99AED000E1B2C /* ToolTipView.swift in Sources */,
 				DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */,
 				DB911D3F22E786FD00D36F1F /* TimeTrackerViewController.swift in Sources */,
 				DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */,
@@ -456,6 +467,7 @@
 				24E2AB9D230202090047C553 /* DeveloperFeedbackViewController.swift in Sources */,
 				DB100491230FADF500964970 /* MonthGraphViewController.swift in Sources */,
 				DB973348230BCFDE00F748DA /* MonthTableViewController.swift in Sources */,
+				DB6BC8C42324DCF300BEFBDE /* WeekGraphViewController.swift in Sources */,
 				DB97334C230BDDFD00F748DA /* YearTableViewCell.swift in Sources */,
 				DB837A2A22D9CF0A003F3A4E /* TouchIDAuthentication.swift in Sources */,
 			);
