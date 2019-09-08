@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DeviceKit
 
 class Button: UIButton {
     required init(coder aDecoder: NSCoder) {
@@ -18,9 +17,7 @@ class Button: UIButton {
         self.backgroundColor = UIColor("#31C1FF")
         self.setTitleColor(UIColor("#fff"), for: .normal)
         
-        let device = Device.current
-        let smallDevice: [Device] = [.iPhoneSE, .simulator(.iPhoneSE), .iPhone5s, .simulator(.iPhone5s)]
-        if device.isOneOf(smallDevice) {
+        if UIScreen.main.bounds.height <= 568 {
             self.layer.cornerRadius = 14
             self.titleLabel?.font = UIFont(name: "Poppins-Bold", size: 16)
         } else {

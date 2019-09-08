@@ -16,6 +16,5 @@ target 'Dante Patient' do
   pod 'FloatingPanel'
   pod 'KontaktSDK', '~>2.0'
   pod 'Charts'
-  pod 'DeviceKit', '~> 2.0'
   pod 'NVActivityIndicatorView'
 end
