@@ -169,6 +169,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomViewHeight" destination="TFt-65-ecd" id="RY7-Te-VA6"/>
                         <outlet property="detailBarItem" destination="tb8-8o-JPo" id="n20-LD-mVu"/>
                         <outlet property="mapImageView" destination="Ytn-cI-nLp" id="WLV-DL-3Qu"/>
                         <outlet property="mapUIView" destination="Z6M-Ee-pUQ" id="ij0-0c-FW5"/>

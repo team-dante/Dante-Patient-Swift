@@ -34,6 +34,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     @IBOutlet weak var mapImageView: UIImageView!
     @IBOutlet weak var queueNum: UILabel!
     @IBOutlet weak var detailBarItem: UIBarButtonItem!
+    @IBOutlet weak var bottomViewHeight: NSLayoutConstraint!
     
     // record the previous room & coordinates that the staff is located
     var prevLoc = [String:StaffPrevLoc]()
@@ -95,6 +96,16 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         queueNum.backgroundColor = UIColor("#fff")
         queueNum.textColor = UIColor("#62B245")
         queueNum.layer.masksToBounds = true
+        
+        // configure bottom view height
+        let height = UIScreen.main.bounds.height
+        if height >= 896 {
+            bottomViewHeight.constant = 150
+        } else if height >= 812 {
+            bottomViewHeight.constant = 110
+        } else {
+            bottomViewHeight.constant = 90
+        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -287,7 +298,15 @@ class MyFloatingPanelLayout: FloatingPanelLayout {
         switch position {
         case .full: return 120.0 // A top inset from safe area
         case .half: return 250.0 // A bottom inset from the safe area
-        case .tip: return 90.0 // A bottom inset from the safe area
+        case .tip:// A bottom inset from the safe area
+            let height = UIScreen.main.bounds.height
+            if height >= 896 {
+                return 145
+            } else if height >= 812 {
+                return 106
+            } else {
+                return 87
+            }
         default: return nil // Or `case .hidden: return nil`
         }
     }
