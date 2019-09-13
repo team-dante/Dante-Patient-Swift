@@ -10,9 +10,16 @@ import UIKit
 import Firebase
 import FloatingPanel
 
+struct RoomCoords {
+    var tl: (Double, Double)
+    var tr: (Double, Double)
+    var br: (Double, Double)
+    var bl: (Double, Double)
+}
+
 struct StaffPrevLoc {
     var room: String
-    var pos: Int
+    var pos: (Double, Double)
 }
 
 class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPanelControllerDelegate {
@@ -39,13 +46,20 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     // record the previous room & coordinates that the staff is located
     var prevLoc = [String:StaffPrevLoc]()
     
-    let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
-    var mapDict: [String: [(Double, Double)]] = [
-        "LA1": [(0.38, 0.7), (0.41, 0.75), (0.46, 0.75), (0.48, 0.7), (0.39, 0.8)],
-        "TLA": [(0.9, 0.36), (0.95, 0.5), (0.83, 0.54), (0.8, 0.5), (0.86, 0.4)],
-        "CT": [(0.0, 0.7), (0.03, 0.75), (0.12, 0.75), (0.06, 0.7), (0.04, 0.8)],
-        "WR": [(0.27, 0.41), (0.3, 0.41), (0.27, 0.47), (0.31, 0.47), (0.33, 0.45)]
+    let roomCoords: [String: RoomCoords] = [
+        "LA1": RoomCoords(tl: (0.178, 0.628), tr: (0.347, 0.628), br: (0.347, 0.93), bl: (0.178, 0.93)),
+        "TLA": RoomCoords(tl: (0.825, 0.342), tr: (1.029, 0.342), br: (1.029, 0.72), bl: (0.825, 0.72)),
+        "CT": RoomCoords(tl: (0.0, 0.725), tr: (0.149, 0.725), br: (0.149, 0.928), bl: (0.0, 0.928)),
+        "WR": RoomCoords(tl: (0.269, 0.437), tr: (0.359, 0.437), br: (0.359, 0.545), bl: (0.269, 0.545))
     ]
+    
+    let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
+//    var mapDict: [String: [(Double, Double)]] = [
+//        "LA1": [(0.38, 0.7), (0.41, 0.75), (0.46, 0.75), (0.48, 0.7), (0.39, 0.8)],
+//        "TLA": [(0.9, 0.36), (0.95, 0.5), (0.83, 0.54), (0.8, 0.5), (0.86, 0.4)],
+//        "CT": [(0.0, 0.7), (0.03, 0.75), (0.12, 0.75), (0.06, 0.7), (0.04, 0.8)],
+//        "WR": [(0.27, 0.41), (0.3, 0.41), (0.27, 0.47), (0.31, 0.47), (0.33, 0.45)]
+//    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -154,25 +168,31 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                                     // remove the old pin before drawing the new pin
                                     self.removePin(key: key)
                                     
-                                    var rand_ind: Int
+                                    let lowerX = Int(self.roomCoords[room]!.tl.0 * 1000)
+                                    let upperX = Int((self.roomCoords[room]!.tr.0 - self.PIN_WIDTH_PROP) * 1000)
+                                    let lowerY = Int((self.roomCoords[room]!.tr.1 - self.PIN_WIDTH_PROP) * 1000)
+                                    let upperY = Int((self.roomCoords[room]!.br.1 - self.PIN_HEIGHT_PROP) * 1000)
+                                    
+                                    var rand_x: Double
+                                    var rand_y: Double
                                     repeat {
                                         // generate (x,y)
-                                        rand_ind = Int.random(in: 0..<5)
-                                        print(rand_ind)
+                                        rand_x = Double(Int.random(in: lowerX..<upperX)) / 1000.0
+                                        rand_y = Double(Int.random(in: lowerY..<upperY)) / 1000.0
               
-                                    } while (self.pinOverlap(room: room, pos: rand_ind))
+                                    } while (self.pinOverlap(room: room, pos_X: rand_x, pos_Y: rand_y))
                                     
-                                    self.prevLoc[key] = StaffPrevLoc(room: room, pos: rand_ind)
+                                    self.prevLoc[key] = StaffPrevLoc(room: room, pos: (rand_x, rand_y))
                                     
                                     // drawing the staff to the newest location
-                                    self.updateDocLoc(doctor: key, color: color, x: self.mapDict[room]![rand_ind].0, y: self.mapDict[room]![rand_ind].1)
+                                    self.updateDocLoc(doctor: key, color: color, x: rand_x, y: rand_y)
                                 }
                             } else {
                                 // remove the old pin before being "invisible"
                                 self.removePin(key: key)
                                 
                                 // reset prev location to default values
-                                self.prevLoc[key] = StaffPrevLoc(room: "Private", pos: -1)
+                                self.prevLoc[key] = StaffPrevLoc(room: "Private", pos: (-1.0, -1.0))
                             }
                         }
                     }
@@ -187,9 +207,9 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     }
     
     // check if pins overlap each other
-    func pinOverlap(room: String, pos: Int) -> Bool {
+    func pinOverlap(room: String, pos_X: Double, pos_Y: Double) -> Bool {
         for (_, v) in self.prevLoc {
-            if v.room == room && v.pos == pos {
+            if v.room == room && abs(v.pos.0 - pos_X) < PIN_WIDTH_PROP && abs(v.pos.1 - pos_Y) < PIN_WIDTH_PROP {
                 return true
             }
         }
@@ -213,7 +233,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         let r = CGFloat(Int(rgb[0])!)
         let g = CGFloat(Int(rgb[1])!)
         let b = CGFloat(Int(rgb[2])!)
-
+        
         // coords.0: x in pixels; coords.1: y in pixels; coords.2: width; coords.3: total height of pin shape
         let coords = self.pinCoords(propX: x, propY: y, propW: PIN_WIDTH_PROP, propH: PIN_HEIGHT_PROP)
         
@@ -222,11 +242,13 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         circleLayer.path = UIBezierPath(ovalIn: CGRect(x: coords.0, y: coords.1, width: coords.2, height: coords.2)).cgPath
         circleLayer.fillColor = UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1.0).cgColor
         circleLayer.strokeColor = UIColor.black.cgColor
+        circleLayer.zPosition = 1000
         
         // pin stand: right under the circle, has width of 4, height = total height - circle height
         let rectLayer = CAShapeLayer()
         rectLayer.path = UIBezierPath(rect: CGRect(x: coords.0 + coords.2 / 2.0 - 1.0, y: coords.1 + coords.2, width: 2, height: coords.3 - coords.2)).cgPath
         rectLayer.fillColor = UIColor.black.cgColor
+        rectLayer.zPosition = 1
         
         self.mapUIView.layer.addSublayer(circleLayer)
         self.mapUIView.layer.addSublayer(rectLayer)
