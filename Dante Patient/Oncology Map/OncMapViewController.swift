@@ -10,6 +10,18 @@ import UIKit
 import Firebase
 import FloatingPanel
 
+struct StaffPrevLoc {
+    var room: String
+    var pos: Int
+}
+// tl: topLeft; tr: topRight; br: bottomRight; bl: bottomLeft
+struct RoomCoords {
+    var tl: (Double, Double)
+    var tr: (Double, Double)
+    var br: (Double, Double)
+    var bl: (Double, Double)
+}
+
 class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPanelControllerDelegate {
     
     var fpc: FloatingPanelController!
@@ -20,12 +32,18 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     var TLABtn: UIButton!
     var allLayers = [String:[CAShapeLayer]]()
     
+    let PIN_WIDTH_PROP: Double = 10/375.0
+    let PIN_HEIGHT_PROP: Double = 23/450.0
+    
     @IBOutlet weak var middleView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var mapUIView: UIView!
     @IBOutlet weak var mapImageView: UIImageView!
     @IBOutlet weak var queueNum: UILabel!
     @IBOutlet weak var detailBarItem: UIBarButtonItem!
+    
+    // record the previous room & coordinates that the staff is located
+    var prevLoc = [String:StaffPrevLoc]()
     
     let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
     var mapDict: [String: [(Double, Double)]] = [
@@ -40,9 +58,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     
         // connecting to Firebase initially
         ref = Database.database().reference()
-        
-        // Singleton Beacon class
-//        Beacons.shared.detectBeacons()
 
         // --------------- settting up FloatingPanel ------------------
         // init FloatingPanelController
@@ -119,7 +134,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
 
         // call observe to always listen for event changes
         ref.child("StaffLocation").observe(.value, with: {(snapshot) in
-            var mapDictCopy = self.mapDict
             if let doctors = snapshot.value as? [String: Any] {
                 for doctor in doctors {
                     let key = doctor.key
@@ -130,18 +144,31 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                             if room != "Private" {
                                 let color = doc["pinColor"]!
                                 
-                                // remove the old pin before drawing the new pin
-                                self.removePin(key: key)
+                                let prevRoom = self.prevLoc[key]?.room ?? ""
                                 
-                                // drawing the staff to the newest location
-                                self.updateDocLoc(doctor: key, color: color, x: mapDictCopy[room]![0].0, y: mapDictCopy[room]![0].1)
-                                
-                                let firstElement = mapDictCopy[room]!.remove(at: 0)
-                                mapDictCopy[room]!.append(firstElement)
-                                
+                                if room != prevRoom {
+                                    // remove the old pin before drawing the new pin
+                                    self.removePin(key: key)
+                                    
+                                    var rand_ind: Int
+                                    repeat {
+                                        // generate (x,y)
+                                        rand_ind = Int.random(in: 0..<5)
+                                        print(rand_ind)
+              
+                                    } while (self.pinOverlap(room: room, pos: rand_ind))
+                                    
+                                    self.prevLoc[key] = StaffPrevLoc(room: room, pos: rand_ind)
+                                    
+                                    // drawing the staff to the newest location
+                                    self.updateDocLoc(doctor: key, color: color, x: self.mapDict[room]![rand_ind].0, y: self.mapDict[room]![rand_ind].1)
+                                }
                             } else {
                                 // remove the old pin before being "invisible"
                                 self.removePin(key: key)
+                                
+                                // reset prev location to default values
+                                self.prevLoc[key] = StaffPrevLoc(room: "Private", pos: -1)
                             }
                         }
                     }
@@ -153,6 +180,16 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     // delegate method to help zooming
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return self.mapUIView
+    }
+    
+    // check if pins overlap each other
+    func pinOverlap(room: String, pos: Int) -> Bool {
+        for (_, v) in self.prevLoc {
+            if v.room == room && v.pos == pos {
+                return true
+            }
+        }
+        return false
     }
     
     // remove staff's pin
@@ -174,7 +211,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         let b = CGFloat(Int(rgb[2])!)
 
         // coords.0: x in pixels; coords.1: y in pixels; coords.2: width; coords.3: total height of pin shape
-        let coords = self.pinCoords(propX: x, propY: y, propW: 10/375.0, propH: 23/450.0)
+        let coords = self.pinCoords(propX: x, propY: y, propW: PIN_WIDTH_PROP, propH: PIN_HEIGHT_PROP)
         
         // circle: same width and height
         let circleLayer = CAShapeLayer()
