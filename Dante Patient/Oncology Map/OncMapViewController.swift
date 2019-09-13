@@ -48,7 +48,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     
     let roomCoords: [String: RoomCoords] = [
         "LA1": RoomCoords(tl: (0.178, 0.628), tr: (0.347, 0.628), br: (0.347, 0.93), bl: (0.178, 0.93)),
-        "TLA": RoomCoords(tl: (0.825, 0.342), tr: (1.029, 0.342), br: (1.029, 0.72), bl: (0.825, 0.72)),
+        "TLA": RoomCoords(tl: (0.825, 0.342), tr: (1, 0.342), br: (1, 0.72), bl: (0.825, 0.72)),
         "CT": RoomCoords(tl: (0.0, 0.725), tr: (0.149, 0.725), br: (0.149, 0.928), bl: (0.0, 0.928)),
         "WR": RoomCoords(tl: (0.269, 0.437), tr: (0.359, 0.437), br: (0.359, 0.545), bl: (0.269, 0.545))
     ]
@@ -162,12 +162,14 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                             if room != "Private" {
                                 let color = doc["pinColor"]!
                                 
+                                // remember the prev room a staff has visited
                                 let prevRoom = self.prevLoc[key]?.room ?? ""
-                                
                                 if room != prevRoom {
                                     // remove the old pin before drawing the new pin
                                     self.removePin(key: key)
                                     
+                                    // lowerX: topLeft corner x; upperX: topRight corner x; lowerY: topRight corner y; upperY: bottomRight corner y
+                                    // random can only be ints; first scale up the coords by 1000; after receiving random numbers, scale down by 1000
                                     let lowerX = Int(self.roomCoords[room]!.tl.0 * 1000)
                                     let upperX = Int((self.roomCoords[room]!.tr.0 - self.PIN_WIDTH_PROP) * 1000)
                                     let lowerY = Int((self.roomCoords[room]!.tr.1 - self.PIN_WIDTH_PROP) * 1000)
@@ -175,6 +177,8 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                                     
                                     var rand_x: Double
                                     var rand_y: Double
+                                    
+                                    // repeat while there is a pin-overlap; check if two circles overlap
                                     repeat {
                                         // generate (x,y)
                                         rand_x = Double(Int.random(in: lowerX..<upperX)) / 1000.0
@@ -206,7 +210,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         return self.mapUIView
     }
     
-    // check if pins overlap each other
+    // check if pins overlap each other (if circles overlap; don't care about the rect stand)
     func pinOverlap(room: String, pos_X: Double, pos_Y: Double) -> Bool {
         for (_, v) in self.prevLoc {
             if v.room == room && abs(v.pos.0 - pos_X) < PIN_WIDTH_PROP && abs(v.pos.1 - pos_Y) < PIN_WIDTH_PROP {
@@ -242,12 +246,14 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         circleLayer.path = UIBezierPath(ovalIn: CGRect(x: coords.0, y: coords.1, width: coords.2, height: coords.2)).cgPath
         circleLayer.fillColor = UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1.0).cgColor
         circleLayer.strokeColor = UIColor.black.cgColor
+        // high z-index for the circle
         circleLayer.zPosition = 1000
         
         // pin stand: right under the circle, has width of 4, height = total height - circle height
         let rectLayer = CAShapeLayer()
         rectLayer.path = UIBezierPath(rect: CGRect(x: coords.0 + coords.2 / 2.0 - 1.0, y: coords.1 + coords.2, width: 2, height: coords.3 - coords.2)).cgPath
         rectLayer.fillColor = UIColor.black.cgColor
+        // low z-index for the stand
         rectLayer.zPosition = 1
         
         self.mapUIView.layer.addSublayer(circleLayer)
