@@ -49,7 +49,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     let roomCoords: [String: RoomCoords] = [
         "LA1": RoomCoords(tl: (0.178, 0.628), tr: (0.347, 0.628), br: (0.347, 0.93), bl: (0.178, 0.93)),
         "TLA": RoomCoords(tl: (0.825, 0.342), tr: (1.029, 0.342), br: (1.029, 0.72), bl: (0.825, 0.72)),
-        "CT": RoomCoords(tl: (0.0, 0.725), tr: (0.074, 0.725), br: (0.074, 0.928), bl: (0.0, 0.928)),
+        "CT": RoomCoords(tl: (0.0, 0.725), tr: (0.149, 0.725), br: (0.149, 0.928), bl: (0.0, 0.928)),
         "WR": RoomCoords(tl: (0.269, 0.437), tr: (0.359, 0.437), br: (0.359, 0.545), bl: (0.269, 0.545))
     ]
     
@@ -233,7 +233,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         let r = CGFloat(Int(rgb[0])!)
         let g = CGFloat(Int(rgb[1])!)
         let b = CGFloat(Int(rgb[2])!)
-
+        
         // coords.0: x in pixels; coords.1: y in pixels; coords.2: width; coords.3: total height of pin shape
         let coords = self.pinCoords(propX: x, propY: y, propW: PIN_WIDTH_PROP, propH: PIN_HEIGHT_PROP)
         
@@ -242,11 +242,13 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         circleLayer.path = UIBezierPath(ovalIn: CGRect(x: coords.0, y: coords.1, width: coords.2, height: coords.2)).cgPath
         circleLayer.fillColor = UIColor(red: r/255, green: g/255, blue: b/255, alpha: 1.0).cgColor
         circleLayer.strokeColor = UIColor.black.cgColor
+        circleLayer.zPosition = 1000
         
         // pin stand: right under the circle, has width of 4, height = total height - circle height
         let rectLayer = CAShapeLayer()
         rectLayer.path = UIBezierPath(rect: CGRect(x: coords.0 + coords.2 / 2.0 - 1.0, y: coords.1 + coords.2, width: 2, height: coords.3 - coords.2)).cgPath
         rectLayer.fillColor = UIColor.black.cgColor
+        rectLayer.zPosition = 1
         
         self.mapUIView.layer.addSublayer(circleLayer)
         self.mapUIView.layer.addSublayer(rectLayer)
