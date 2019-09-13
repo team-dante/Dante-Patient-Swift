@@ -14,13 +14,6 @@ struct StaffPrevLoc {
     var room: String
     var pos: Int
 }
-// tl: topLeft; tr: topRight; br: bottomRight; bl: bottomLeft
-struct RoomCoords {
-    var tl: (Double, Double)
-    var tr: (Double, Double)
-    var br: (Double, Double)
-    var bl: (Double, Double)
-}
 
 class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPanelControllerDelegate {
     
