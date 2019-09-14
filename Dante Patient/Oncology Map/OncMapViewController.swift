@@ -47,7 +47,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     var prevLoc = [String:StaffPrevLoc]()
     
     let roomCoords: [String: RoomCoords] = [
-        "LA1": RoomCoords(tl: (0.178, 0.628), tr: (0.347, 0.628), br: (0.347, 0.93), bl: (0.178, 0.93)),
+        "LA1": RoomCoords(tl: (0.345, 0.628), tr: (0.508, 0.628), br: (0.508, 1.0), bl: (0.345, 1.0)),
         "TLA": RoomCoords(tl: (0.825, 0.342), tr: (1, 0.342), br: (1, 0.72), bl: (0.825, 0.72)),
         "CT": RoomCoords(tl: (0.0, 0.725), tr: (0.149, 0.725), br: (0.149, 0.928), bl: (0.0, 0.928)),
         "WR": RoomCoords(tl: (0.269, 0.437), tr: (0.359, 0.437), br: (0.359, 0.545), bl: (0.269, 0.545))
