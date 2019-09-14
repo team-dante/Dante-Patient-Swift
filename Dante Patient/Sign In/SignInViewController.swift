@@ -27,7 +27,7 @@ class SignInViewController: UIViewController {
         super.viewDidAppear(true)
         
         // if user has signed in and the device has FaceID/TouchID enabled, log user in using FaceID/TouchID
-        if UserDefaults.standard.bool(forKey: "hasLoggedIn") == true && autoSignIn.canEvaluatePolicy() {
+        if UserDefaults.standard.bool(forKey: "hasLoggedIn") == true && autoSignIn.canEvaluatePolicy() && Auth.auth().currentUser != nil {
             autoLoginAction()
         }
     }
@@ -60,7 +60,7 @@ class SignInViewController: UIViewController {
             }
         }
     }
-    
+
     // show an alert message
     func showAlert(message: String) {
         let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
