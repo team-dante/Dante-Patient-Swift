@@ -36,6 +36,7 @@
 		DBCCC64F22CB292900B00A68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC64E22CB292900B00A68 /* Assets.xcassets */; };
 		DBCCC65222CB292900B00A68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DBCCC65022CB292900B00A68 /* LaunchScreen.storyboard */; };
 		DBCCC65A22CB412700B00A68 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBCCC65922CB412700B00A68 /* UIViewExtension.swift */; };
+		DBD80915232EB62800525AD4 /* RoomDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD80914232EB62800525AD4 /* RoomDetailsViewController.swift */; };
 		DBF45F1922E41DDD00A18C7B /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */; };
 		DBF45F1B22E41E0300A18C7B /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */; };
 		DBF45F1D22E41E2F00A18C7B /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF45F1C22E41E2F00A18C7B /* UIViewControllerExtension.swift */; };
@@ -84,6 +85,7 @@
 		DBCCC65122CB292900B00A68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DBCCC65322CB292900B00A68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DBCCC65922CB412700B00A68 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		DBD80914232EB62800525AD4 /* RoomDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDetailsViewController.swift; sourceTree = "<group>"; };
 		DBEC145722DBADF30039FE3B /* DantePatient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DantePatient-Bridging-Header.h"; sourceTree = "<group>"; };
 		DBF45F1822E41DDD00A18C7B /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		DBF45F1A22E41E0300A18C7B /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
@@ -206,6 +208,7 @@
 				DBCCC64922CB292500B00A68 /* OncMapViewController.swift */,
 				DBA917C522D939560088A520 /* PinRefViewController.swift */,
 				DBA917C722D93A2B0088A520 /* PinRefTableViewCell.swift */,
+				DBD80914232EB62800525AD4 /* RoomDetailsViewController.swift */,
 			);
 			path = "Oncology Map";
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 			files = (
 				DBA917C622D939560088A520 /* PinRefViewController.swift in Sources */,
 				DBB901C623232EC200EAAC7C /* DateExtension.swift in Sources */,
+				DBD80915232EB62800525AD4 /* RoomDetailsViewController.swift in Sources */,
 				DBA8118322DABADB006CE057 /* ActivateAcctViewController.swift in Sources */,
 				DB973344230BC25D00F748DA /* DateTableViewCell.swift in Sources */,
 				DBA917C822D93A2B0088A520 /* PinRefTableViewCell.swift in Sources */,

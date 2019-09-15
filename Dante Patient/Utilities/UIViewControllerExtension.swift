@@ -21,11 +21,14 @@ extension UIViewController {
         return "\(year)-\(formattedMonth)-\(formattedDay)"
     }
     
-    func prettifyRoom(room: String) -> String {
+    func prettifyRoom(room: String, fullName: Bool? = false) -> String {
         switch room {
         case "LA1":
             return "Linear Accelerator 1"
         case "TLA":
+            if fullName == true {
+                return "Trilogy Linear Accelerator"
+            }
             return "Trilogy Linear Acc."
         case "CT":
             return "CT Simulator"

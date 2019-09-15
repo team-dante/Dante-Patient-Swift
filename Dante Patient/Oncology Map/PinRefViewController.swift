@@ -67,7 +67,6 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
                         }
                     }
                 }
-                // reload the tableView immediately
                 self.tableView.reloadData()
             }
         })

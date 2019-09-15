@@ -27,10 +27,12 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     var fpc: FloatingPanelController!
     var pinRef: PinRefViewController!
     var ref: DatabaseReference!
-    var showDetails = false
-    var CTBtn: UIButton!
-    var TLABtn: UIButton!
+    
     var allLayers = [String:[CAShapeLayer]]()
+    
+    var showDetails = false
+    var selectedRoom = ""
+    var roomBtns = [UIButton]()
     
     let PIN_WIDTH_PROP: Double = 10/375.0
     let PIN_HEIGHT_PROP: Double = 23/450.0
@@ -47,9 +49,9 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     var prevLoc = [String:StaffPrevLoc]()
     
     let roomCoords: [String: RoomCoords] = [
-        "LA1": RoomCoords(tl: (0.345, 0.628), tr: (0.508, 0.628), br: (0.508, 1.0), bl: (0.345, 1.0)),
+        "LA1": RoomCoords(tl: (0.345, 0.676), tr: (0.508, 0.676), br: (0.508, 1.0), bl: (0.345, 1.0)),
         "TLA": RoomCoords(tl: (0.825, 0.342), tr: (1, 0.342), br: (1, 0.72), bl: (0.825, 0.72)),
-        "CT": RoomCoords(tl: (0.0, 0.725), tr: (0.149, 0.725), br: (0.149, 0.928), bl: (0.0, 0.928)),
+        "CT": RoomCoords(tl: (0.0, 0.725), tr: (0.176, 0.725), br: (0.176, 0.928), bl: (0.0, 0.928)),
         "WR": RoomCoords(tl: (0.269, 0.437), tr: (0.359, 0.437), br: (0.359, 0.545), bl: (0.269, 0.545))
     ]
     
@@ -60,6 +62,13 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
 //        "CT": [(0.0, 0.7), (0.03, 0.75), (0.12, 0.75), (0.06, 0.7), (0.04, 0.8)],
 //        "WR": [(0.27, 0.41), (0.3, 0.41), (0.27, 0.47), (0.31, 0.47), (0.33, 0.45)]
 //    ]
+    
+    // configure clickable buttons; (x, y, width, height)
+    let clickableRooms: [String: (Double, Double, Double, Double)] = [
+        "TLA": (0.794, 0.342, 0.205, 0.378),
+        "LA1": (0.345, 0.628, 0.163, 0.372),
+        "CT": (0.0, 0.628, 0.176, 0.298)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -122,19 +131,6 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         }
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        // set room buttons' positions
-        let (x1, y1, w1, h1) = self.pinCoords(propX: 0.0, propY: 0.629, propW: 0.178, propH: 0.303)
-        CTBtn = UIButton(frame: CGRect(x: x1, y: y1, width: w1, height: h1))
-        self.addRoomBtn(btn: CTBtn)
-        
-        let (x2, y2, w2, h2) = self.pinCoords(propX: 0.794, propY: 0.3418, propW: 0.2045, propH: 0.3786)
-        TLABtn = UIButton(frame: CGRect(x: x2, y: y2, width: w2, height: h2))
-        self.addRoomBtn(btn: TLABtn)
-    }
-    
     // if FloatingPanel's position is at tip, then it will be at half
     @objc func handleSurface(tapGesture: UITapGestureRecognizer) {
         if fpc.position == .tip {
@@ -147,8 +143,8 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         fpc.move(to: .tip, animated: true)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
 
         // call observe to always listen for event changes
         ref.child("StaffLocation").observe(.value, with: {(snapshot) in
@@ -295,25 +291,55 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         return (x, y, w, h)
     }
     
-    func addRoomBtn(btn: UIButton) {
-        btn.backgroundColor = UIColor("#00C213").withAlphaComponent(0.55)
-        btn.layer.borderColor = UIColor("#BBA012").cgColor
-        btn.layer.borderWidth = 1.5
-        mapUIView.addSubview(btn)
-        btn.isHidden = true
-    }
     
     @IBAction func onShowRoomDetails(_ sender: Any) {
         self.showDetails = !self.showDetails
         self.detailBarItem.title = self.showDetails ? "Done" : "Details"
-        self.CTBtn.isHidden = !self.CTBtn.isHidden
-        self.TLABtn.isHidden = !self.TLABtn.isHidden
+
+        if self.showDetails {
+            // set room buttons' positions
+            for (k, v) in self.clickableRooms {
+                let (x, y, w, h) = self.pinCoords(propX: v.0, propY: v.1, propW: v.2, propH: v.3)
+                let btn = UIButton(frame: CGRect(x: x, y: y, width: w, height: h))
+                btn.accessibilityIdentifier = k
+                
+                btn.addTarget(self, action: #selector(didClick), for: .touchUpInside)
+                self.customizeRoomButtons(btn: btn)
+                
+                self.roomBtns.append(btn)
+                self.mapUIView.addSubview(btn)
+            }
+        } else {
+            for btn in self.roomBtns {
+                btn.removeFromSuperview()
+            }
+            self.roomBtns.removeAll()
+        }
+    }
+    
+    @objc func didClick(_ sender: UIButton) {
+        let roomId = sender.accessibilityIdentifier
+        self.selectedRoom = roomId!
+        self.performSegue(withIdentifier: "RoomDetailsSegue", sender: nil)
+    }
+    
+    func customizeRoomButtons(btn: UIButton) {
+        btn.backgroundColor = UIColor("#00C213").withAlphaComponent(0.55)
+        btn.layer.borderColor = UIColor("#BBA012").cgColor
+        btn.layer.borderWidth = 1.5
+        btn.layer.zPosition = 2000
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         ref.removeAllObservers()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let detailsVC = segue.destination as? RoomDetailsViewController {
+            detailsVC.roomStr = self.selectedRoom
+        }
     }
 }
 
