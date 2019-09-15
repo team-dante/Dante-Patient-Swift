@@ -9,6 +9,12 @@
 import UIKit
 import Firebase
 
+struct Staff {
+    var pinColor: String
+    var room: String
+    var name: String
+}
+
 class PinRefViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
@@ -18,7 +24,7 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
     var ref: DatabaseReference!
     
     let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
-    var doctors = [[String: String]]()
+    var staffArr = [Staff]()
     
     // For iOS 10 only
     private lazy var shadowLayer: CAShapeLayer = CAShapeLayer()
@@ -47,26 +53,25 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
         ref.child("StaffLocation").observe(.value, with: {(snapshot) in
             
             // clear doctors list data at refreshing
-            self.doctors = []
-            if let doctors = snapshot.value as? [String: Any] {
-                for doctor in doctors {
-                    let docPhoneNum = doctor.key
-                    if self.trackedStaff.contains(docPhoneNum) {
-                        if let doc = doctor.value as? [String: String] {
-                            let room = doc["room"]! // e.g. "CTRoom"
+            self.staffArr = []
+            if let allStaff = snapshot.value as? [String: Any] {
+                for staff in allStaff {
+                    let staffPhoneNum = staff.key
+                    if self.trackedStaff.contains(staffPhoneNum) {
+                        if let staff = staff.value as? [String: String] {
+                            let room = staff["room"]! // e.g. "CT"
                             if room != "Private" {
-                                let lastName = doc["lastName"]!
-                                let color = doc["pinColor"]!
-                                
+                                let lastName = staff["lastName"]!
+                                let color = staff["pinColor"]!
                                 let name = "Dr. \(lastName)"
-                                
                                 let formattedRoomStr = self.prettifyRoom(room: room)
-                                let doctorDict = ["pinColor": color, "room": formattedRoomStr, "docName": name]
-                                self.doctors.append(doctorDict)
+                                
+                                self.staffArr.append(Staff(pinColor: color, room: formattedRoomStr, name: name))
                             }
                         }
                     }
                 }
+                self.staffArr.sort(by: { $0.name < $1.name })
                 self.tableView.reloadData()
             }
         })
@@ -96,17 +101,17 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.doctors.count
+        return self.staffArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: "PinRefTableViewCell", for: indexPath) as? PinRefTableViewCell {
             
-            let doctor = self.doctors[indexPath.row]
+            let staff = self.staffArr[indexPath.row]
             
             // parse color
-            let color = doctor["pinColor"]!
+            let color = staff.pinColor
             let rgb = color.split(separator: "-")
             let r = CGFloat(Int(rgb[0])!)
             let g = CGFloat(Int(rgb[1])!)
@@ -124,8 +129,8 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
             cell.layer.addSublayer(circleLayer)
             cell.layer.addSublayer(rectLayer)
             
-            cell.docLabel.text = doctor["docName"]
-            cell.roomLabel.text = doctor["room"]
+            cell.docLabel.text = staff.name
+            cell.roomLabel.text = staff.room
             
             cell.setNeedsDisplay()
             
@@ -136,14 +141,14 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
     
     func numberOfSections(in tableView: UITableView) -> Int {
         var numOfSections = 0
-        if self.doctors.count != 0 {
+        if self.staffArr.count != 0 {
             tableView.separatorStyle = .singleLine
             numOfSections = 1
             tableView.backgroundView = nil
         } else {
             let defaultLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
             defaultLabel.text = "Doctors may choose to remain private in the meantime"
-            defaultLabel.textColor = UIColor("#9e9e9e")
+            defaultLabel.textColor = UIColor("#919191")
             defaultLabel.textAlignment = .center
             defaultLabel.numberOfLines = 0
             tableView.backgroundView = defaultLabel
