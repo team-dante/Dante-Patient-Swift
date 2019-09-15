@@ -67,7 +67,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     let clickableRooms: [String: (Double, Double, Double, Double)] = [
         "TLA": (0.794, 0.342, 0.205, 0.378),
         "LA1": (0.345, 0.628, 0.163, 0.372),
-        "CT": (0.0, 0.628, 0.176, 0.298)
+        "CT": (0.0, 0.628, 0.179, 0.302)
     ]
     
     override func viewDidLoad() {
@@ -302,7 +302,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                 let (x, y, w, h) = self.pinCoords(propX: v.0, propY: v.1, propW: v.2, propH: v.3)
                 let btn = UIButton(frame: CGRect(x: x, y: y, width: w, height: h))
                 btn.accessibilityIdentifier = k
-                
+                btn.setImage(UIImage(named: "info_disclosure"), for: .normal)
                 btn.addTarget(self, action: #selector(didClick), for: .touchUpInside)
                 self.customizeRoomButtons(btn: btn)
                 
@@ -324,9 +324,9 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
     }
     
     func customizeRoomButtons(btn: UIButton) {
-        btn.backgroundColor = UIColor("#00C213").withAlphaComponent(0.55)
-        btn.layer.borderColor = UIColor("#BBA012").cgColor
-        btn.layer.borderWidth = 1.5
+        btn.backgroundColor = UIColor("#31c1ff").withAlphaComponent(0.6)
+        btn.layer.borderColor = UIColor("#31B464").cgColor
+        btn.layer.borderWidth = 2
         btn.layer.zPosition = 2000
     }
     
