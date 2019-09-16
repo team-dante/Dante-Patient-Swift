@@ -89,7 +89,9 @@ class TimeTrackerViewController: UIViewController {
     }
     
     @objc func processTimer() {
-    ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(today!)").queryOrdered(byChild: "inSession").queryEqual(toValue: true).observeSingleEvent(of: .value, with: { (snapshot) in
+        ref.child("/PatientVisitsByDates/\(userPhoneNum!)/\(today!)").queryOrdered(byChild: "inSession").queryEqual(toValue: true)
+            .observeSingleEvent(of: .value, with: { (snapshot) in
+                
             if snapshot.exists() {
                 if let timeObj = snapshot.value as? [String:Any] {
                     for object in timeObj {
