@@ -147,7 +147,7 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
             tableView.backgroundView = nil
         } else {
             let defaultLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: tableView.bounds.size.height))
-            defaultLabel.text = "Doctors may choose to remain private in the meantime"
+            defaultLabel.text = "Physicians may choose to remain private in the meantime"
             defaultLabel.textColor = UIColor("#919191")
             defaultLabel.textAlignment = .center
             defaultLabel.numberOfLines = 0
