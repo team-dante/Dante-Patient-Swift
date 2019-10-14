@@ -55,7 +55,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
         "WR": RoomCoords(tl: (0.269, 0.437), tr: (0.359, 0.437), br: (0.359, 0.545), bl: (0.269, 0.545))
     ]
     
-    let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
+//    let trackedStaff: Set<String> = ["111", "222", "333", "444", "555"]
 //    var mapDict: [String: [(Double, Double)]] = [
 //        "LA1": [(0.38, 0.7), (0.41, 0.75), (0.46, 0.75), (0.48, 0.7), (0.39, 0.8)],
 //        "TLA": [(0.9, 0.36), (0.95, 0.5), (0.83, 0.54), (0.8, 0.5), (0.86, 0.4)],
@@ -151,7 +151,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
             if let doctors = snapshot.value as? [String: Any] {
                 for doctor in doctors {
                     let key = doctor.key
-                    if self.trackedStaff.contains(key) {
+//                    if self.trackedStaff.contains(key) {
                         // get doctor's value e.g. {"room": "CTRoom"}
                         if let doc = doctor.value as? [String: String] {
                             let room = doc["room"]! // e.g. "CTRoom"
@@ -196,7 +196,7 @@ class OncMapViewController: UIViewController, UIScrollViewDelegate, FloatingPane
                             }
                         }
                     }
-                }
+//                }
             }
         })
     }

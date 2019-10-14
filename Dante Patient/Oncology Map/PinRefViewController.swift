@@ -56,8 +56,8 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
             self.staffArr = []
             if let allStaff = snapshot.value as? [String: Any] {
                 for staff in allStaff {
-                    let staffPhoneNum = staff.key
-                    if self.trackedStaff.contains(staffPhoneNum) {
+//                    let staffPhoneNum = staff.key
+//                    if self.trackedStaff.contains(staffPhoneNum) {
                         if let staff = staff.value as? [String: String] {
                             let room = staff["room"]! // e.g. "CT"
                             if room != "Private" {
@@ -69,7 +69,7 @@ class PinRefViewController: UIViewController, UITableViewDataSource, UITableView
                                 self.staffArr.append(Staff(pinColor: color, room: formattedRoomStr, name: name))
                             }
                         }
-                    }
+//                    }
                 }
                 self.staffArr.sort(by: { $0.name < $1.name })
                 self.tableView.reloadData()
