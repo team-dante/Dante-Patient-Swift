@@ -71,12 +71,12 @@ class TimeTrackerViewController: UIViewController {
     }
     
     func processStroke(elapsed: Int) {
-        let hour = 3600.0
+        let hour: Int = 3600
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        let prevTime = Double(elapsed).remainder(dividingBy: hour) / hour
+        let prevTime = Double(elapsed % hour) / Double(hour)
         basicAnimation.fromValue = prevTime
         
-        let incTime = (Double(elapsed) + 1.0).remainder(dividingBy: hour) / hour
+        let incTime = Double((elapsed + 1) % hour) / Double(hour)
         basicAnimation.toValue = incTime
         
         basicAnimation.duration = 1
