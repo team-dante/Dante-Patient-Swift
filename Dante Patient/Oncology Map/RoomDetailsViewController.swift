@@ -7,16 +7,27 @@
 //
 
 import UIKit
+import SceneKit
+import FirebaseStorage
 
 class RoomDetailsViewController: UIViewController {
-
-    @IBOutlet weak var roomLabel: UILabel!
+    
     @IBOutlet weak var navigationVIew: UIView!
     @IBOutlet weak var navHeight: NSLayoutConstraint!
-    @IBOutlet weak var roomImageView: UIImageView!
-    @IBOutlet weak var roomDespLabel: UILabel!
     
+    
+    @IBOutlet weak var sceneView: SCNView!
+    var scene: SCNScene!
+    
+    // received string from the map
     var roomStr: String!
+    
+    var filename = "sample3D-1.scn"
+    var textureFilename = "sample3D-1.jpg"
+    var textureImage: UIImage!
+    
+    // storage reference
+    var imageReference = Storage.storage().reference().child("images")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +39,56 @@ class RoomDetailsViewController: UIViewController {
             self.navHeight.constant = 64
         }
         
-        self.roomLabel.text = self.prettifyRoom(room: roomStr, fullName: true)
-        self.roomImageView.image = UIImage(named: roomStr)
-        self.roomDespLabel.text = "\(roomLabel.text!) is Lorem ipsum dolor sit amet, in purto appetere delicata quo, erant molestie voluptatibus duo ei, mazim utamur lucilius vim te. Exerci dicunt legendos ut has, noster maluisset mea ad, ei equidem accumsan antiopam eam. Erroribus definiebas vis ea. Scribentur reformidans no cum. Ex usu inermis volumus alienum. Pro ea abhorreant interesset theophrastus."
+        // set up Scene
+        sceneView.allowsCameraControl = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+
+        self.loadTexture { () -> () in
+            self.loadImage()
+        }
+        
+    }
+    
+    func loadTexture(handleComplete: ()->()) {
+        let downloadImageTextureRef = imageReference.child(textureFilename)
+
+        downloadImageTextureRef.downloadURL(completion: { url, error in
+            if let imgLink = url {
+                do {
+                    let data = try Data(contentsOf: imgLink)
+                    self.textureImage = UIImage(data: data)
+                } catch {
+                    print(error)
+                }
+            }
+        })
+        handleComplete()
+    }
+    
+    func loadImage() {
+        let downloadImageRef = imageReference.child(filename)
+
+        downloadImageRef.downloadURL(completion: { url, error in
+            if let imgLink = url {
+                do {
+                    self.scene = try SCNScene(url: imgLink, options: nil)
+                    if let node = self.scene.rootNode.childNode(withName: "MDL_OBJ_material_0", recursively: true) {
+                        let material = SCNMaterial()
+                        material.diffuse.contents = self.textureImage
+                        node.geometry?.materials = [material]
+                    }
+                    self.sceneView.scene = self.scene
+                }
+                catch {
+                    print("cannot render 3D image")
+                }
+            }
+            else {
+                print(error ?? "NO ERROR")
+            }
+        })
     }
 
     @IBAction func onCancel(_ sender: Any) {
