@@ -51,7 +51,7 @@ class RoomDetailsViewController: UIViewController {
         
     }
     
-    func loadTexture(handleComplete: ()->()) {
+    func loadTexture(handleComplete: @escaping ()->()) {
         let downloadImageTextureRef = imageReference.child(textureFilename)
 
         downloadImageTextureRef.downloadURL(completion: { url, error in
@@ -63,8 +63,8 @@ class RoomDetailsViewController: UIViewController {
                     print(error)
                 }
             }
+            handleComplete()
         })
-        handleComplete()
     }
     
     func loadImage() {
@@ -74,6 +74,7 @@ class RoomDetailsViewController: UIViewController {
             if let imgLink = url {
                 do {
                     self.scene = try SCNScene(url: imgLink, options: nil)
+                    self.scene.background.contents = UIColor.black
                     if let node = self.scene.rootNode.childNode(withName: "MDL_OBJ_material_0", recursively: true) {
                         let material = SCNMaterial()
                         material.diffuse.contents = self.textureImage
