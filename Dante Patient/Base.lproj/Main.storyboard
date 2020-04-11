@@ -210,15 +210,25 @@
                                     <constraint firstAttribute="trailing" secondItem="8eS-20-dhp" secondAttribute="trailing" constant="20" id="dDU-Qc-98A"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgx-yt-5ei" customClass="SCNView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgx-yt-5ei" customClass="CTPanoramaView" customModule="CTPanoramaView">
                                 <rect key="frame" x="0.0" y="88" width="375" height="724"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1lz-FC-uZr" customClass="CTPieSliceView" customModule="CTPanoramaView">
+                                <rect key="frame" x="327" y="718" width="40" height="40"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="LZ0-Zd-XMj"/>
+                                    <constraint firstAttribute="width" constant="40" id="SeP-Tc-UbR"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.90980392160000001" green="0.98039215690000003" blue="0.99215686270000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Q42-0V-Crm" firstAttribute="trailing" secondItem="1lz-FC-uZr" secondAttribute="trailing" constant="8" id="58p-yF-FYz"/>
                             <constraint firstAttribute="bottom" secondItem="Jgx-yt-5ei" secondAttribute="bottom" id="DtI-53-wUq"/>
                             <constraint firstItem="4Zn-I2-znq" firstAttribute="trailing" secondItem="Q42-0V-Crm" secondAttribute="trailing" id="G5z-je-hnA"/>
                             <constraint firstItem="4Zn-I2-znq" firstAttribute="leading" secondItem="Q42-0V-Crm" secondAttribute="leading" id="Hte-FH-PhD"/>
+                            <constraint firstItem="Q42-0V-Crm" firstAttribute="bottom" secondItem="1lz-FC-uZr" secondAttribute="bottom" constant="20" id="NG9-zm-YVH"/>
                             <constraint firstItem="Jgx-yt-5ei" firstAttribute="leading" secondItem="Q42-0V-Crm" secondAttribute="leading" id="Td5-rL-h3V"/>
                             <constraint firstItem="4Zn-I2-znq" firstAttribute="top" secondItem="XMt-gJ-7pr" secondAttribute="top" id="bYm-ua-Zdx"/>
                             <constraint firstItem="Q42-0V-Crm" firstAttribute="trailing" secondItem="Jgx-yt-5ei" secondAttribute="trailing" id="dyY-D5-Y38"/>
@@ -230,8 +240,10 @@
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Edd-Zq-fDd"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="compassView" destination="1lz-FC-uZr" id="Uyi-nN-a9n"/>
                         <outlet property="navHeight" destination="7qf-Ee-8kb" id="R2e-QO-h0l"/>
                         <outlet property="navigationVIew" destination="4Zn-I2-znq" id="PEa-kz-yIc"/>
+                        <outlet property="panoramaView" destination="Jgx-yt-5ei" id="Dlk-MI-2AK"/>
                         <outlet property="sceneView" destination="Jgx-yt-5ei" id="O95-ac-Rov"/>
                     </connections>
                 </viewController>

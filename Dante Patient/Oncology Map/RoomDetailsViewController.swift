@@ -9,11 +9,14 @@
 import UIKit
 import SceneKit
 import FirebaseStorage
+import CTPanoramaView
 
 class RoomDetailsViewController: UIViewController {
     
     @IBOutlet weak var navigationVIew: UIView!
     @IBOutlet weak var navHeight: NSLayoutConstraint!
+    @IBOutlet weak var panoramaView: CTPanoramaView!
+    @IBOutlet weak var compassView: CTPieSliceView!
     
     
     @IBOutlet weak var sceneView: SCNView!
@@ -38,17 +41,29 @@ class RoomDetailsViewController: UIViewController {
         } else {
             self.navHeight.constant = 64
         }
-        
+
         // set up Scene
-        sceneView.allowsCameraControl = true
+//        sceneView.allowsCameraControl = true
+        
+        loadSphericalImage()
+        panoramaView.compass = compassView
+//        panoramaView.controlMethod = .motion
     }
     
     override func viewWillAppear(_ animated: Bool) {
 
-        self.loadTexture { () -> () in
-            self.loadImage()
-        }
+//        self.loadTexture { () -> () in
+//            self.loadImage()
+//        }
         
+    }
+    
+    func loadSphericalImage() {
+        panoramaView.image = UIImage(named: "hungRoom")
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .all
     }
     
     func loadTexture(handleComplete: @escaping ()->()) {

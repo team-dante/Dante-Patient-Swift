@@ -6,6 +6,7 @@ target 'Dante Patient' do
   use_frameworks!
 
   # Pods for Dante Patient
+  pod "CTPanoramaView", "~> 1.3"
   pod 'Firebase/Core'
   pod 'Firebase/Auth'
   pod 'Firebase/Analytics'

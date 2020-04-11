@@ -4,12 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Charts.xcscheme</key>
+		<key>CTPanoramaView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>DeviceKit.xcscheme</key>
+		<key>Charts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>

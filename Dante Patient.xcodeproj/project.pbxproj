@@ -628,14 +628,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Dante Patient/Dante Patient.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4UZRYSG2AZ;
+				DEVELOPMENT_TEAM = X86U5N326S;
 				INFOPLIST_FILE = "Dante Patient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xhl.dante-patient";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dante-patient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -651,14 +651,14 @@
 				CODE_SIGN_ENTITLEMENTS = "Dante Patient/Dante Patient.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 4UZRYSG2AZ;
+				DEVELOPMENT_TEAM = X86U5N326S;
 				INFOPLIST_FILE = "Dante Patient/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.xhl.dante-patient";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.dante-patient";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
